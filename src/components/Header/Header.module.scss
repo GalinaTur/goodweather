@@ -1,0 +1,106 @@
+@import '../../utils/mixins.scss';
+@import '../../utils/variables.scss';
+
+.header {
+    background-color: $blocksBGC;
+    padding: 15px 0;
+    font-size: 18px;
+
+    .container {
+        justify-content: center;
+    }
+
+    .logo {
+        position: absolute;
+        font-size: 10px;
+        top: -12px;
+        left: 0;
+        background-image: url(../../assets/icons/logo.svg);
+        background-position: left bottom;
+        background-size: contain;
+        padding: 18px;
+        background-repeat: no-repeat;
+    }
+
+    .location {
+        padding: 0 25px 0 0;
+        background-image: url(../../assets/icons/location.svg);
+        background-size: 16px;
+        background-position-x: right;
+        background-position-y: top;
+        background-repeat: no-repeat;
+    }
+
+    .input {
+        color: inherit;
+        font-size: 8px;
+        position: absolute;
+        padding: 2px 5px;
+        right: 25px;
+        font-size: inherit;
+        width: 18px;
+        height: 22px;
+        background-color: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 15px;
+        background-position-x: center;
+        background-position-y: center;
+        justify-self: flex-end;
+        transition: width 1s ease-in-out;
+        z-index: 2;
+
+        &:placeholder {
+            display: none;
+        }
+
+        &:focus, 
+        &:active {
+            width: 150px;
+            z-index: 0;
+        }
+    }
+
+    .button {
+        cursor: pointer;
+        position: absolute;
+        right: 27px;
+        top: 4px;
+        width: 20px;
+        height: 18px;
+        background-image: url(../../assets/icons/search.svg);
+        background-color: transparent;
+        background-size: 14px;
+        background-repeat: no-repeat;
+        z-index: 1;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            background-size: 18px;
+            top: 2px;
+            right: 29px;
+        }
+    }
+}
+
+@include for-phone{
+    .header {
+        padding: 10px 0;
+
+        .container {
+            justify-content: flex-start;
+            margin: 0 10px;
+        }
+
+        .logo {
+            display: none;
+        }
+
+        .input {
+            right: 10px;
+        }
+
+        .button {
+            right: 12px;
+        }
+}
+}

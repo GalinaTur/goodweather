@@ -1,0 +1,32 @@
+@import './utils/mixins.scss';
+@import '@fontsource/oxygen';
+
+body {
+  width: 100vw;
+  max-height: 100vh;
+  background-image: url(../src/assets/bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  font-family: 'Oxygen';
+  font-size: 16px;
+  line-height: 1.2;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  padding: 0;
+  border: none;
+}
+
+@include for-phone {
+  body {
+    background-image: url(../src/assets/bg_phone.PNG);
+    font-size: 12px;
+}
+}

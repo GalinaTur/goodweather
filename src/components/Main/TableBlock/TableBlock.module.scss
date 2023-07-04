@@ -1,0 +1,89 @@
+@import '../../../utils/mixins.scss';
+@import '../../../utils/variables.scss';
+
+.tableBlock {
+    width: 100%;
+    background-color: $blocksBGC;
+    padding: 20px 0 10px;
+    position: relative;
+    overflow-y: hidden;
+    flex: 1;
+
+    &::before {
+        content: 'Click a day to see forecast by hourly';
+        font-size: 12px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .tableContainer {
+        height: 100%;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        padding: 0 20px;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+
+            tr {
+                border-bottom: 1px solid rgb(255, 255, 255);
+
+                &:last-of-type {
+                    border-bottom: none;
+                }
+
+                td {
+                    text-align: center;
+
+                    img {
+                        width: 10px;
+                        height: 30px;
+                    }
+                }
+            }
+
+            .date,
+            .weather {
+                text-align-last: left;
+            }
+
+            .temperature {
+                text-align: right;
+            }
+
+        }
+    }
+}
+
+@include for-phone {
+    .tableBlock {
+        padding: 30px 10px 5px;
+
+        &::before {
+            content: 'Touch a day to see forecast by hourly';
+            top: 5px;
+        }
+
+        .table tr {
+            border-bottom: 1px solid rgb(255, 255, 255);
+
+            td {
+
+                img {
+                    width: 25px;
+                    height: 25px;
+                }
+            }
+
+            .for_lg {
+                display: none
+            }
+        }
+    }
+}

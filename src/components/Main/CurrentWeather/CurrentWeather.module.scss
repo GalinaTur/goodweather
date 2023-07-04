@@ -1,0 +1,135 @@
+@import '../../../utils/mixins.scss';
+@import '../../../utils/variables.scss';
+
+.current {
+    width: 100%;
+    margin: 0 auto;
+    background-color: $blocksBGC;
+    padding: 5px 0;
+    display: grid;
+    grid-template-areas: 'date temp weather'
+        'diff diff diff'
+        'wind wind wind';
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 5fr 1fr 1fr;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+
+    .date {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        grid-area: date;
+        gap: 5px;
+
+        span {
+            font-size: 30px;
+            letter-spacing: 4px;
+        }
+    }
+
+    .temperature {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        grid-area: temp;
+
+        span {
+            font-size: 100px;
+        }
+    }
+
+    .weather {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        grid-area: weather;
+
+        p {
+            margin-top: -20px;
+        }
+    }
+
+    .temperatureDiff {
+        display: flex;
+        grid-area: diff;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .wind {
+        display: flex;
+        grid-area: wind;
+        justify-content: center;
+        align-items: center;
+
+        p {
+            background-image: url(../../../assets/icons/windicon.svg);
+            background-size: 20px;
+            background-repeat: no-repeat;
+            background-position: left center;
+            padding-left: 20px;
+        }
+    }
+}
+
+@include for-tablets {
+    .current {
+
+        .temperature {
+            span {
+                font-size: 100px;
+            }
+        }
+
+        .weather {
+            img {
+                width: 100px;
+            }
+        }
+    }
+}
+
+@include for-phone {
+    .current {
+        width: 250px;
+        font-size: 14px;
+        height: 250px;
+        border-radius: 50%;
+        padding: 10px 10px;
+        grid-template-areas: 'date date date date'
+            'temp temp weather weather'
+            'diff diff diff diff'
+            'wind wind wind wind';
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 4rem 4rem 1rem 1rem;
+        row-gap: 20px;
+
+        .temperature {
+            span {
+                font-size: 70px;
+            }
+        }
+
+        .date {
+            span {
+                font-size: 22px;
+            }
+        }
+
+        .weather {
+            svg {
+                width: 80px;
+                height: 80px;
+            }
+
+            p {
+                margin-top: -15px;
+            }
+        }
+    }
+}

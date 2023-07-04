@@ -1,0 +1,16 @@
+@import '../../utils/mixins.scss';
+
+.main {
+    padding: 5px 0;
+
+    .container {
+        flex-direction: column;
+        height: calc(100vh - 48px);
+    }
+}
+
+@include for-phone {
+    .header {
+        padding: 10px 10px;
+    }
+}
