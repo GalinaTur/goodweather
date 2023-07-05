@@ -49,8 +49,15 @@
             }
 
             .date,
-            .weather {
+            .image {
                 text-align-last: left;
+            }
+
+            .wind {
+                background-image: url(../../../assets/icons/windicon.svg);
+                background-size: 20px;
+                background-repeat: no-repeat;
+                background-position: 12% center;
             }
 
             .temperature {
@@ -81,7 +88,8 @@
                 }
             }
 
-            .for_lg {
+            .wind,
+            weather {
                 display: none
             }
         }
