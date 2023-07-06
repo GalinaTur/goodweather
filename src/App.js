@@ -22,7 +22,8 @@ function App() {
     feels_like: '',
     weather: '',
     wind_deg: '',
-    wind_speed: ''
+    wind_speed: '',
+    time_of_day: ''
   })
 
   useEffect(() => {
@@ -51,7 +52,8 @@ function App() {
           feels_like: data.main.feels_like,
           weather: data.weather[0].description,
           wind_deg: data.wind.deg,
-          wind_speed: data.wind.speed
+          wind_speed: data.wind.speed,
+          time_of_day: (data.weather[0].icon).slice(-1),
         })
       }).then(() => fetch(`${API_URL}/data/2.5/forecast?lat=${coords.latitude}&lon=${coords.longitude}&appid=${API_KEY}&units=metric`))
       .then(response => {

@@ -22,7 +22,6 @@ const formatTime=(time)=> {
 export default function Main({currentWeather}) {
     const [date, setDate] = useState(formatDate(dateTime));
     const [time, setTime] = useState(formatTime(dateTime));
-    const [timeOfDay, setTimeOfDay] = useState();
 
     useEffect(()=> {
         let dateTime;

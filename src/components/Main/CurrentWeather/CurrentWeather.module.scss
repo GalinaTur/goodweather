@@ -8,24 +8,25 @@
     padding: 5px 0;
     display: grid;
     grid-template-areas: 'date temp weather'
-        'diff diff diff'
-        'wind wind wind';
+        'det det det';
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 5fr 1fr 1fr;
+    grid-template-rows: 2fr 1fr;
     gap: 5px;
     justify-content: center;
     align-items: center;
 
     .date {
+        padding-top: 15px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         grid-area: date;
         gap: 5px;
+        font-size: 24px;
 
-        span {
-            font-size: 30px;
+        .time {
+            font-size: 46px;
             letter-spacing: 4px;
         }
     }
@@ -48,34 +49,52 @@
         align-items: center;
         grid-area: weather;
 
-        p {
+        &_text {
             margin-top: -20px;
+
+            &::first-letter {
+                text-transform: uppercase;
+            }
         }
     }
 
-    .feelsLike {
+    .details {
         display: flex;
-        grid-area: diff;
-        align-items: center;
-        justify-content: center;
+        flex-direction: column;
+        grid-area: det;
         gap: 15px;
-    }
 
-    .wind {
-        display: flex;
-        grid-area: wind;
-        justify-content: center;
-        align-items: center;
+        .feelsLike {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
 
-        p {
-            background-image: url(../../../assets/icons/windicon.svg);
-            background-size: 20px;
-            background-repeat: no-repeat;
-            background-position: left center;
-            padding-left: 20px;
+        .wind {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.5;
+            gap:10px;
+
+            .deg {
+                display: flex;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .speed {
+                background-image: url(../../../assets/icons/windicon.svg);
+                background-size: 20px;
+                background-repeat: no-repeat;
+                background-position: left center;
+                padding-left: 25px;
+            }
         }
     }
 }
+
 
 @include for-tablets {
     .current {
@@ -101,23 +120,24 @@
         height: 250px;
         border-radius: 50%;
         padding: 10px 10px;
-        grid-template-areas: 'date date date date'
-            'temp temp weather weather'
-            'diff diff diff diff'
-            'wind wind wind wind';
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 4rem 4rem 1rem 1rem;
+        grid-template-areas: 'date date'
+            'temp weather'
+            'det det';
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 4rem 4rem 2rem;
         row-gap: 20px;
 
         .temperature {
             span {
-                font-size: 70px;
+                font-size: 90px;
             }
         }
 
         .date {
-            span {
-                font-size: 22px;
+            font-size: 18px;
+
+            .time {
+                font-size: 30px;
             }
         }
 
@@ -129,6 +149,16 @@
 
             p {
                 margin-top: -15px;
+            }
+        }
+
+        .details {
+            padding-top: 40px;
+            gap: 10px;
+
+            .wind {
+                flex-direction: column;
+                gap: 2px;
             }
         }
     }
