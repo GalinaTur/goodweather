@@ -1,49 +1,45 @@
 import styles from './ChartBlock.module.scss';
-import icons from '../../../assets/sprite.svg';
 import { Line } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import Datalabel from './Datalabel/Datalabel';
 Chart.register(...registerables);
 
+let amountOfHours = 16;
+let tempExtremes = { min: '', max: '' };
 
-const data = [
-    { hour: '12:00', temperature: 20 },
-    { hour: '13:00', temperature: 28 },
-    { hour: '14:00', temperature: 29 },
-    { hour: '15:00', temperature: 28 },
-    { hour: '16:00', temperature: 28 },
-    { hour: '17:00', temperature: 28 },
-    { hour: '18:00', temperature: 28 },
-    { hour: '19:00', temperature: 29 },
-    { hour: '20:00', temperature: 29 },
-    { hour: '21:00', temperature: 29 },
-    { hour: '22:00', temperature: 29 },
-    { hour: '23:00', temperature: 29 },
-    { hour: '00:00', temperature: 28 },
-    { hour: '01:00', temperature: 28 },
-    { hour: '02:00', temperature: 28 },
-    { hour: '18:00', temperature: 29 },
-    { hour: '18:00', temperature: 28 },
-    { hour: '18:00', temperature: 29 },
-    { hour: '18:00', temperature: 28 },
-    { hour: '18:00', temperature: 29 },
-    { hour: '18:00', temperature: 28 },
-    { hour: '18:00', temperature: 29 },
-    { hour: '18:00', temperature: 29 },
-    { hour: '12:00', temperature: 30 },
-];
+const checkIfMinOrMaxTemp = (temp) => {
+    tempExtremes.min = Math.min(temp, tempExtremes.min || temp);
+    tempExtremes.max = Math.max(temp, tempExtremes.max || temp);
+}
 
-export default function ChartBlock() {
+export default function ChartBlock({ forecast, iconIdCreator }) {
+    console.log(forecast);
+    let list = forecast.list;
 
-    return (
+    return !forecast ? 'Loading' : (
         <div className={styles.chartBlock}>
-            <p className={styles.title}>24 hours next → </p>
+            <p className={styles.title}>48 hours next → </p>
+            <p className={styles.tip}><span>💧Chance of rain</span><span>❄Chance of snow</span></p>
+            <p className={styles.details}></p>
+
             <div className={styles.chart}>
-                <Line width="4000" height="260" datasetIdKey="tempByHoursChart" data={{
-                    labels: data.map(row => row.hour),
+                {list?.map((elem, id) => {
+                    if (id > amountOfHours) return;
+                    return <Datalabel elem={elem} id={id} key={id} iconIdCreator={iconIdCreator} />
+                })}
+                <Line width="5000" datasetIdKey="tempByHoursChart" data={{
+                    labels: list?.map((elem, id) => {
+                        if (id > amountOfHours) return;
+                        return elem.dt
+                    }),
                     datasets: [
                         {
-                            data: data.map(row => row.temperature),
+                            data: list?.map((elem, id) => {
+                                if (id > amountOfHours) return;
+                                checkIfMinOrMaxTemp(elem.main.temp);
+                                return Math.round(elem.main.temp);
+                            }),
                             indexAxis: 'x',
                             fill: {
                                 target: 'origin',
@@ -55,6 +51,8 @@ export default function ChartBlock() {
                         }
                     ]
                 }} options={{
+                    responsive: false,
+                    maintainAspectRatio: false,
                     plugins: {
                         tooltip: {
                             enabled: false,
@@ -76,11 +74,10 @@ export default function ChartBlock() {
 
                         }
                     },
-
                     scales: {
                         y: {
-                            min: 18, //min -2
-                            max: 40, //todo! max +10 ??
+                            suggestedMin: (tempExtremes.min - 1),
+                            suggestedMax: (tempExtremes.max + 25),
                             ticks: {
                                 display: false,
                             },
@@ -94,7 +91,6 @@ export default function ChartBlock() {
 
                         x: {
                             display: true,
-                            position: 'top',
                             grid: {
                                 display: false,
                             },
@@ -104,16 +100,13 @@ export default function ChartBlock() {
 
                             ticks: {
                                 color: 'transparent',
-                                family: 'Oxygen',
-                                padding: 30
+                                padding: 20
                             },
                         }
                     }
                 }}
                     plugins={[ChartDataLabels]} />
             </div>
-            <footer className={styles.footer}>
-                <p className={styles.details}></p></footer>
         </div>
     )
 }

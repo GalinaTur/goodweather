@@ -5,39 +5,51 @@ import CurrentWeather from './CurrentWeather/CurrentWeather';
 import styles from './Main.module.scss';
 import TableBlock from './TableBlock/TableBlock';
 
-let dateTime = new Date();
+const API_ADDITIONAL = '&units=metric';
 
-const formatDate=(date)=> {
+const formatDate = (date) => {
     let oldDate = date.toDateString();
-    let newDate = `${oldDate.slice(0,3)} - ${oldDate.slice(4,10)}, ${oldDate.slice(11)}`;
+    let newDate = `${oldDate.slice(0, 3)} - ${oldDate.slice(4, 10)}, ${oldDate.slice(11)}`;
     return newDate;
 }
 
-const formatTime=(time)=> {
+const formatTime = (time) => {
     let oldTime = time.toTimeString();
-    let newTime = oldTime.slice(0,5);
+    let newTime = oldTime.slice(0, 5);
     return newTime;
 }
 
-export default function Main({currentWeather}) {
-    const [date, setDate] = useState(formatDate(dateTime));
-    const [time, setTime] = useState(formatTime(dateTime));
+const iconIdCreator = (weather_description, time_of_day) => {
+    let iconID = `${weather_description.replaceAll(' ', '_')}_${time_of_day}`;
+    return iconID;
+}
 
-    useEffect(()=> {
-        let dateTime;
-        setInterval(()=> {
-            dateTime = new Date();
-            setDate(formatDate(dateTime));
-            setTime(formatTime(dateTime));
-        }, 60000);
-    },[]);
+export default function Main({ fetchData, currentLocation, API_KEY, API_URL }) {
+   
+    const [currentWeather, setCurrentWeather] = useState(null);
+    const [forecast, setForecast] = useState([]);
+    const [error, setError] = useState(null);
+
+   
+
+    useEffect(() => {
+        if (currentLocation) {
+            fetchData(API_URL.weather, currentLocation[0]['lat'], currentLocation[0]['lon'], '', API_KEY, API_ADDITIONAL, setCurrentWeather, setError);
+        }
+    }, [currentLocation]);
+
+    useEffect(() => {
+        if (currentLocation) {
+            fetchData(API_URL.forecast, currentLocation[0]['lat'], currentLocation[0]['lon'], '', API_KEY, API_ADDITIONAL, setForecast, setError);
+        }
+    }, [currentLocation]);
 
     return (
         <main className={styles.main}>
             <Container className={styles.container}>
-                    <CurrentWeather currentWeather={currentWeather} date={date} time={time}/>
-                    <ChartBlock/>
-                    <TableBlock/>
+                <CurrentWeather currentWeather={currentWeather} formatDate={formatDate} formatTime={formatTime} iconIdCreator={iconIdCreator}/>
+                <ChartBlock forecast={forecast} iconIdCreator={iconIdCreator}/>
+                <TableBlock />
             </Container>
         </main>
     )
