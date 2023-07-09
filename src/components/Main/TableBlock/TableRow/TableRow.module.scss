@@ -1,0 +1,63 @@
+@import '../../../../utils/mixins.scss';
+@import '../../../../utils/variables.scss';
+
+.row {
+    border-bottom: 1px solid rgb(255, 255, 255);
+
+    &:last-of-type {
+        border-bottom: none;
+    }
+
+    td {
+        text-align: left;
+    }
+}
+
+.day {
+    width: 90px;
+}
+
+.date {
+    max-width: 200px;
+}
+
+.wind {
+    padding-left: 23px;
+    background-image: url(../../../../assets/icons/windicon.svg);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: left center;
+
+    p {
+        display: inline-block;
+    }
+}
+
+.temperature {
+    white-space: wrap;
+    width: 80px;
+}
+
+
+@include for-phone {
+    .row {
+        border-bottom: 1px solid rgb(255, 255, 255);
+
+        .wind,
+        .weather {
+            display: none
+        }
+
+        .day {
+            width: 70px;
+        }
+
+        .temperature {
+            width: 60px;
+        }
+        
+        .image {
+            text-align: center;
+        }
+    }
+}

@@ -24,14 +24,14 @@
     }
 
     .title {
-        right: calc((100vw - 850px)/2 + 5px);
+        right: calc((100vw - 850px)/2 + 15px);
     }
 
     .details {
         bottom: 246px;
 
         &::after {
-            right: calc((100vw - 850px)/2 + 5px);
+            right: calc((100vw - 850px)/2 + 25px);
             content: 'click to see details';
             text-decoration: underline;
         }
@@ -46,7 +46,7 @@
 
 
     .chart {
-        width: 2110px;
+        width: 2300px;
         overflow: hidden;
         cursor: grab;
         padding-top: 65px;

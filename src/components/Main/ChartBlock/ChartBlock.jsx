@@ -5,7 +5,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import Datalabel from './Datalabel/Datalabel';
 Chart.register(...registerables);
 
-let amountOfHours = 16;
+let amountOfHours = 17;
 let tempExtremes = { min: '', max: '' };
 
 const checkIfMinOrMaxTemp = (temp) => {
@@ -13,9 +13,8 @@ const checkIfMinOrMaxTemp = (temp) => {
     tempExtremes.max = Math.max(temp, tempExtremes.max || temp);
 }
 
-export default function ChartBlock({ forecast, iconIdCreator }) {
-    console.log(forecast);
-    let list = forecast.list;
+export default function ChartBlock({ forecast, iconIdCreator, definePrecip }) {
+    const list = forecast? forecast.list.slice(0, (amountOfHours+1)) : '';
 
     return !forecast ? 'Loading' : (
         <div className={styles.chartBlock}>
@@ -25,21 +24,19 @@ export default function ChartBlock({ forecast, iconIdCreator }) {
 
             <div className={styles.chart}>
                 {list?.map((elem, id) => {
-                    if (id > amountOfHours) return;
-                    return <Datalabel elem={elem} id={id} key={id} iconIdCreator={iconIdCreator} />
+                    return <Datalabel elem={elem} id={id} key={id} iconIdCreator={iconIdCreator} definePrecip={definePrecip}/>
                 })}
-                <Line width="5000" datasetIdKey="tempByHoursChart" data={{
-                    labels: list?.map((elem, id) => {
-                        if (id > amountOfHours) return;
+                <Line width="2300" datasetIdKey="tempByHoursChart" data={{
+                    labels: list?.map((elem) => {
                         return elem.dt
                     }),
                     datasets: [
                         {
-                            data: list?.map((elem, id) => {
-                                if (id > amountOfHours) return;
+                            data: list?.map((elem) => {
                                 checkIfMinOrMaxTemp(elem.main.temp);
                                 return Math.round(elem.main.temp);
                             }),
+         
                             indexAxis: 'x',
                             fill: {
                                 target: 'origin',

@@ -12,6 +12,7 @@
     &::before {
         content: 'Click a day to see forecast by hourly';
         font-size: 12px;
+        font-weight: 300;
         position: absolute;
         top: 10px;
         right: 10px;
@@ -30,68 +31,19 @@
         .table {
             width: 100%;
             border-collapse: collapse;
-
-            tr {
-                border-bottom: 1px solid rgb(255, 255, 255);
-
-                &:last-of-type {
-                    border-bottom: none;
-                }
-
-                td {
-                    text-align: center;
-
-                    img {
-                        width: 10px;
-                        height: 30px;
-                    }
-                }
-            }
-
-            .date,
-            .image {
-                text-align-last: left;
-            }
-
-            .wind {
-                background-image: url(../../../assets/icons/windicon.svg);
-                background-size: 20px;
-                background-repeat: no-repeat;
-                background-position: 12% center;
-            }
-
-            .temperature {
-                text-align: right;
-            }
-
         }
     }
 }
 
 @include for-phone {
     .tableBlock {
-        padding: 30px 10px 5px;
+        padding: 20px 0 5px;
 
         &::before {
             content: 'Touch a day to see forecast by hourly';
             top: 5px;
+            font-size: 10px;
         }
 
-        .table tr {
-            border-bottom: 1px solid rgb(255, 255, 255);
-
-            td {
-
-                img {
-                    width: 25px;
-                    height: 25px;
-                }
-            }
-
-            .wind,
-            weather {
-                display: none
-            }
-        }
     }
 }
