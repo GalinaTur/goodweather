@@ -10,10 +10,6 @@
     scroll-behavior: smooth;
     font-size: 12px;
 
-    &::-webkit-scrollbar {
-        display: none;
-    }
-
     .title,
     .details,
     .tip {
@@ -28,22 +24,23 @@
     }
 
     .details {
-        bottom: 246px;
+        padding-right: 10px;
+        top: 403px;
+        width: 150px;
+        text-align: right;
 
         &::after {
-            right: calc((100vw - 850px)/2 + 25px);
             content: 'click to see details';
             text-decoration: underline;
         }
     }
 
     .tip {
-        bottom: 246px;
-         display: flex;
+        top: 403px;
+        display: flex;
         gap: 15px;
         left: calc((100vw - 850px)/2 + 20px);
     }
-
 
     .chart {
         width: 2300px;
@@ -78,7 +75,7 @@
 
     .tip,
     .details {
-        bottom: 190px;
+        top: 450px;
     }
 
     .tip {

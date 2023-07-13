@@ -15,9 +15,9 @@ export default function TableBlock({ forecast, iconIdCreator, formatDT, definePr
             <div className={styles.tableContainer}>
                 <table className={styles.table}>
                     <tbody>
-                    {Object.values(groupedList).map((value)=> {
+                    {Object.values(groupedList).map((value, id)=> {
                         if (Object.keys(value).length < 2) return; 
-                    return <TableRow day={value} iconIdCreator={iconIdCreator} formatDT={formatDT} definePrecip={definePrecip}/>
+                    return <TableRow key={id} day={value} iconIdCreator={iconIdCreator} formatDT={formatDT} definePrecip={definePrecip}/>
                     })}
                     </tbody>
                 </table>

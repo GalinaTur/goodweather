@@ -1,1 +1,21 @@
+@import './utils/mixins.scss';
+@import './utils/variables.scss';
 
+.App {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.err {
+    background-color: $blocksBGC;
+    height: 100px;
+    width: 850px;
+    margin: auto;
+    font-size: 20px;
+    line-height: 1.5;
+
+    b {
+        font-size: 30px;
+    }
+}

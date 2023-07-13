@@ -1,6 +1,16 @@
 @import './utils/mixins.scss';
 @import '@fontsource/oxygen';
 
+* {
+  box-sizing: border-box;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 body {
   width: 100vw;
   max-height: 100vh;
@@ -19,14 +29,15 @@ p {
   margin: 0;
 }
 
-button {
-  padding: 0;
+button,
+input {
   border: none;
+  padding: 0;
 }
 
 @include for-phone {
   body {
     background-image: url(../src/assets/bg_phone.PNG);
     font-size: 12px;
-}
+  }
 }

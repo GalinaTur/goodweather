@@ -99,12 +99,14 @@ export default function Main({ fetchData, currentLocation, API_KEY, API_URL }) {
         }
     }, [currentLocation]);
 
-    return !currentLocation ? 'Loading' : (
+    return (
         <main className={styles.main}>
             <Container className={styles.container}>
+            <>
                 <CurrentWeather currentWeather={currentWeather} formatDate={formatDate} formatTime={formatTime} iconIdCreator={iconIdCreator} defineWindDirection={defineWindDirection} />
                 <ChartBlock forecast={forecast} iconIdCreator={iconIdCreator} definePrecip={definePrecip} />
                 <TableBlock forecast={forecast} iconIdCreator={iconIdCreator} formatDT={formatDT} definePrecip={definePrecip}/>
+                </>
             </Container>
         </main>
     )

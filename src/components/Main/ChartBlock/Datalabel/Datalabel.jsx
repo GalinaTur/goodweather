@@ -12,7 +12,7 @@ export default function Datalabel({elem, id, iconIdCreator, definePrecip}) {
     
 
     return !elem? 'Loading..' : (
-        <div className={classNames(styles.weather, styles.weather_id)} style={{left: (128.8*id + 13)}}>
+        <div className={classNames(styles.weather, styles.weather_id)} style={{left: (129*id + 7)}}>
         <p>{time}</p>
             <svg width='40' height='40' viewBox="0 0 100 100" role="img" aria-roledescription="">
                 <use href={`${icons}#${!elem? '' : iconIdCreator(weather, partOfDay)}`} />

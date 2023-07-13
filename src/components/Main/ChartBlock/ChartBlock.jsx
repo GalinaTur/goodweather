@@ -6,15 +6,17 @@ import Datalabel from './Datalabel/Datalabel';
 Chart.register(...registerables);
 
 let amountOfHours = 17;
-let tempExtremes = { min: '', max: '' };
 
-const checkIfMinOrMaxTemp = (temp) => {
-    tempExtremes.min = Math.min(temp, tempExtremes.min || temp);
-    tempExtremes.max = Math.max(temp, tempExtremes.max || temp);
-}
 
 export default function ChartBlock({ forecast, iconIdCreator, definePrecip }) {
     const list = forecast? forecast.list.slice(0, (amountOfHours+1)) : '';
+
+    let tempExtremes = { min: '', max: '' };
+
+    const checkIfMinOrMaxTemp = (temp) => {
+        tempExtremes.min = Math.min(temp, tempExtremes.min || temp);
+        tempExtremes.max = Math.max(temp, tempExtremes.max || temp);
+    }
 
     return !forecast ? 'Loading' : (
         <div className={styles.chartBlock}>
@@ -36,7 +38,6 @@ export default function ChartBlock({ forecast, iconIdCreator, definePrecip }) {
                                 checkIfMinOrMaxTemp(elem.main.temp);
                                 return Math.round(elem.main.temp);
                             }),
-         
                             indexAxis: 'x',
                             fill: {
                                 target: 'origin',

@@ -4,25 +4,6 @@ import icons from '../../../assets/sprite.svg';
 
 let dateTime = new Date();
 
-const defineWindDirection = (deg) => {
-    if (deg < 22.5 || deg > 337.5) 
-        return 'North';
-    if (deg < 67.5)
-        return 'North-East';
-    if (deg < 112.5)
-        return 'East';
-    if (deg < 157.5)
-        return 'South-East';
-    if (deg < 202.5)
-        return 'South';
-    if (deg < 247.5)
-        return 'South-West';
-    if (deg < 292.5)
-        return 'West';
-    if (deg < 337.5)
-        return 'North-West';
-}
-
 export default function CurrentWeather({ currentWeather, formatDate, formatTime, iconIdCreator, defineWindDirection }) {
 
     const [currentDate, setCurrentDate] = useState(formatDate(dateTime));
@@ -54,7 +35,7 @@ export default function CurrentWeather({ currentWeather, formatDate, formatTime,
 
                     <p className={styles.temperature}><span>{temp}</span> °C</p>
                     <div className={styles.weather}>
-                        <svg width='100' height='100' viewBox="0 0 100 100" role="img" aria-roledescription="">
+                        <svg width='90' height='90' viewBox="0 0 100 100" role="img" aria-roledescription="">
                             <use href={`${icons}#${!weather ? '' : iconIdCreator(weather, partOfDay)}`} />
                         </svg>
                         <p className={styles.weather_text}>{weather}</p>

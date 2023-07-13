@@ -40,7 +40,6 @@ const getMaxWindSpeed = (list) => {
 }
 
 export default function TableRow({ day, iconIdCreator, formatDT, definePrecip }) {
-    console.log(day);
     const [dayOfWeek, date] = day ? formatDT(day[0].dt) : '';
 
     const temps = [...day.map((e) => Math.round(e.main.temp))];
