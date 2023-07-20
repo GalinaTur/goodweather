@@ -8,7 +8,8 @@
     position: relative;
     overflow-y: hidden;
     flex: 1;
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px) drop-shadow(0 0 1px rgb(100, 100, 100));
+    -webkit-backdrop-filter: blur(3px) drop-shadow(0 0 1px rgb(100, 100, 100));
 
     &::before {
         content: 'Click a day to see forecast by hourly';
