@@ -5,12 +5,22 @@
 
     .container {
         flex-direction: column;
-        height: calc(100vh - 48px);
+        height: calc(100vh - 60px);
     }
 }
 
 @include for-phone {
-    .header {
-        padding: 10px 10px;
+    .main {
+        .container {
+            height: calc(100vh - 50px);
+        }
+    }
+}
+
+@include for-phone-horiz {
+    .main {
+        .container {
+            height: calc(100% - 50px);
+        }
     }
 }

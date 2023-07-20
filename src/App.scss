@@ -2,9 +2,10 @@
 @import './utils/variables.scss';
 
 .App {
-    height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    
 }
 
 .err {
@@ -17,5 +18,12 @@
 
     b {
         font-size: 30px;
+    }
+}
+
+@include for-phone-horiz {
+    .App {
+        height: 100% !important;
+        overflow-y: auto;
     }
 }

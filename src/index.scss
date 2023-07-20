@@ -11,18 +11,16 @@
   }
 }
 
+
 body {
-  width: 100vw;
-  max-height: 100vh;
-  background-image: url(../src/assets/bg.jpg);
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  color: white;
+  color: rgb(255, 255, 255);
   font-family: 'Oxygen';
   font-size: 16px;
   line-height: 1.2;
-  overflow: hidden;
-  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 p {
@@ -31,13 +29,21 @@ p {
 
 button,
 input {
+  background-color: transparent;
   border: none;
   padding: 0;
 }
 
+.logo{
+  transition: width 1s ease-in-out;
+}
+
+.logo_active {
+  width: 315px !important;
+}
+
 @include for-phone {
   body {
-    background-image: url(../src/assets/bg_phone.PNG);
     font-size: 12px;
   }
 }

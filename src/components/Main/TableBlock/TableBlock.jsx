@@ -1,7 +1,8 @@
 import styles from './TableBlock.module.scss';
 import TableRow from './TableRow/TableRow';
+import classNames from 'classnames';
 
-export default function TableBlock({ forecast, iconIdCreator, formatDT, definePrecip, defineWindDirection }) {
+export default function TableBlock({ forecast, iconIdCreator, formatDT, definePrecip, defineWindDirection, className }) {
 
     const groupedList = !forecast ? '' : forecast.list.reduce((newList, elem) => {
         const key = elem['dt_txt'].slice(0, 10);
@@ -11,7 +12,7 @@ export default function TableBlock({ forecast, iconIdCreator, formatDT, definePr
     }, {});
 
     return (
-        <div className={styles.tableBlock}>
+        <div className={classNames(className, styles.tableBlock)}>
             <div className={styles.tableContainer}>
                 <table className={styles.table}>
                     <tbody>

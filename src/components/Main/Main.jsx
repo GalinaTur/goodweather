@@ -103,9 +103,9 @@ export default function Main({ fetchData, currentLocation, API_KEY, API_URL }) {
         <main className={styles.main}>
             <Container className={styles.container}>
             <>
-                <CurrentWeather currentWeather={currentWeather} formatDate={formatDate} formatTime={formatTime} iconIdCreator={iconIdCreator} defineWindDirection={defineWindDirection} />
-                <ChartBlock forecast={forecast} iconIdCreator={iconIdCreator} definePrecip={definePrecip} />
-                <TableBlock forecast={forecast} iconIdCreator={iconIdCreator} formatDT={formatDT} definePrecip={definePrecip}/>
+                <CurrentWeather className={styles.current} currentWeather={currentWeather} formatDate={formatDate} formatTime={formatTime} iconIdCreator={iconIdCreator} defineWindDirection={defineWindDirection} />
+                <ChartBlock className={styles.chart} forecast={forecast} iconIdCreator={iconIdCreator} definePrecip={definePrecip} />
+                <TableBlock className={styles.table} forecast={forecast} iconIdCreator={iconIdCreator} formatDT={formatDT} definePrecip={definePrecip}/>
                 </>
             </Container>
         </main>

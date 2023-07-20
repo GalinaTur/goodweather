@@ -84,7 +84,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" style={{height: window.innerHeight}}>
       <Header currentLocation={currentLocation} isPending={isPending} handleChange={handleChange} handleSubmit={handleSubmit} searchResult={searchResult} handleSelect={handleSelect} />
       {isPending && 'loading...'}
       {currentLocation && <Main fetchData={fetchData} currentLocation={currentLocation} API_KEY={API_KEY} API_URL={API_URL} isPending={isPending} setIsPending={setIsPending} />}

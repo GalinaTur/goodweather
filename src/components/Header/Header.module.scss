@@ -4,37 +4,65 @@
 .header {
     background-color: $blocksBGC;
     font-size: 1rem;
+    backdrop-filter: blur(3px);
 
     .container {
         position: relative;
+        padding: 0 30px;
+        width: auto;
         justify-content: space-between;
-        padding: 0 10px;
+        gap: 10px;
     }
 
     .logo {
-        font-size: 10px;
+        color: white;
+        text-shadow: -1px -1px 0 rgb(100, 100, 100), 1px -1px 0 rgb(100, 100, 100), -1px 1px 0 rgb(100, 100, 100), 1px 1px 0 rgb(100, 100, 100);
+        font-size: 12px;
         background-image: url(../../assets/icons/logo.svg);
         background-position: left bottom;
         background-size: contain;
-        padding: 18px 0 18px 18px;
-        width: 220px;
         background-repeat: no-repeat;
+        padding: 18px 0 18px 18px;
+        width: 125px;
+        flex: 0 1 auto;
     }
 
     .location {
-        padding: 10px 25px 10px 25px;
-        background-image: url(../../assets/icons/location.svg);
-        background-size: 16px;
-        background-position-x: right;
-        background-position-y: center;
-        background-repeat: no-repeat;
+        padding: 10px 0;
+        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        padding-bottom: 15px;
 
-
-        span {
-            white-space: nowrap;
+        svg {
+            width: 16px;
+            padding-top: 5px;
         }
+    }
+
+    .btn_container {
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+        gap: 5px;
+    }
+
+    .settings {
+        width: 34px;
+        height: 34px;
+        background-image: url(../../assets/icons/setting.svg);
+        background-position: center top;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .menu {
+        width: 35px;
+        height: 35px;
+        background-image: url(../../assets/icons/menu.svg);
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
     }
 }
 
@@ -44,6 +72,10 @@
 
         .logo {
             display: none;
+        }
+
+        .location {
+            padding-left: 0;
         }
     }
 }

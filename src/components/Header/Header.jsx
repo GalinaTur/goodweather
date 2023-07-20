@@ -1,6 +1,8 @@
 import Container from '../Container/Container';
 import styles from './Header.module.scss';
 import InputForm from './InputForm/InputForm';
+import icons from '../../assets/sprite.svg';
+import classNames from 'classnames';
 
 const setLocationText = (location, isPending, locText) => {
     if (!location && isPending) {
@@ -17,12 +19,22 @@ export default function Header({ currentLocation, isPending, handleChange, handl
     const country = currentLocation?.[0]['country'];
     const locText = `${city}, ${state ? state + ', ' : ''}${country}`;
 
+    
     return (
         <header className={styles.header}>
             <Container className={styles.container}>
-                <p className={styles.logo}>GOODWEATHER</p>
-                <p className={styles.location}><span>{setLocationText(currentLocation, isPending, locText)}</span></p>
-                <InputForm handleChange={handleChange} handleSubmit={handleSubmit} searchResult={searchResult} handleSelect={handleSelect} />
+                <p id='hdrlg' className={classNames('logo', styles.logo)}>GOODWEATHER</p>
+                <p className={styles.location}>
+                <svg width='16' height='20' viewBox="0 0 100 100" role="img" aria-roledescription={`Location: ${locText}`}>
+                            <use href={`${icons}#location`} />
+                        </svg>
+                        {setLocationText(currentLocation, isPending, locText)}
+                </p>
+                <div className={styles.btn_container}>
+                    <InputForm handleChange={handleChange} handleSubmit={handleSubmit} searchResult={searchResult} handleSelect={handleSelect}/>
+                    <button className={styles.settings}></button>
+                    <button className={styles.menu}></button>
+                </div>
             </Container>
         </header>
     )

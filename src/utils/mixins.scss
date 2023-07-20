@@ -9,3 +9,9 @@
         @content;
     }
 }
+
+@mixin for-phone-horiz {
+    @media (max-height: 599px) and (orientation: landscape) {
+        @content;
+    }
+}

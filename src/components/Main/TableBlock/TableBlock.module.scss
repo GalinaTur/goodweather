@@ -4,10 +4,11 @@
 .tableBlock {
     width: 100%;
     background-color: $blocksBGC;
-    padding: 20px 0 10px;
+    padding: 30px 0 10px;
     position: relative;
     overflow-y: hidden;
     flex: 1;
+    backdrop-filter: blur(3px);
 
     &::before {
         content: 'Click a day to see forecast by hourly';
@@ -46,4 +47,11 @@
         }
 
     }
+}
+
+@include for-phone-horiz {
+    .tableBlock {
+    flex: 0;
+    height: 100%;
+}
 }

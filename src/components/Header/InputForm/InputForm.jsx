@@ -3,21 +3,25 @@ import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption 
 import "@reach/combobox/styles.css";
 import styles from './InputForm.module.scss';
 
-export default function InputForm({ handleChange, handleSubmit, searchResult, handleSelect }) {
+export default function InputForm({ handleChange, handleSubmit, searchResult, handleSelect}) {
 
     const input = document.getElementById('hdrnpt');
+    const logo = document.getElementById('hdrlg');
 
     const handleClick = (e) => {
         if (!input.classList.contains(styles.input_active)) {
             input.focus();
             input.classList.add(styles.input_active);
+            logo.classList.add('logo_active');
         } else if (input.value) {
             handleSubmit(e);
+            
         }
     }
 
     const handleBlur = (e) => {
         input.classList.remove(styles.input_active);
+        logo.classList.remove('logo_active');
     }
 
     return (
