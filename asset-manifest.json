@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/goodweather/static/css/main.85d26283.css",
-    "main.js": "/goodweather/static/js/main.89171181.js",
+    "main.css": "/goodweather/static/css/main.cc73a424.css",
+    "main.js": "/goodweather/static/js/main.2056fb85.js",
     "static/js/787.ed3ce669.chunk.js": "/goodweather/static/js/787.ed3ce669.chunk.js",
     "static/media/clouds_n.jpg": "/goodweather/static/media/clouds_n.f66d87db31f0c9fd4d93.jpg",
     "static/media/mist.jpg": "/goodweather/static/media/mist.b7be22245f7a326034d2.jpg",
     "static/media/rain.jpg": "/goodweather/static/media/rain.c4d7e0d2dbd02409b490.jpg",
     "static/media/tornado.jpg": "/goodweather/static/media/tornado.6b52d549e53cdb7dd2f8.jpg",
-    "static/media/sprite.svg": "/goodweather/static/media/sprite.cfd6c4dd3229195843c7ad980afce790.svg",
+    "static/media/sprite.svg": "/goodweather/static/media/sprite.ce243351a25def1fe2bcfa83d16eeed8.svg",
     "static/media/clear_d.jpg": "/goodweather/static/media/clear_d.ef50d52040fca4e6e9fb.jpg",
     "static/media/clear_n.jpg": "/goodweather/static/media/clear_n.aa17ed7036093e1c0b27.jpg",
     "static/media/thunder.jpg": "/goodweather/static/media/thunder.2d04cf0d36805b45e0fb.jpg",
@@ -24,12 +24,12 @@
     "static/media/windicon.svg": "/goodweather/static/media/windicon.74661e7497345dc044c2.svg",
     "static/media/search.svg": "/goodweather/static/media/search.43f4a0c8891c29e07a0c.svg",
     "static/media/menu.svg": "/goodweather/static/media/menu.077492ba7950a2488a3f.svg",
-    "main.85d26283.css.map": "/goodweather/static/css/main.85d26283.css.map",
-    "main.89171181.js.map": "/goodweather/static/js/main.89171181.js.map",
+    "main.cc73a424.css.map": "/goodweather/static/css/main.cc73a424.css.map",
+    "main.2056fb85.js.map": "/goodweather/static/js/main.2056fb85.js.map",
     "787.ed3ce669.chunk.js.map": "/goodweather/static/js/787.ed3ce669.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.85d26283.css",
-    "static/js/main.89171181.js"
+    "static/css/main.cc73a424.css",
+    "static/js/main.2056fb85.js"
   ]
 }
