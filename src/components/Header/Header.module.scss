@@ -2,10 +2,8 @@
 @import '../../utils/variables.scss';
 
 .header {
-    background-color: $blocksBGC;
     font-size: 1rem;
-    backdrop-filter: blur(3px) drop-shadow(0 0 1px rgb(100, 100, 100));
-    -webkit-backdrop-filter: blur(3px) drop-shadow(0 0 1px rgb(100, 100, 100));
+    @include block-bg;
 
     .container {
         position: relative;

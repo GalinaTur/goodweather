@@ -9,7 +9,8 @@
     }
 
     td {
-        text-align: center;
+        white-space: wrap;
+        text-align: left;
     }
 
     .day {
@@ -26,23 +27,16 @@
     max-width: 200px;
 }
 
-.wind {
-    
-    &_deg,
-    &_icon {
-        svg {
-            margin-bottom: -3px;
-        }
-    }
-
+.wind_container {
+    display: flex;
+    align-items: center;
     p {
-        display: inline-block;
-        margin-right: 5px;
+        display: inline;
+        padding: 0 5px;
     }
 }
 
 .temperature {
-    white-space: wrap;
     width: 80px;
 }
 

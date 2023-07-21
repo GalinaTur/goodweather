@@ -65,17 +65,15 @@ export default function TableRow({ day, iconIdCreator, formatDT, definePrecip })
             <td className={styles.weather}>{dailyWeather}</td>
             <td className={styles.precipitation}>{`${definePrecip(tempWhilePrecip, presipType)} ${maxPoP}%`}</td>
             <td className={styles.wind}>
-                <p className={styles.wind_icon}>
+                <div className={styles.wind_container}>
                     <svg width='24' height='24' viewBox="0 0 100 100" role="img" aria-label="Wind">
                         <use href={`${icons}#wind`} />
                     </svg>
-                </p>
                 <p className={styles.wind_speed}>{`${windSpeed} km/h`}</p>
-                <p className={styles.wind_deg}>
                     <svg width='20' height='20' viewBox="0 0 100 100" role="img" aria-roledescription="Wind direction" style={{ transform: `rotate(${windDeg}deg)` }}>
                         <use href={`${icons}#wind_dir`} />
                     </svg>
-                </p>
+                </div>
             </td>
             <td className={styles.temperature}>{`${Math.min(...temps)}° / ${Math.max(...temps)}°`}</td>
         </tr>

@@ -8,6 +8,7 @@ const API_URL = {
   forecast: "https://api.openweathermap.org/data/2.5/forecast?",
   locationDir: "http://api.openweathermap.org/geo/1.0/direct?",
   locationRev: "https://api.openweathermap.org/geo/1.0/reverse?",
+  airPollution: "http://api.openweathermap.org/data/2.5/air_pollution?"
 };
 const API_KEY = '05df3968351d03d8d7668321890270e3';
 const API_LIMIT = '&limit=1';

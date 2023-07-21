@@ -7,7 +7,7 @@ import classNames from 'classnames';
 
 Chart.register(...registerables);
 
-let amountOfHours = 17;
+let amountOfHours = 9;
 
 export default function ChartBlock({ forecast, iconIdCreator, definePrecip, className }) {
     const list = forecast ? forecast.list.slice(0, (amountOfHours + 1)) : '';
@@ -20,13 +20,13 @@ export default function ChartBlock({ forecast, iconIdCreator, definePrecip, clas
     }
 
     return !forecast ? 'Loading' : (
-        <>
+        <div className={styles.chartBlockContainer}>
             <div className={classNames(className, styles.chartBlock)}>
                 <div className={styles.chart}>
                     {list?.map((elem, id) => {
                         return <Datalabel elem={elem} id={id} key={id} iconIdCreator={iconIdCreator} definePrecip={definePrecip} />
                     })}
-                    <Line width="2300" datasetIdKey="tempByHoursChart" data={{
+                    <Line width="1300" datasetIdKey="tempByHoursChart" data={{
                         labels: list?.map((elem) => {
                             return elem.dt
                         }),
@@ -74,6 +74,7 @@ export default function ChartBlock({ forecast, iconIdCreator, definePrecip, clas
                                 suggestedMin: (tempExtremes.min - 1),
                                 suggestedMax: (tempExtremes.max + 25),
                                 ticks: {
+                                    beginAtZero: false,
                                     display: false,
                                 },
                                 grid: {
@@ -103,10 +104,10 @@ export default function ChartBlock({ forecast, iconIdCreator, definePrecip, clas
                         plugins={[ChartDataLabels]} />
                 </div>
             </div>
-            <p className={styles.title}>48 hours next → </p>
+            <p className={styles.title}>24 hours next → </p>
             <p className={styles.tip}><span>💧Chance of rain</span><span>❄Chance of snow</span></p>
             <p className={styles.details}></p>
-        </>
+        </div>
     )
 }
 

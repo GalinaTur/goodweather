@@ -2,7 +2,7 @@ import styles from './TableBlock.module.scss';
 import TableRow from './TableRow/TableRow';
 import classNames from 'classnames';
 
-export default function TableBlock({ forecast, iconIdCreator, formatDT, definePrecip, defineWindDirection, className }) {
+export default function TableBlock({ forecast, iconIdCreator, formatDT, definePrecip, className }) {
 
     const groupedList = !forecast ? '' : forecast.list.reduce((newList, elem) => {
         const key = elem['dt_txt'].slice(0, 10);

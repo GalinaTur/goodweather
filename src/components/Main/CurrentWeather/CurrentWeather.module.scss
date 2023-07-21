@@ -4,7 +4,6 @@
 .current {
     width: 100%;
     margin: 0 auto;
-    background-color: $blocksBGC;
     padding: 5px 0;
     display: grid;
     grid-template-areas: 'date temp weather'
@@ -14,8 +13,7 @@
     gap: 5px;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(3px) drop-shadow(0 0 1px rgb(100, 100, 100));
-    -webkit-backdrop-filter: blur(3px) drop-shadow(0 0 1px rgb(100, 100, 100));
+    @include block-bg;
 
     .date {
         padding-top: 15px;
@@ -90,18 +88,6 @@
                 background-repeat: no-repeat;
                 background-position: left center;
                 padding-left: 25px;
-            }
-        }
-    }
-}
-
-
-@include for-tablets {
-    .current {
-
-        .temperature {
-            span {
-                font-size: 100px;
             }
         }
     }

@@ -12,7 +12,7 @@
 @include for-phone {
     .main {
         .container {
-            height: calc(100vh - 50px);
+            height: calc(100vh - 60px);
         }
     }
 }
@@ -20,7 +20,7 @@
 @include for-phone-horiz {
     .main {
         .container {
-            height: calc(100% - 50px);
+            height: auto;
         }
     }
 }

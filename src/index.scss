@@ -13,9 +13,12 @@
 
 
 body {
+  background-color: #68a8e4;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
+
   color: rgb(255, 255, 255);
   font-family: 'Oxygen';
   font-size: 16px;
@@ -23,8 +26,13 @@ body {
   overflow-x: hidden;
 }
 
-p {
+p, ul {
   margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
 }
 
 button,
@@ -33,6 +41,7 @@ input {
   border: none;
   padding: 0;
 }
+
 
 .logo{
   transition: width 1s ease-in-out;
@@ -45,5 +54,11 @@ input {
 @include for-phone {
   body {
     font-size: 12px;
+  }
+}
+
+@include for-phone-horiz {
+  body {
+    background-size: 120% auto;
   }
 }
