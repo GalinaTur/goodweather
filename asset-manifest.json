@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/goodweather/static/css/main.7e9c750e.css",
-    "main.js": "/goodweather/static/js/main.4158f5c0.js",
+    "main.css": "/goodweather/static/css/main.9cbffe34.css",
+    "main.js": "/goodweather/static/js/main.b25379be.js",
     "static/js/787.ed3ce669.chunk.js": "/goodweather/static/js/787.ed3ce669.chunk.js",
     "static/media/clouds_n.jpg": "/goodweather/static/media/clouds_n.f66d87db31f0c9fd4d93.jpg",
     "static/media/mist.jpg": "/goodweather/static/media/mist.b7be22245f7a326034d2.jpg",
     "static/media/rain.jpg": "/goodweather/static/media/rain.c4d7e0d2dbd02409b490.jpg",
     "static/media/tornado.jpg": "/goodweather/static/media/tornado.6b52d549e53cdb7dd2f8.jpg",
-    "static/media/sprite.svg": "/goodweather/static/media/sprite.8327e859cf14d859d9caf8ea3e8788c6.svg",
+    "static/media/sprite.svg": "/goodweather/static/media/sprite.77277112341f868e5a5404baa571e9ad.svg",
     "static/media/clear_d.jpg": "/goodweather/static/media/clear_d.ef50d52040fca4e6e9fb.jpg",
     "static/media/clear_n.jpg": "/goodweather/static/media/clear_n.aa17ed7036093e1c0b27.jpg",
     "static/media/thunder.jpg": "/goodweather/static/media/thunder.2d04cf0d36805b45e0fb.jpg",
@@ -20,12 +20,12 @@
     "static/media/oxygen-latin-ext-400-normal.woff": "/goodweather/static/media/oxygen-latin-ext-400-normal.d94dfbc8cc816a03972a.woff",
     "static/media/logo.svg": "/goodweather/static/media/logo.b955d97fa017094cee3e.svg",
     "index.html": "/goodweather/index.html",
-    "main.7e9c750e.css.map": "/goodweather/static/css/main.7e9c750e.css.map",
-    "main.4158f5c0.js.map": "/goodweather/static/js/main.4158f5c0.js.map",
+    "main.9cbffe34.css.map": "/goodweather/static/css/main.9cbffe34.css.map",
+    "main.b25379be.js.map": "/goodweather/static/js/main.b25379be.js.map",
     "787.ed3ce669.chunk.js.map": "/goodweather/static/js/787.ed3ce669.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7e9c750e.css",
-    "static/js/main.4158f5c0.js"
+    "static/css/main.9cbffe34.css",
+    "static/js/main.b25379be.js"
   ]
 }
