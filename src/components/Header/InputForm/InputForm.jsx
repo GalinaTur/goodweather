@@ -39,7 +39,7 @@ export default function InputForm({ handleChange, handleSubmit, searchResult, ha
                         </ComboboxPopover>
                     }
                 </Combobox>
-                <svg id='hdrbtn' role='button' viewBox="-6 -6 30 30" className={styles.button} onClick={handleClick}>
+                <svg id='hdrbtn' width='30' height='30' role='button' viewBox="-6 -6 30 30" className={styles.button} onClick={handleClick}>
                 <use href={`${icons}#search`} />
                 </svg>
             </form>

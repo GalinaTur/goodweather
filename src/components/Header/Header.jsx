@@ -32,10 +32,10 @@ export default function Header({ currentLocation, isPending, handleChange, handl
                 </p>
                 <div className={styles.btn_container}>
                     <InputForm handleChange={handleChange} handleSubmit={handleSubmit} searchResult={searchResult} handleSelect={handleSelect} />
-                    <svg role='button' viewBox="0 0 30 30" className={styles.settings}>
+                    <svg role='button' width='30' height='30' viewBox="0 0 30 30" className={styles.settings}>
                         <use href={`${icons}#settings`} />
                     </svg>
-                    <svg role='button' viewBox="-3 -3 30 30" className={styles.menu}>
+                    <svg role='button' width='30' height='30' viewBox="-3 -3 30 30" className={styles.menu}>
                         <use href={`${icons}#menu`} />
                     </svg>
                 </div>
