@@ -1,0 +1,49 @@
+@import '../../../../utils/mixins.scss';
+@import '../../../../utils/variables.scss';
+
+td {
+    white-space: wrap;
+    text-align: left;
+    width: 100px;
+}
+
+.weatherIcon {
+    width: 60px;
+}
+
+.wind {
+    p {
+        display: flex;
+        align-items: center;
+    }
+    svg {
+        margin: 0 5px;
+    }
+}
+
+.popr {
+    text-align: center;
+}
+
+.tempExtr {
+    width: 80px;
+    min-width: 60px;
+}
+
+.weather {
+    text-align: left;
+}
+
+@include for-phone {
+        .wind,
+        .weather {
+            display: none
+        }
+
+        .weatherIcon {
+            svg {
+            width: 40px;
+            height: 40px;
+            }
+        }
+}

@@ -38,19 +38,22 @@
 @include for-phone {
     .tableBlock {
         padding: 20px 0 5px;
+        font-size: 10px;
 
         &::before {
             content: 'Touch a day to see forecast by hourly';
             top: 5px;
-            font-size: 10px;
         }
 
+        .tableContainer {
+            padding: 0 10px;
+        }
     }
 }
 
 @include for-phone-horiz {
     .tableBlock {
-    flex: 0;
-    height: 100%;
-}
+        flex: 0;
+        height: 100%;
+    }
 }

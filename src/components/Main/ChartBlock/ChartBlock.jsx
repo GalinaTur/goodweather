@@ -3,14 +3,12 @@ import { Line } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import Datalabel from './Datalabel/Datalabel';
-import classNames from 'classnames';
 
 Chart.register(...registerables);
 
-let amountOfHours = 9;
+let amountOfHours = 8;
 
-export default function ChartBlock({ forecast, iconIdCreator, definePrecip, className }) {
-    const list = forecast ? forecast.list.slice(0, (amountOfHours + 1)) : '';
+export default function ChartBlock({ data, definePrecip }) {
 
     let tempExtremes = { min: '', max: '' };
 
@@ -19,22 +17,22 @@ export default function ChartBlock({ forecast, iconIdCreator, definePrecip, clas
         tempExtremes.max = Math.max(temp, tempExtremes.max || temp);
     }
 
-    return !forecast ? 'Loading' : (
+    return !data ? 'Loading' : (
         <div className={styles.chartBlockContainer}>
-            <div className={classNames(className, styles.chartBlock)}>
+            <div className={styles.chartBlock}>
                 <div className={styles.chart}>
-                    {list?.map((elem, id) => {
-                        return <Datalabel elem={elem} id={id} key={id} iconIdCreator={iconIdCreator} definePrecip={definePrecip} />
+                    {data?.map((elem, id) => {
+                        return <Datalabel elem={elem} id={id} key={id} iconId={elem.weatherIcon} definePrecip={definePrecip} />
                     })}
-                    <Line width="1300" datasetIdKey="tempByHoursChart" data={{
-                        labels: list?.map((elem) => {
-                            return elem.dt
+                    <Line width="850" datasetIdKey="tempByHoursChart" data={{
+                        labels: data?.map((elem) => {
+                            return elem.time
                         }),
                         datasets: [
                             {
-                                data: list?.map((elem) => {
-                                    checkIfMinOrMaxTemp(elem.main.temp);
-                                    return Math.round(elem.main.temp);
+                                data: data?.map((elem) => {
+                                    checkIfMinOrMaxTemp(elem.temp);
+                                    return elem.temp;
                                 }),
                                 indexAxis: 'x',
                                 fill: {
@@ -104,7 +102,7 @@ export default function ChartBlock({ forecast, iconIdCreator, definePrecip, clas
                         plugins={[ChartDataLabels]} />
                 </div>
             </div>
-            <p className={styles.title}>24 hours next → </p>
+            <p className={styles.title}>24 hours next</p>
             <p className={styles.tip}><span>💧Chance of rain</span><span>❄Chance of snow</span></p>
             <p className={styles.details}></p>
         </div>

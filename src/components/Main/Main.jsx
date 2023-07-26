@@ -15,6 +15,8 @@ import bgSnowN from '../../assets/img/snow_n.jpg';
 import bgThunder from '../../assets/img/thunder.jpg';
 import bgTornado from '../../assets/img/tornado.jpg';
 import bgMist from '../../assets/img/mist.jpg';
+import units from '../../utils/store.js';
+import icons from '../../assets/sprite.svg';
 
 const API_ADDITIONAL = '&units=metric';
 
@@ -118,8 +120,150 @@ let setBgImage = (weather, partOfDay) => {
 
 let dateTime = new Date();
 
-export default function Main({ fetchData, currentLocation, API_KEY, API_URL }) {
+const createDataArr = (data, aqi) => {
+    const dataArr = [
+        {
+            key: 'Feels like',
+            value: Math.round(data.main.feels_like),
+            unit: units.temp.metric,
+        },
+        {
+            key: 'Pressure',
+            value: data.main.pressure,
+            unit: units.pressure.en,
+        },
+        {
+            key: 'Humidity',
+            value: data.main.humidity,
+            unit: units.humidity,
+        },
+        {
+            key: 'Cloudiness',
+            value: data.clouds.all,
+            unit: units.cloudiness,
+        },
+        {
+            key: 'Visibility',
+            value: data.visibility,
+            unit: units.visibility.en,
+        },
+        {
+            key: 'Wind',
+            value: <p>
+                <svg width='20' height='20' viewBox="0 0 100 100" role="img" aria-roledescription="Wind direction" style={{ transform: `rotate(${data.wind.deg}deg)` }}>
+                    <use href={`${icons}#wind_dir`} />
+                </svg>
+                {Math.round(data.wind.speed)} {units.speed.metric.en}
+            </p>,
+            unit: units.speed.metric.en
+        },
+        {
+            key: 'Gust',
+            value: data.wind.gust,
+            unit: units.gust.metric.en
+        },
+        {
+            key: `Chance of ${data.rain ? 'rain' : data.snow ? 'snow' : 'precipitation'}`,
+            value: data.pop * 100 || 0,
+            unit: units.pop
+        },
+        {
+            key: 'Precipitation volume',
+            value: data.rain?.['1h'] || data.rain?.['3h'] || data.snow?.['1h'] || data.snow?.['3h'] || '--',
+            unit: units.precipitation,
+        },
+        {
+            key: 'Air quality index',
+            value: aqi && aqi.main.aqi,
+        },
+    ]
+    return dataArr;
+}
 
+const getMaxPoP = (list) => {
+
+    let precipType, tempWhilePrecip;
+    let precipitation = list.reduce((maxPoP, elem) => {
+        if (maxPoP < elem.details[7].value) {
+            maxPoP = Math.round(elem.details[7].value);
+            precipType = elem.rain ? "rain" : elem.snow ? 'snow' : '';
+            tempWhilePrecip = elem.temp;
+        }
+        return maxPoP;
+    }, 0);
+    precipitation = `${definePrecip(tempWhilePrecip, precipType)} ${precipitation}%`
+    return precipitation;
+}
+
+const getDayByMaxValue = (obj) => {
+    let actualKey = '';
+    let maxValue = 0;
+    for (const [key, value] of Object.entries(obj)) {
+        if (value > maxValue) {
+            maxValue = value;
+            actualKey = key;
+        }
+    }
+    return actualKey;
+}
+
+const getMaxWindSpeed = (list) => {
+    let indexOfElement = 0;
+    list.reduce((maxWind, elem, i) => {
+        if (elem.windSpeed > maxWind) {
+            maxWind = Math.round(elem.windSpeed);
+            indexOfElement = i;
+        }
+        return indexOfElement;
+    }, 0);
+    return list[indexOfElement].details[5].value;
+}
+
+const getTempExtremums = (list) => {
+    const temps = [...list.map((e) => Math.round(e.temp))];
+    return `${Math.min(...temps)}° / ${Math.max(...temps)}°`
+}
+
+const defineCommonWeatherPerDay = (data) => {
+
+    const commonWeather = [...data.map((e) => e.weather)].reduce((acc, weath) => {
+        acc[weath] ? acc[weath] = acc[weath] + 1 : acc[weath] = 1;
+        return acc;
+    }, {});
+    return getDayByMaxValue(commonWeather);
+}
+
+const groupForecastByDay = (forecast) => {
+    const list = forecast.reduce((newList, elem) => {
+        const key = elem.date;
+        if (!newList[key]) newList[key] = [];
+        newList[key].push(elem);
+        return newList;
+    }, {});
+    return list;
+}
+
+const addDetailsForDay = (list) => {
+    const groupedList = groupForecastByDay(list);
+    for (let [key, value] of Object.entries(groupedList)) {
+        groupedList[key].detailsForTable = {
+            dayOfWeek: value[0].dayOfWeek[0],
+            date: value[0].dayOfWeek[1],
+            weatherIcon: <svg width='50' height='50' viewBox="0 0 100 100" role="img" aria-roledescription="">
+                <use href={`${icons}#${iconIdCreator(defineCommonWeatherPerDay(value), 'd')}`} />
+            </svg>,
+            weather: defineCommonWeatherPerDay(value),
+            popr: getMaxPoP(value),
+            wind: getMaxWindSpeed(value),
+            tempExtr: getTempExtremums(value),
+        }
+    }
+    return groupedList;
+}
+
+
+
+export default function Main({ fetchData, currentLocation, API_KEY, API_URL }) {
     const [currentWeather, setCurrentWeather] = useState(null);
     const [forecast, setForecast] = useState(null);
     const [currentDate, setCurrentDate] = useState(formatDate(dateTime));
@@ -153,65 +297,52 @@ export default function Main({ fetchData, currentLocation, API_KEY, API_URL }) {
         }
     }, [currentLocation]);
 
-    // const createDataMap = (data) => {
-    //     const dataMap = new Map ([
-    //         ['Feels&nbsp;like', Math.round(data.main.feels_like)],
-    //         ['Pressure', data.main.pressure],
-    //         ['Humidity', data.main.humidity],
-    //         ['Cloudiness', data.clouds.all],
-    //         ['Visibility', data.visibility],
-    //         ['Wind', {deg:data.wind.deg, speed:data.wind.speed}],
-    //         ['Gust', data.wind.gust],
-    //     ])
-    //     }
-        
-
     const currentData = {
         date: currentDate,
         time: currentTime,
         temp: currentWeather && Math.round(currentWeather.main.temp),
         weather: currentWeather?.weather[0].description,
+        weatherIcon: currentWeather && iconIdCreator(currentWeather.weather[0].description, currentWeather.weather[0].icon.slice(-1)),
         briefWeather: currentWeather?.weather[0].main,
         partOfDay: currentWeather && currentWeather.weather[0].icon.slice(-1),
-        feelsLike: currentWeather && Math.round(currentWeather.main.feels_like),
-        windDeg: currentWeather?.wind.deg,
-        windSpeed: currentWeather && Math.round(currentWeather.wind.speed),
-        windGust: currentWeather?.wind.gust,
-        pressure: currentWeather?.main.pressure,
-        humidity: currentWeather?.main.humidity,
-        visibility: currentWeather?.visibility,
-        cloudiness: currentWeather?.clouds.all,
-        pop: currentWeather?.pop,
-        rain: {
-            '1h': currentWeather?.rain?.['1h'] || null,
-            '3h': currentWeather?.rain?.['3h'] || null,
-        },
-        snow: {
-            '1h': currentWeather?.snow?.['1h'] || null,
-            '3h': currentWeather?.snow?.['3h'] || null,
-        },
-        sunrise: currentWeather?.sys.sunrise,
-        sunrise: currentWeather?.sys.sunset,
-        aqi: airPollut?.list[0].main.aqi,
+        windDirWords: currentWeather && defineWindDirection(currentWeather?.wind.deg),
+        details: currentWeather && createDataArr(currentWeather, airPollut?.list?.[0]),
     }
 
-    const daily = {
-        
-    }
+    const forecastData = forecast && forecast.list.map((elem) => {
+        const date = new Date(elem.dt * 1000);
+        return {
+            date: elem && formatDate(date),
+            time: elem && formatTime(date),
+            temp: Math.round(elem.main.temp),
+            weather: elem?.weather[0].description,
+            weatherIcon: elem && iconIdCreator(elem.weather[0].description, currentWeather.weather[0].icon.slice(-1)),
+            briefWeather: elem?.weather[0].main,
+            partOfDay: elem && elem.sys.pod,
+            windSpeed: elem && elem.wind.speed,
+            windDirWords: elem && defineWindDirection(elem?.wind.deg),
+            dayOfWeek: elem && formatDT(elem.dt),
+            details: elem && createDataArr(elem, airPollut?.list?.[0]),
+        }
+    });
 
     useEffect(() => {
         if (!currentData.briefWeather) return;
         setBgImage(currentData.briefWeather, currentData.partOfDay);
     }, [currentWeather]);
 
+    const hourlyForecast = forecastData?.slice(0, 9);
+
+    const dailyForecast = forecastData && addDetailsForDay(forecastData);
+
     return (
         <main className={styles.main}>
             <Container className={styles.container}>
                 <>
                     {/* <ExtendedBlock weather={currentWeather} iconIdCreator={iconIdCreator} defineWindDirection={defineWindDirection}/> */}
-                    <CurrentWeather className={styles.current} data={currentData} iconIdCreator={iconIdCreator} defineWindDirection={defineWindDirection} />
-                    <ChartBlock className={styles.chart} forecast={forecast} iconIdCreator={iconIdCreator} definePrecip={definePrecip} />
-                    <TableBlock className={styles.table} forecast={forecast} iconIdCreator={iconIdCreator} formatDT={formatDT} definePrecip={definePrecip} />
+                    <CurrentWeather data={currentData} />
+                    <ChartBlock data={hourlyForecast} definePrecip={definePrecip} />
+                    <TableBlock data={dailyForecast} />
                 </>
             </Container>
         </main>

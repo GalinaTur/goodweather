@@ -41,26 +41,51 @@
     .btn_container {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
         flex-wrap: nowrap;
         gap: 5px;
     }
 
     .settings {
-        width: 34px;
-        height: 34px;
-        background-image: url(../../assets/icons/setting.svg);
-        background-position: center top;
-        background-size: contain;
-        background-repeat: no-repeat;
+        width: 30px;
+        height: 30px;
+        padding: 5px 5px;
+        transition: border-color 0.1s ease-in-out; 
+        transition: transform 0.5s ease-in-out; 
+        border: 1px solid transparent;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+            padding: 3px 3px;
+            transform: rotate(50deg);
+        }
+
+        &:active {
+            border-color: currentColor;
+            transform-origin: center;
+        }
     }
 
     .menu {
-        width: 35px;
-        height: 35px;
-        background-image: url(../../assets/icons/menu.svg);
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat;
+        width: 30px;
+        height: 30px;
+        padding: 2px 2px;
+        transition: border-color 0.1s ease-in-out;
+        transition: transform 0.5s ease-in-out;  
+        border: 1px solid transparent;
+        border-radius: 50%;
+        cursor: pointer;
+        
+        &:hover {
+            padding: 0 0;
+            transform: rotate(90deg);
+        }
+
+        &:active {
+            border-color: currentColor;
+            transform-origin: center;
+        }
     }
 }
 

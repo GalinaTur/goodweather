@@ -19,21 +19,25 @@ export default function Header({ currentLocation, isPending, handleChange, handl
     const country = currentLocation?.[0]['country'];
     const locText = `${city}, ${state ? state + ', ' : ''}${country}`;
 
-    
+
     return (
         <header className={styles.header}>
             <Container className={styles.container}>
                 <p id='hdrlg' className={classNames('logo', styles.logo)}>GOODWEATHER</p>
                 <p className={styles.location}>
-                <svg width='16' height='20' viewBox="0 0 100 100" role="img" aria-roledescription={`Location: ${locText}`}>
-                            <use href={`${icons}#location`} />
-                        </svg>
-                        {setLocationText(currentLocation, isPending, locText)}
+                    <svg width='16' height='20' viewBox="0 0 100 100" role="img" aria-roledescription={`Location: ${locText}`}>
+                        <use href={`${icons}#location`} />
+                    </svg>
+                    {setLocationText(currentLocation, isPending, locText)}
                 </p>
                 <div className={styles.btn_container}>
-                    <InputForm handleChange={handleChange} handleSubmit={handleSubmit} searchResult={searchResult} handleSelect={handleSelect}/>
-                    <button className={styles.settings}></button>
-                    <button className={styles.menu}></button>
+                    <InputForm handleChange={handleChange} handleSubmit={handleSubmit} searchResult={searchResult} handleSelect={handleSelect} />
+                    <svg role='button' viewBox="0 0 30 30" className={styles.settings}>
+                        <use href={`${icons}#settings`} />
+                    </svg>
+                    <svg role='button' viewBox="-3 -3 30 30" className={styles.menu}>
+                        <use href={`${icons}#menu`} />
+                    </svg>
                 </div>
             </Container>
         </header>

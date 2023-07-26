@@ -7,6 +7,10 @@
         flex-direction: column;
         height: calc(100vh - 60px);
     }
+
+    wind {
+        display: flex;
+    }
 }
 
 @include for-phone {

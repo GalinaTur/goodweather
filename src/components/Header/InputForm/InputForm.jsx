@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from '@reach/combobox';
 import "@reach/combobox/styles.css";
 import styles from './InputForm.module.scss';
+import icons from '../../../assets/sprite.svg';
 
 export default function InputForm({ handleChange, handleSubmit, searchResult, handleSelect}) {
 
@@ -26,7 +27,7 @@ export default function InputForm({ handleChange, handleSubmit, searchResult, ha
 
     return (
         <div className={styles.formContainer}>
-            <form id='hdrfrm' onSubmit={handleSubmit} autoComplete="off" onBlur={handleBlur}>
+            <form id='hdrfrm' onSubmit={handleSubmit} autoComplete="off" onBlur={handleBlur} tabIndex='-1'>
                 <Combobox aria-label="q" onSelect={handleSelect}>
                     <ComboboxInput id="hdrnpt" onChange={handleChange} className={styles.input}/>
                     {searchResult &&
@@ -38,7 +39,9 @@ export default function InputForm({ handleChange, handleSubmit, searchResult, ha
                         </ComboboxPopover>
                     }
                 </Combobox>
-                <button id='hdrbtn' type='button' className={styles.button} onClick={handleClick}></button>
+                <svg id='hdrbtn' role='button' viewBox="-6 -6 30 30" className={styles.button} onClick={handleClick}>
+                <use href={`${icons}#search`} />
+                </svg>
             </form>
         </div>
     )

@@ -1,24 +1,16 @@
 import styles from './TableBlock.module.scss';
 import TableRow from './TableRow/TableRow';
-import classNames from 'classnames';
 
-export default function TableBlock({ forecast, iconIdCreator, formatDT, definePrecip, className }) {
+export default function TableBlock({ data }) {
 
-    const groupedList = !forecast ? '' : forecast.list.reduce((newList, elem) => {
-        const key = elem['dt_txt'].slice(0, 10);
-        if (!newList[key]) newList[key] = [];
-        newList[key].push(elem);
-        return newList;
-    }, {});
-
-    return (
-        <div className={classNames(className, styles.tableBlock)}>
+    return data && (
+        <div className={styles.tableBlock}>
             <div className={styles.tableContainer}>
                 <table className={styles.table}>
                     <tbody>
-                    {Object.values(groupedList).map((value, id)=> {
+                    {Object.values(data).map((value, id)=> {
                         if (Object.keys(value).length < 2) return; 
-                    return <TableRow key={id} day={value} iconIdCreator={iconIdCreator} formatDT={formatDT} definePrecip={definePrecip}/>
+                    return <TableRow key={id} data={value}/>
                     })}
                     </tbody>
                 </table>
