@@ -56,9 +56,3 @@ input {
     font-size: 12px;
   }
 }
-
-@include for-phone-horiz {
-  body {
-    background-size: 120% auto;
-  }
-}
