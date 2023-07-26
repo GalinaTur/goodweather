@@ -47,7 +47,7 @@
     }
 
     .settings {
-        padding: 5px 5px;
+        padding: 4px 4px;
         transition: border-color 0.1s ease-in-out; 
         transition: transform 0.5s ease-in-out; 
         border: 1px solid transparent;
@@ -55,13 +55,12 @@
         cursor: pointer;
 
         &:hover {
-            padding: 3px 3px;
+            padding: 2px 2px;
             transform: rotate(50deg);
         }
 
         &:active {
             border-color: currentColor;
-            transform-origin: center;
         }
     }
 
@@ -80,7 +79,6 @@
 
         &:active {
             border-color: currentColor;
-            transform-origin: center;
         }
     }
 }
