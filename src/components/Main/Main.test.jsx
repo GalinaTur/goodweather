@@ -56,9 +56,4 @@ describe('Main', () => {
         const icon = await screen.findByTestId('bad_weather_g')
         await waitFor(() => expect(screen.getByTestId('datalabel_8')).toContainElement(icon));
     });
-    test('renders correct PoP icon in datalabel', async () => {
-        render(<Main {...props} />);
-        const icon = await screen.findByTestId('bad_weather_g')
-        await waitFor(() => expect(screen.getByTestId('datalabel_8')).toContainElement(icon));
-    });
 })
