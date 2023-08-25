@@ -1,0 +1,30 @@
+@import '../../utils/mixins.scss';
+
+.main {
+    padding: 5px 0;
+
+    .container {
+        flex-direction: column;
+        height: calc(100% - 60px);
+    }
+
+    wind {
+        display: flex;
+    }
+}
+
+@include for-phone {
+    .main {
+        .container {
+            height: calc(100% - 80px);
+        }
+    }
+}
+
+@include for-phone-horiz {
+    .main {
+        .container {
+            height: auto;
+        }
+    }
+}

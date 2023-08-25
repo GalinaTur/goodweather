@@ -1,0 +1,119 @@
+@import '../../../utils/mixins.scss';
+@import '../../../utils/variables.scss';
+
+.formContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 10px;
+    width: max-content;
+    padding: 2px;
+
+    form {
+        position: relative;
+        width: fit-content;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        border: 1px solid transparent;
+        border-radius: 18px;
+        transition: border-color 1.2s cubic-bezier(1, 0, 1, 0);
+
+        &:focus-within {
+            border-color: currentColor;
+            transition: border-color 1s cubic-bezier(0, 1, 0, 1);
+        }
+
+        .input {
+            font-size: 14px;
+            width: 0;
+            height: 30px;
+            transition: all 1s ease-in-out;
+            color: transparent;
+            caret-color: transparent;
+
+            &:placeholder {
+                display: none;
+            }
+
+            &_active {
+                outline: none;
+                color: inherit;
+                padding: 2px 5px;
+                width: 190px;
+                caret-color: currentColor;
+            }
+        }
+
+
+        .button {
+            cursor: pointer;
+            transition: all 0.1s ease-in-out;
+            padding: 5px 0;
+
+            &:hover {
+                background-size: 18px;
+                padding: 2px 0;
+            }
+        }
+
+    }
+}
+
+.popover {
+    font-size: 80%;
+    background-color: $blocksBGC;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    z-index: 5;
+}
+
+.list {
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+.option {
+    background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    height: 40px;
+    padding: 12px 5px;
+
+    &:first-of-type {
+        border-radius: 8px 8px 0 0;
+    }
+
+    &:last-of-type {
+        border-radius: 0 0 8px 8px;
+        border-bottom: none;
+    }
+
+    &[aria-selected='true'],
+    &:hover,
+    &:focus {
+        background-color: rgba(0, 0, 0, 0.4);
+        color: rgb(0, 119, 255);
+    }
+}
+
+
+@include for-phone {
+
+    .formContainer {
+        margin-left: 5px;
+
+        .input {
+            &_active {
+                width: 135px !important;
+            }
+
+            .button {
+                right: 12px;
+                top: 2px
+            }
+        }
+    }
+
+    .popover {
+        width: 165px !important;
+    }
+}

@@ -1,0 +1,101 @@
+@import '../../../utils/mixins.scss';
+@import '../../../utils/variables.scss';
+
+.chartBlockContainer {
+    width: 100%;
+    position: relative;
+}
+
+.chartBlock {
+    height: 170px;
+    overflow: hidden;
+    font-size: 12px;
+    @include block-bg;
+
+    .chart {
+        position: relative;
+        width: 850px;
+        overflow: hidden;
+        cursor: grab;
+        padding-top: 65px;
+        margin-left: -10px;
+    }
+}
+
+.title,
+.details,
+.tip {
+    position: absolute;
+    font-size: 12px;
+    z-index: 5;
+}
+
+.title {
+    top: 5px;
+    right: 25px;
+}
+
+.details {
+    bottom: 2px;
+    width: 150px;
+    right: 25px;
+    text-align: right;
+
+    &::after {
+        content: 'click to see details';
+        text-decoration: underline;
+    }
+}
+
+.tip {
+    width: max-content;
+    bottom: 2px;
+    display: flex;
+    gap: 15px;
+    left: 20px;
+}
+
+@include for-tablets {
+    .chartBlock {
+        height: 170px;
+        overflow-x: auto;
+        font-size: 12px;
+    }
+
+        .title, 
+        .details {
+            right: 20px;
+        }
+
+        .details::after {
+            content: 'touch to see details';
+        }
+
+        .tip {
+            left: 20px;
+        }
+    }
+
+@include for-phone {
+    .title {
+        font-size: 10px;
+    }
+
+    .tip,
+    .details {
+        font-size: 10px;
+    }
+
+    .tip {
+        gap: 10px;
+    }
+}
+
+
+
+@include for-phone-horiz {
+    .tip,
+    .details {
+        bottom: 0;
+    }
+}

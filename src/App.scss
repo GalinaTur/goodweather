@@ -1,0 +1,29 @@
+@import './utils/mixins.scss';
+@import './utils/variables.scss';
+
+.App {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    
+}
+
+.err {
+    background-color: $blocksBGC;
+    height: 100px;
+    width: 850px;
+    margin: auto;
+    font-size: 20px;
+    line-height: 1.5;
+
+    b {
+        font-size: 30px;
+    }
+}
+
+@include for-phone-horiz {
+    .App {
+        height: 100% !important;
+        overflow-y: auto;
+    }
+}

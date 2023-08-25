@@ -1,0 +1,17 @@
+@import '../../utils/mixins.scss';
+
+.container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 850px;
+    margin: 0 auto;
+    padding: 0 10px;
+    gap: 5px;
+}
+
+@include for-tablets {
+    .container {
+        width: auto;
+    }
+}

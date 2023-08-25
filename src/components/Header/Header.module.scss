@@ -1,0 +1,98 @@
+@import '../../utils/mixins.scss';
+@import '../../utils/variables.scss';
+
+.header {
+    font-size: 1rem;
+    @include block-bg;
+
+    .container {
+        position: relative;
+        padding: 0 30px;
+        width: auto;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .logo {
+        color: white;
+        text-shadow: -1px -1px 0 rgb(100, 100, 100), 1px -1px 0 rgb(100, 100, 100), -1px 1px 0 rgb(100, 100, 100), 1px 1px 0 rgb(100, 100, 100);
+        font-size: 12px;
+        background-image: url(../../assets/icons/logo.svg);
+        background-position: left bottom;
+        background-size: contain;
+        background-repeat: no-repeat;
+        padding: 18px 0 18px 18px;
+        width: 125px;
+    }
+
+    .location {
+        padding: 10px 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-bottom: 15px;
+
+        svg {
+            width: 16px;
+            padding-top: 5px;
+        }
+    }
+
+    .btn_container {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 5px;
+    }
+
+    .settings {
+        padding: 3px 3px;
+        transition: border-color 0.1s ease-in-out; 
+        transition: transform 0.5s ease-in-out; 
+        border: 1px solid transparent;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+            padding: 2px 2px;
+            transform: rotate(50deg);
+        }
+
+        &:active {
+            border-color: currentColor;
+        }
+    }
+
+    .menu {
+        padding: 2px 2px;
+        transition: border-color 0.1s ease-in-out;
+        transition: transform 0.5s ease-in-out;  
+        border: 1px solid transparent;
+        border-radius: 50%;
+        cursor: pointer;
+        
+        &:hover {
+            padding: 0 0;
+            transform: rotate(90deg);
+        }
+
+        &:active {
+            border-color: currentColor;
+        }
+    }
+}
+
+@include for-phone {
+    .header {
+        height: fit-content;
+
+        .logo {
+            display: none;
+        }
+
+        .location {
+            padding-left: 0;
+        }
+    }
+}

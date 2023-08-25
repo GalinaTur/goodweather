@@ -1,0 +1,13 @@
+@import '../../../../utils/mixins.scss';
+@import '../../../../utils/variables.scss';
+
+.weather {
+        position: absolute;
+        width: 50px;
+        top: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        align-items: center;
+        font-size: 12px;
+    }

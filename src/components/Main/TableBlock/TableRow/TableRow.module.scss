@@ -1,0 +1,17 @@
+@import '../../../../utils/mixins.scss';
+@import '../../../../utils/variables.scss';
+
+.row {
+    border-bottom: 1px solid rgb(255, 255, 255);
+
+    &:last-of-type {
+        border-bottom: none;
+    }
+}
+
+@include for-phone {
+    .row {
+        border-bottom: 1px solid rgb(255, 255, 255);
+        font-size: 120%;
+    }
+}

@@ -1,0 +1,58 @@
+@import './utils/mixins.scss';
+@import '@fontsource/oxygen';
+
+* {
+  box-sizing: border-box;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+
+body {
+  background-color: #68a8e4;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+
+  color: rgb(255, 255, 255);
+  font-family: 'Oxygen';
+  font-size: 16px;
+  line-height: 1.2;
+  overflow-x: hidden;
+}
+
+p, ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+button,
+input {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+
+.logo{
+  transition: width 1s ease-in-out;
+}
+
+.logo_active {
+  width: 315px !important;
+}
+
+@include for-phone {
+  body {
+    font-size: 12px;
+  }
+}
