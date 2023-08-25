@@ -34,7 +34,7 @@ function App() {
     const params = new URLSearchParams({
       q: [...locationArr],
       limit: 1,
-      appid: process.env.REACT_APP_API_KEY
+      appid: process.env.API_KEY
     })
 
     fetchLocation(API_URL.locationDir + params.toString());
