@@ -63,22 +63,14 @@
         justify-content: space-between;
         gap: 30px;
 
-        ul {
-            flex: 1;
-            height: 100%;
+        table {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
 
-            li {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                border-bottom: 1px solid currentColor;
-                height: 20%;
-            }
-
-            span {
-                display: flex;
-                align-items: center;
-                gap: 5px;
+            tbody {
+                width: 50%;
             }
         }
     }
@@ -127,6 +119,10 @@
         .body {
             flex-direction: column;
             gap: 0;
+
+            table {
+                gap: 10px;
+            }
         }
     }
 }

@@ -20,7 +20,7 @@ const units = {
     },
     gust: {
         metric: {
-            en: 'meter/sec',
+            en: 'm/s',
             uk: 'м/с',
         },
         imperial: {
@@ -34,8 +34,8 @@ const units = {
         uk: 'мм'
     },
     visibility: {
-        en: 'km of 10',
-        uk: 'км з 10',
+        en: 'km of\u00a010',
+        uk: 'км з\u00a010',
     },
     pop: '%',
 }

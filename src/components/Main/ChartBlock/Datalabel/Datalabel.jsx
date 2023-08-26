@@ -2,7 +2,7 @@ import styles from './Datalabel.module.scss';
 import icons from '../../../../assets/sprite.svg';
 import classNames from 'classnames';
 
-export default function Datalabel({elem, id, iconId, definePrecip}) {
+export default function Datalabel({elem, id, iconId}) {
     const presipType = elem.rain ? "rain" : elem.snow ? 'snow' : '';
     
     return !elem? 'Loading..' : (
@@ -11,7 +11,7 @@ export default function Datalabel({elem, id, iconId, definePrecip}) {
             <svg width='40' height='40' viewBox="0 0 100 100" role="img" aria-label={`Weather at ${elem.time}: ${elem.weather}`} data-testid={iconId} >
                 <use href={`${icons}#${iconId}`} />
             </svg>
-            <p>{`${definePrecip(elem.temp, presipType)} ${elem.details?.[7].value}%`}</p>
+            <p>{`${elem.precipitationIcon} ${elem.details?.[7].value}`}</p>
         </div>
     )
 }

@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useFetch } from '../../useFetch';
 import Container from '../Container/Container';
-import ChartBlock from './ChartBlock/ChartBlock';
-import CurrentWeather from './CurrentWeather/CurrentWeather';
+import HomeBlock from './HomeBlock/HomeBlock';
 import ExtendedBlock from './ExtendedBlock/ExtendedBlock';
 import styles from './Main.module.scss';
-import TableBlock from './TableBlock/TableBlock';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import bgClearD from '../../assets/img/clear_d.jpg';
 import bgClearN from '../../assets/img/clear_n.jpg';
 import bgCloudsD from '../../assets/img/clouds_d.jpg';
@@ -120,56 +119,58 @@ let setBgImage = (weather, partOfDay) => {
 const createDataArr = (data, aqi) => {
     const dataArr = [
         {
+            icon: 'feelsLike',
             key: 'Feels like',
-            value: Math.round(data.main.feels_like),
-            unit: units.temp.metric,
+            value: Math.round(data.main.feels_like) + units.temp.metric,
         },
         {
+            icon: 'pressure',
             key: 'Pressure',
-            value: data.main.pressure,
-            unit: units.pressure.en,
+            value: data.main.pressure + units.pressure.en,
         },
         {
+            icon: 'humidity',
             key: 'Humidity',
-            value: data.main.humidity,
-            unit: units.humidity,
+            value: data.main.humidity + units.humidity,
         },
         {
+            icon: 'cloudiness',
             key: 'Cloudiness',
-            value: data.clouds.all,
-            unit: units.cloudiness,
+            value: data.clouds.all + units.cloudiness,
         },
         {
+            icon: 'visibility',
             key: 'Visibility',
-            value: data.visibility,
-            unit: units.visibility.en,
+            value: data.visibility / 1000 + units.visibility.en,
         },
         {
+            icon: 'wind',
             key: 'Wind',
             value: <p>
                 <svg width='20' height='20' viewBox="0 0 100 100" role="img" aria-roledescription="Wind direction" style={{ transform: `rotate(${data.wind.deg}deg)` }}>
                     <use href={`${icons}#wind_dir`} />
                 </svg>
-                {Math.round(data.wind.speed)} {units.speed.metric.en}
+                {Math.round(data.wind.speed)}{units.speed.metric.en}
             </p>,
-            unit: units.speed.metric.en
         },
         {
+            icon: 'gust',
             key: 'Gust',
-            value: data.wind.gust,
-            unit: units.gust.metric.en
+            value: data.wind.gust + units.gust.metric.en,
         },
         {
+            icon: 'chance',
             key: `Chance of ${data.rain ? 'rain' : data.snow ? 'snow' : 'precipitation'}`,
-            value: Math.round(data.pop) * 100 || 0,
-            unit: units.pop
+            value: (Math.round(data.pop) * 100 || 0) + units.pop,
         },
         {
+            icon: 'volume',
             key: 'Precipitation volume',
-            value: data.rain?.['1h'] || data.rain?.['3h'] || data.snow?.['1h'] || data.snow?.['3h'] || '--',
-            unit: units.precipitation,
+            value: data.rain ? (data.rain?.['1h'] || data.rain?.['3h']) + units.precipitation :
+                data.snow ? (data.snow?.['1h'] || data.snow?.['3h']) + units.precipitation : '--',
         },
         {
+            icon: 'aqi',
             key: 'Air quality index',
             value: aqi && aqi.main.aqi,
         },
@@ -290,6 +291,8 @@ export default function Main({ currentLocation, API_URL }) {
         briefWeather: currentWeather?.weather[0].main,
         partOfDay: currentWeather && currentWeather.weather[0].icon.slice(-1),
         windDirWords: currentWeather && defineWindDirection(currentWeather?.wind.deg),
+        sunrise: currentWeather && formatTime(new Date(currentWeather.sys.sunrise*1000)),
+        sunset: currentWeather && formatTime(new Date(currentWeather.sys.sunset*1000)),
         details: currentWeather && createDataArr(currentWeather, airPollut?.list?.[0]),
     }
 
@@ -306,6 +309,7 @@ export default function Main({ currentLocation, API_URL }) {
             windSpeed: elem && elem.wind.speed,
             windDirWords: elem && defineWindDirection(elem?.wind.deg),
             dayOfWeek: elem && formatDT(elem.dt),
+            precipitationIcon: elem && definePrecip(elem.main.temp, elem.rain ? "rain" : elem.snow ? 'snow' : ''),
             details: elem && createDataArr(elem, airPollut?.list?.[0]),
         }
     });
@@ -320,16 +324,17 @@ export default function Main({ currentLocation, API_URL }) {
     const dailyForecast = forecastData && addDetailsForDay(forecastData);
 
     return (
-        <main className={styles.main}>
-            <Container className={styles.container}>
-                <>
-                    {/* <ExtendedBlock weather={currentWeather} iconIdCreator={iconIdCreator} defineWindDirection={defineWindDirection}/> */}
-                    <CurrentWeather data={currentData} />
-                    <ChartBlock data={hourlyForecast} definePrecip={definePrecip} />
-                    <TableBlock data={dailyForecast} />
-                </>
-            </Container>
-        </main>
+        <Router>
+            <main className={styles.main}>
+                <Container className={styles.container}>
+                    <Routes>
+                        <Route path="/" element={
+                            <HomeBlock currentData={currentData} dailyForecast={dailyForecast} hourlyForecast={hourlyForecast} />
+                        } />
+                        <Route path="details" element={<ExtendedBlock data={currentData} />} />
+                    </Routes>
+                </Container>
+            </main>
+        </Router>
     )
 }
-

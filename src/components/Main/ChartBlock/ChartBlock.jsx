@@ -6,7 +6,7 @@ import Datalabel from './Datalabel/Datalabel';
 
 Chart.register(...registerables);
 
-export default function ChartBlock({ data, definePrecip }) {
+export default function ChartBlock({ data }) {
 
     let tempExtremes = { min: '', max: '' };
 
@@ -20,7 +20,7 @@ export default function ChartBlock({ data, definePrecip }) {
             <div className={styles.chartBlock}>
                 <div className={styles.chart}>
                     {data?.map((elem, id) => {
-                        return <Datalabel elem={elem} id={id} key={id} iconId={elem.weatherIcon} definePrecip={definePrecip} />
+                        return <Datalabel elem={elem} id={id} key={id} iconId={elem.weatherIcon} />
                     })}
                     <Line width="850" datasetIdKey="tempByHoursChart" data={{
                         labels: data?.map((elem) => {

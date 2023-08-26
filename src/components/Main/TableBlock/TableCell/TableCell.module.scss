@@ -15,6 +15,7 @@ td {
     p {
         display: flex;
         align-items: center;
+        flex-direction: row;
     }
     svg {
         margin: 0 5px;
@@ -34,6 +35,21 @@ td {
     text-align: left;
 }
 
+.icon {
+    min-width: 30px;
+    width: 8%;
+}
+
+.value {
+    text-align: right;
+    width: max-content;
+    white-space: nowrap;
+}
+
+.key {
+    width: 100%;
+}
+
 @include for-phone {
         .wind,
         .weather {
@@ -46,4 +62,9 @@ td {
             height: 40px;
             }
         }
+
+        .value {
+            white-space: unset;
+        }
+
 }
