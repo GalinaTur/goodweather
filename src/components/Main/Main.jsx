@@ -18,15 +18,15 @@ import bgMist from '../../assets/img/mist.jpg';
 import units from '../../utils/store.js';
 import icons from '../../assets/sprite.svg';
 
-const formatDate = (date) => {
-    let oldDate = date.toDateString();
-    let newDate = `${oldDate.slice(0, 3)} - ${oldDate.slice(4, 10)}, ${oldDate.slice(11)}`;
+const formatDate = (date, offset) => {
+    let oldDate = new Date(date.getTime() + offset*1000).toUTCString();
+    let newDate = oldDate.slice(0, 16);
     return newDate;
 }
 
-const formatTime = (time) => {
-    let oldTime = time.toTimeString();
-    let newTime = oldTime.slice(0, 5);
+const formatTime = (time, offset) => {
+    let oldTime = new Date(time.getTime() + offset*1000).toUTCString();
+    let newTime = oldTime.slice(17, 22);
     return newTime;
 }
 
@@ -34,27 +34,10 @@ const setTwoDigit = (numb) => {
     return numb < 10 ? `0${numb}` : numb;
 }
 
-const formatDT = (dt) => {
-    const dateTime = new Date(dt * 1000);
-    let newDate = formatDate(dateTime);
-    let dayOfWeek = newDate.slice(0, 3);
+const formatDT = (dt, offset) => {
+    const dateTime = new Date((dt + offset)*1000);
+    let dayOfWeek = dateTime.toUTCString().slice(0, 3);
     let date = `${setTwoDigit(dateTime.getDate())}.${setTwoDigit(dateTime.getMonth() + 1)}`
-    switch (dayOfWeek) {
-        case 'Mon': dayOfWeek = 'Monday';
-            break;
-        case 'Tue': dayOfWeek = 'Tuesday';
-            break;
-        case 'Wed': dayOfWeek = 'Wednesday';
-            break;
-        case 'Thu': dayOfWeek = 'Thursday';
-            break;
-        case 'Fri': dayOfWeek = 'Friday';
-            break;
-        case 'Sat': dayOfWeek = 'Saturday';
-            break;
-        case 'Sun': dayOfWeek = 'Sunday';
-            break;
-    }
     return [dayOfWeek, date];
 }
 
@@ -121,53 +104,53 @@ const createDataArr = (data, aqi) => {
         {
             icon: 'feelsLike',
             key: 'Feels like',
-            value: Math.round(data.main.feels_like) + units.temp.metric,
+            value: Math.round(data.main.feels_like) + '\u00a0'+ units.temp.metric,
         },
         {
             icon: 'pressure',
             key: 'Pressure',
-            value: data.main.pressure + units.pressure.en,
+            value: data.main.pressure + '\u00a0' + units.pressure.en,
         },
         {
             icon: 'humidity',
             key: 'Humidity',
-            value: data.main.humidity + units.humidity,
+            value: data.main.humidity + '\u00a0' + units.humidity,
         },
         {
             icon: 'cloudiness',
             key: 'Cloudiness',
-            value: data.clouds.all + units.cloudiness,
+            value: data.clouds.all + '\u00a0' + units.cloudiness,
         },
         {
             icon: 'visibility',
             key: 'Visibility',
-            value: data.visibility / 1000 + units.visibility.en,
+            value: data.visibility / 1000 + '\u00a0' + units.visibility.en,
         },
         {
             icon: 'wind',
             key: 'Wind',
-            value: <p>
+            value: <p className={styles.wind}>
                 <svg width='20' height='20' viewBox="0 0 100 100" role="img" aria-roledescription="Wind direction" style={{ transform: `rotate(${data.wind.deg}deg)` }}>
                     <use href={`${icons}#wind_dir`} />
                 </svg>
-                {Math.round(data.wind.speed)}{units.speed.metric.en}
+                {' ' + Math.round(data.wind.speed) + '\u00a0' + units.speed.metric.en}
             </p>,
         },
         {
             icon: 'gust',
             key: 'Gust',
-            value: data.wind.gust + units.gust.metric.en,
+            value: data.wind.gust + '\u00a0' + units.gust.metric.en,
         },
         {
             icon: 'chance',
             key: `Chance of ${data.rain ? 'rain' : data.snow ? 'snow' : 'precipitation'}`,
-            value: (Math.round(data.pop) * 100 || 0) + units.pop,
+            value: (Math.round(data.pop) * 100 || 0) + '\u00a0' + units.pop,
         },
         {
             icon: 'volume',
             key: 'Precipitation volume',
-            value: data.rain ? (data.rain?.['1h'] || data.rain?.['3h']) + units.precipitation :
-                data.snow ? (data.snow?.['1h'] || data.snow?.['3h']) + units.precipitation : '--',
+            value: data.rain ? (data.rain?.['1h'] || data.rain?.['3h']) + '\u00a0' + units.precipitation :
+                data.snow ? (data.snow?.['1h'] || data.snow?.['3h']) + '\u00a0' + units.precipitation : '--',
         },
         {
             icon: 'aqi',
@@ -271,36 +254,26 @@ export default function Main({ currentLocation, API_URL }) {
     const [currentWeather, isPendingCurrent, errorCurrent, fetchWeather] = useFetch(API_URL.weather, params);
     const [forecast, isPendingForecast, errorForecast, fetchForecast] = useFetch(API_URL.forecast, params);
     const [airPollut, isPendingAirPollut, errorAirPollut, fetchAirPollut] = useFetch(API_URL.airPollution, params);
-    const [currentDate, setCurrentDate] = useState(formatDate(new Date(Date.now())));
-    const [currentTime, setCurrentTime] = useState(formatTime(new Date(Date.now())));
-
-    useEffect(() => {
-        setInterval(() => {
-            let dateTime = new Date(Date.now());
-            setCurrentDate(formatDate(dateTime));
-            setCurrentTime(formatTime(dateTime));
-        }, 60000);
-    }, []);
 
     const currentData = {
-        date: currentDate,
-        time: currentTime,
+        date: currentWeather && new Date(Date.now() + currentWeather.timezone*1000).toUTCString(),
+        timezone: currentWeather && currentWeather.timezone*1000,
         temp: currentWeather && Math.round(currentWeather.main.temp),
         weather: currentWeather?.weather[0].description,
         weatherIcon: currentWeather && iconIdCreator(currentWeather.weather[0].description, currentWeather.weather[0].icon.slice(-1)),
         briefWeather: currentWeather?.weather[0].main,
         partOfDay: currentWeather && currentWeather.weather[0].icon.slice(-1),
         windDirWords: currentWeather && defineWindDirection(currentWeather?.wind.deg),
-        sunrise: currentWeather && formatTime(new Date(currentWeather.sys.sunrise*1000)),
-        sunset: currentWeather && formatTime(new Date(currentWeather.sys.sunset*1000)),
+        sunrise: currentWeather && formatTime(new Date(currentWeather.sys.sunrise*1000), currentWeather.timezone),
+        sunset: currentWeather && formatTime(new Date(currentWeather.sys.sunset*1000), currentWeather.timezone),
         details: currentWeather && createDataArr(currentWeather, airPollut?.list?.[0]),
     }
 
     const forecastData = forecast && forecast.list.map((elem) => {
         const date = new Date(elem.dt * 1000);
         return {
-            date: elem && formatDate(date),
-            time: elem && formatTime(date),
+            date: elem && formatDate(date, forecast.city.timezone),
+            time: elem && formatTime(date, forecast.city.timezone),
             temp: Math.round(elem.main.temp),
             weather: elem?.weather[0].description,
             weatherIcon: elem && iconIdCreator(elem?.weather?.[0].description, elem?.sys.pod),
@@ -308,7 +281,7 @@ export default function Main({ currentLocation, API_URL }) {
             partOfDay: elem && elem.sys.pod,
             windSpeed: elem && elem.wind.speed,
             windDirWords: elem && defineWindDirection(elem?.wind.deg),
-            dayOfWeek: elem && formatDT(elem.dt),
+            dayOfWeek: elem && formatDT(elem.dt, forecast.city.timezone),
             precipitationIcon: elem && definePrecip(elem.main.temp, elem.rain ? "rain" : elem.snow ? 'snow' : ''),
             details: elem && createDataArr(elem, airPollut?.list?.[0]),
         }
@@ -323,15 +296,15 @@ export default function Main({ currentLocation, API_URL }) {
 
     const dailyForecast = forecastData && addDetailsForDay(forecastData);
 
-    return (
+    return currentWeather && (
         <Router>
             <main className={styles.main}>
                 <Container className={styles.container}>
                     <Routes>
                         <Route path="/" element={
-                            <HomeBlock currentData={currentData} dailyForecast={dailyForecast} hourlyForecast={hourlyForecast} />
+                            <HomeBlock currentData={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast}/>
                         } />
-                        <Route path="details" element={<ExtendedBlock data={currentData} />} />
+                        <Route path="details/today" element={<ExtendedBlock data={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast}/>} />
                     </Routes>
                 </Container>
             </main>

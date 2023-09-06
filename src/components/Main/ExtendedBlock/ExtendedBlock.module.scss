@@ -1,6 +1,26 @@
 @import '../../../utils/mixins.scss';
 @import '../../../utils/variables.scss';
 
+.navigation {
+    display: flex;
+    background-color: $blocksBGC;
+    width: 300px;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border-radius: 18px;
+
+    .navlink {
+        position: relative;
+        width: 60px;
+        text-align: center;
+        font-size: 10px;
+
+        .active {
+            font-size: 16px;
+        }
+    }
+}
+
 .extended {
     display: flex;
     flex-direction: column;

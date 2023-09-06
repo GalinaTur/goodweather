@@ -6,13 +6,13 @@ import Datalabel from './Datalabel/Datalabel';
 
 Chart.register(...registerables);
 
-export default function ChartBlock({ data }) {
+export default function ChartBlock({ data, datalabel, weatherKey }) {
 
-    let tempExtremes = { min: '', max: '' };
+    let extremes = { min: '', max: '' };
 
-    const checkIfMinOrMaxTemp = (temp) => {
-        tempExtremes.min = Math.min(temp, tempExtremes.min || temp);
-        tempExtremes.max = Math.max(temp, tempExtremes.max || temp);
+    const checkIfMinOrMaxTemp = (key) => {
+        extremes.min = Math.min(key, extremes.min || key);
+        extremes.max = Math.max(key, extremes.max || key);
     }
 
     return !data ? 'Loading' : (
@@ -20,7 +20,7 @@ export default function ChartBlock({ data }) {
             <div className={styles.chartBlock}>
                 <div className={styles.chart}>
                     {data?.map((elem, id) => {
-                        return <Datalabel elem={elem} id={id} key={id} iconId={elem.weatherIcon} />
+                        return <Datalabel elem={elem} id={id} key={id} weatherKey={weatherKey}/>
                     })}
                     <Line width="850" datasetIdKey="tempByHoursChart" data={{
                         labels: data?.map((elem) => {
@@ -67,8 +67,8 @@ export default function ChartBlock({ data }) {
                         },
                         scales: {
                             y: {
-                                min: (tempExtremes.min -5),
-                                max: (tempExtremes.max + 40),
+                                min: (extremes.min -5),
+                                max: (extremes.max + 40),
                                 ticks: {
                                     beginAtZero: false,
                                     display: false,
