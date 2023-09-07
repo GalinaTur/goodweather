@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/goodweather/static/css/main.60327761.css",
-    "main.js": "/goodweather/static/js/main.696a7340.js",
+    "main.css": "/goodweather/static/css/main.bee4496b.css",
+    "main.js": "/goodweather/static/js/main.8fa09e7d.js",
     "static/js/787.ed3ce669.chunk.js": "/goodweather/static/js/787.ed3ce669.chunk.js",
     "static/media/clouds_n.jpg": "/goodweather/static/media/clouds_n.f66d87db31f0c9fd4d93.jpg",
     "static/media/mist.jpg": "/goodweather/static/media/mist.b7be22245f7a326034d2.jpg",
@@ -20,12 +20,12 @@
     "static/media/oxygen-latin-ext-400-normal.woff": "/goodweather/static/media/oxygen-latin-ext-400-normal.d94dfbc8cc816a03972a.woff",
     "static/media/logo.svg": "/goodweather/static/media/logo.f6bb827018d5d4de99c5.svg",
     "index.html": "/goodweather/index.html",
-    "main.60327761.css.map": "/goodweather/static/css/main.60327761.css.map",
-    "main.696a7340.js.map": "/goodweather/static/js/main.696a7340.js.map",
+    "main.bee4496b.css.map": "/goodweather/static/css/main.bee4496b.css.map",
+    "main.8fa09e7d.js.map": "/goodweather/static/js/main.8fa09e7d.js.map",
     "787.ed3ce669.chunk.js.map": "/goodweather/static/js/787.ed3ce669.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.60327761.css",
-    "static/js/main.696a7340.js"
+    "static/css/main.bee4496b.css",
+    "static/js/main.8fa09e7d.js"
   ]
 }
