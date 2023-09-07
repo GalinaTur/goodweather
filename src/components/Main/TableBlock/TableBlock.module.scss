@@ -10,12 +10,12 @@
     @include block-bg;
 
     &::before {
-        content: 'Click a day to see forecast by hourly';
+        content: 'click a day to see details';
         font-size: 12px;
         font-weight: 300;
         position: absolute;
         top: 10px;
-        right: 10px;
+        right: 25px;
     }
 
     .tableContainer {
@@ -41,7 +41,8 @@
         font-size: 10px;
 
         &::before {
-            content: 'Touch a day to see forecast by hourly';
+            content: 'touch a day to see details';
+            font-size: 10px;
             top: 5px;
         }
 

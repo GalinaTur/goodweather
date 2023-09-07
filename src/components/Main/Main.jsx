@@ -132,6 +132,10 @@ const defineAqiDescription = (aqi) => {
     return aqiDescription;
 }
 
+const convertPressureValue = (value) => {
+    return Math.round(value * 0.75006157584566);
+}
+
 const createDataArr = (data, aqi) => {
     const dataArr = [
         {
@@ -142,7 +146,7 @@ const createDataArr = (data, aqi) => {
         {
             icon: 'pressure',
             key: 'Pressure',
-            value: data.main.pressure + '\u00a0' + units.pressure.en,
+            value: convertPressureValue(data.main.pressure) + '\u00a0' + units.pressure.en,
         },
         {
             icon: 'humidity',
@@ -172,7 +176,7 @@ const createDataArr = (data, aqi) => {
         {
             icon: 'gust',
             key: 'Gust',
-            value: data.wind.gust ? data.wind.gust + '\u00a0' + units.gust.metric.en : '--',
+            value: data.wind.gust ? Math.round(data.wind.gust) + '\u00a0' + units.gust.metric.en : '--',
         },
         {
             icon: 'chance',
@@ -195,10 +199,9 @@ const createDataArr = (data, aqi) => {
 }
 
 const getMaxPoP = (list) => {
-
     let precipType, tempWhilePrecip;
     let precipitation = list.reduce((maxPoP, elem) => {
-        if (!elem.details) return;
+        if (!elem.details) return maxPoP;
         if (maxPoP < elem.details[7].value) {
             maxPoP = Math.round(elem.details[7].value);
             precipType = elem.rain ? "rain" : elem.snow ? 'snow' : '';
@@ -235,7 +238,10 @@ const getMaxWindSpeed = (list) => {
 }
 
 const getTempExtremums = (list) => {
-    const temps = [...list.map((e) => Math.round(e.temp))];
+    const temps = [...list.map((e) => {
+        if (e.temp === '?') return null;
+        return Math.round(e.temp)
+    })];
     return `${Math.min(...temps)}° / ${Math.max(...temps)}°`
 }
 
@@ -366,7 +372,7 @@ export default function Main({ currentLocation, API_URL }) {
                         <Route path="/" element={
                             <HomeBlock currentData={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast} />
                         } />
-                        <Route path="details/today" element={<ExtendedBlock data={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast} />} />
+                        <Route path="/details/*" element={<ExtendedBlock data={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast} />} />
                         {forecast && Object.values(dailyForecast).map((elem, id) => {
                             return <Route path={`details/day${id}`} element={<ExtendedBlock data={getInitialHourForExt(elem)} hourlyForecast={elem} dailyForecast={dailyForecast} />} key={id} />
                         })}

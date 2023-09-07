@@ -2,7 +2,7 @@ import styles from './ExtendedBlock.module.scss';
 import icons from '../../../assets/sprite.svg';
 import TableRow from '../TableBlock/TableRow/TableRow';
 import ChartBlock from '../ChartBlock/ChartBlock';
-import { HashRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, NavLink, Link } from 'react-router-dom';
 import { useState } from 'react';
 
 export default function ExtendedBlock({ data, hourlyForecast, dailyForecast }) {
@@ -17,6 +17,11 @@ export default function ExtendedBlock({ data, hourlyForecast, dailyForecast }) {
                 })}
             </nav>
             <div className={styles.extended}>
+            <Link to='/' className={styles.back}>
+                <svg width='30' height='30' viewBox="0 0 100 100" role="img" aria-label="back to main page">
+                    <use href={`${icons}#back`} />
+                </svg>
+            </Link>
                 <div className={styles.datetime}><p>{data.date}</p><p>{data.time}</p></div>
                 <div className={styles.header}>
                     <div className={styles.part}>

@@ -5,8 +5,8 @@ const units = {
     },
     humidity: '%',
     pressure: {
-        en: 'hPa',
-        uk: 'гПа',
+        en: 'mmHg',
+        uk: 'мм рт. ст.',
     },
     speed: {
         metric: {

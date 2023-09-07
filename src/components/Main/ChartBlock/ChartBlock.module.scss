@@ -42,8 +42,7 @@
     text-align: right;
 
     &::after {
-        content: 'click to see details';
-        text-decoration: underline;
+        content: 'click an hour to see details';
     }
 }
 
@@ -66,11 +65,7 @@
         .details {
             right: 20px;
         }
-
-        .details::after {
-            content: 'touch to see details';
-        }
-
+        
         .tip {
             left: 20px;
         }
@@ -84,6 +79,10 @@
     .tip,
     .details {
         font-size: 10px;
+    }
+
+    .details::after {
+        content: 'touch an hour to see details';
     }
 
     .tip {

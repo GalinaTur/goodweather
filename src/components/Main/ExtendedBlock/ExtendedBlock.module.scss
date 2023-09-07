@@ -26,10 +26,19 @@
     padding: 10px 20px;
     line-height: 1;
 
+    .back {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        left: 15px;
+        top: 5px;
+    }
+
     .datetime {
         display: flex;
         justify-content: center;
         gap: 15px;
+        padding: 5px 0;
     }
 
     .header {

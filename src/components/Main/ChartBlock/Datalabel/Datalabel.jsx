@@ -19,7 +19,7 @@ export default function Datalabel({ elem, id }) {
                 <svg width='40' height='40' viewBox="0 0 100 100" role="img" aria-label={`Weather at ${elem.time}: ${elem.weather}`} data-testid={elem.weatherIcon} >
                     <use href={`${icons}#${elem.weatherIcon}`} />
                 </svg>
-                <p>{`${elem.precipitationIcon} ${elem.details?.[7].value}`}</p>
+                <p>{`${elem.precipitationIcon}\u00a0${elem.details?.[7].value}`}</p>
             </div>
     )
 }
