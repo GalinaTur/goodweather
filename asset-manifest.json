@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/goodweather/static/css/main.bee4496b.css",
-    "main.js": "/goodweather/static/js/main.8fa09e7d.js",
+    "main.css": "/goodweather/static/css/main.5aa9cab4.css",
+    "main.js": "/goodweather/static/js/main.a9973532.js",
     "static/js/787.ed3ce669.chunk.js": "/goodweather/static/js/787.ed3ce669.chunk.js",
     "static/media/clouds_n.jpg": "/goodweather/static/media/clouds_n.f66d87db31f0c9fd4d93.jpg",
     "static/media/mist.jpg": "/goodweather/static/media/mist.b7be22245f7a326034d2.jpg",
     "static/media/rain.jpg": "/goodweather/static/media/rain.c4d7e0d2dbd02409b490.jpg",
     "static/media/tornado.jpg": "/goodweather/static/media/tornado.6b52d549e53cdb7dd2f8.jpg",
-    "static/media/sprite.svg": "/goodweather/static/media/sprite.3136730ca6d032ad91506cd7726aef12.svg",
+    "static/media/sprite.svg": "/goodweather/static/media/sprite.b0ee00a5804938f511bd5bfd0cf5ba8d.svg",
     "static/media/clear_d.jpg": "/goodweather/static/media/clear_d.ef50d52040fca4e6e9fb.jpg",
     "static/media/clear_n.jpg": "/goodweather/static/media/clear_n.aa17ed7036093e1c0b27.jpg",
     "static/media/thunder.jpg": "/goodweather/static/media/thunder.2d04cf0d36805b45e0fb.jpg",
@@ -20,12 +20,12 @@
     "static/media/oxygen-latin-ext-400-normal.woff": "/goodweather/static/media/oxygen-latin-ext-400-normal.d94dfbc8cc816a03972a.woff",
     "static/media/logo.svg": "/goodweather/static/media/logo.f6bb827018d5d4de99c5.svg",
     "index.html": "/goodweather/index.html",
-    "main.bee4496b.css.map": "/goodweather/static/css/main.bee4496b.css.map",
-    "main.8fa09e7d.js.map": "/goodweather/static/js/main.8fa09e7d.js.map",
+    "main.5aa9cab4.css.map": "/goodweather/static/css/main.5aa9cab4.css.map",
+    "main.a9973532.js.map": "/goodweather/static/js/main.a9973532.js.map",
     "787.ed3ce669.chunk.js.map": "/goodweather/static/js/787.ed3ce669.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bee4496b.css",
-    "static/js/main.8fa09e7d.js"
+    "static/css/main.5aa9cab4.css",
+    "static/js/main.a9973532.js"
   ]
 }
