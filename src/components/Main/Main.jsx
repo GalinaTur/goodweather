@@ -35,9 +35,25 @@ const setTwoDigit = (numb) => {
 }
 
 const formatDT = (dt, offset) => {
-    const dateTime = new Date((dt + offset)*1000);
+    const dateTime = new Date((dt + offset) * 1000);
     let dayOfWeek = dateTime.toUTCString().slice(0, 3);
     let date = `${setTwoDigit(dateTime.getDate())}.${setTwoDigit(dateTime.getMonth() + 1)}`
+    switch (dayOfWeek) {
+        case 'Mon': dayOfWeek = 'Monday';
+            break;
+        case 'Tue': dayOfWeek = 'Tuesday';
+            break;
+        case 'Wed': dayOfWeek = 'Wednesday';
+            break;
+        case 'Thu': dayOfWeek = 'Thursday';
+            break;
+        case 'Fri': dayOfWeek = 'Friday';
+            break;
+        case 'Sat': dayOfWeek = 'Saturday';
+            break;
+        case 'Sun': dayOfWeek = 'Sunday';
+            break;
+    }
     return [dayOfWeek, date];
 }
 
@@ -139,7 +155,7 @@ const createDataArr = (data, aqi) => {
         {
             icon: 'gust',
             key: 'Gust',
-            value: data.wind.gust + '\u00a0' + units.gust.metric.en,
+            value: data.wind.gust? data.wind.gust + '\u00a0' + units.gust.metric.en : '--',
         },
         {
             icon: 'chance',
@@ -149,8 +165,8 @@ const createDataArr = (data, aqi) => {
         {
             icon: 'volume',
             key: 'Precipitation volume',
-            value: data.rain ? (data.rain?.['1h'] || data.rain?.['3h']) + '\u00a0' + units.precipitation :
-                data.snow ? (data.snow?.['1h'] || data.snow?.['3h']) + '\u00a0' + units.precipitation : '--',
+            value: data.rain ? (data.rain?.['1h'] || data.rain?.['3h']) + '\u00a0' + units.precipitation.en :
+                data.snow ? (data.snow?.['1h'] || data.snow?.['3h']) + '\u00a0' + units.precipitation.en : '--',
         },
         {
             icon: 'aqi',
@@ -255,24 +271,26 @@ export default function Main({ currentLocation, API_URL }) {
     const [forecast, isPendingForecast, errorForecast, fetchForecast] = useFetch(API_URL.forecast, params);
     const [airPollut, isPendingAirPollut, errorAirPollut, fetchAirPollut] = useFetch(API_URL.airPollution, params);
 
-    const currentData = {
-        date: currentWeather && new Date(Date.now() + currentWeather.timezone*1000).toUTCString(),
-        timezone: currentWeather && currentWeather.timezone*1000,
-        temp: currentWeather && Math.round(currentWeather.main.temp),
-        weather: currentWeather?.weather[0].description,
-        weatherIcon: currentWeather && iconIdCreator(currentWeather.weather[0].description, currentWeather.weather[0].icon.slice(-1)),
-        briefWeather: currentWeather?.weather[0].main,
-        partOfDay: currentWeather && currentWeather.weather[0].icon.slice(-1),
-        windDirWords: currentWeather && defineWindDirection(currentWeather?.wind.deg),
-        sunrise: currentWeather && formatTime(new Date(currentWeather.sys.sunrise*1000), currentWeather.timezone),
-        sunset: currentWeather && formatTime(new Date(currentWeather.sys.sunset*1000), currentWeather.timezone),
-        details: currentWeather && createDataArr(currentWeather, airPollut?.list?.[0]),
+    const currentData = currentWeather && {
+        date: formatDate(new Date(Date.now()), currentWeather.timezone),
+        time: formatTime(new Date(Date.now()), currentWeather.timezone),
+        timezone: currentWeather.timezone*1000,
+        temp: Math.round(currentWeather.main.temp),
+        weather: currentWeather.weather[0].description,
+        weatherIcon: iconIdCreator(currentWeather.weather[0].description, currentWeather.weather[0].icon.slice(-1)),
+        briefWeather: currentWeather.weather[0].main,
+        partOfDay: currentWeather.weather[0].icon.slice(-1),
+        windDirWords: defineWindDirection(currentWeather?.wind.deg),
+        sunrise: formatTime(new Date(currentWeather.sys.sunrise*1000), currentWeather.timezone),
+        sunset: formatTime(new Date(currentWeather.sys.sunset*1000), currentWeather.timezone),
+        details: createDataArr(currentWeather, airPollut?.list?.[0]),
     }
 
     const forecastData = forecast && forecast.list.map((elem) => {
         const date = new Date(elem.dt * 1000);
         return {
             date: elem && formatDate(date, forecast.city.timezone),
+            timezone: elem && forecast.timezone*1000,
             time: elem && formatTime(date, forecast.city.timezone),
             temp: Math.round(elem.main.temp),
             weather: elem?.weather[0].description,
@@ -283,12 +301,14 @@ export default function Main({ currentLocation, API_URL }) {
             windDirWords: elem && defineWindDirection(elem?.wind.deg),
             dayOfWeek: elem && formatDT(elem.dt, forecast.city.timezone),
             precipitationIcon: elem && definePrecip(elem.main.temp, elem.rain ? "rain" : elem.snow ? 'snow' : ''),
+            sunrise: elem && formatTime(new Date(forecast.city.sunrise*1000), forecast.city.timezone),
+            sunset: elem && formatTime(new Date(forecast.city.sunset*1000), forecast.city.timezone),
             details: elem && createDataArr(elem, airPollut?.list?.[0]),
         }
     });
 
     useEffect(() => {
-        if (!currentData.briefWeather) return;
+        if (!currentData) return;
         setBgImage(currentData.briefWeather, currentData.partOfDay);
     }, [currentWeather]);
 
@@ -305,6 +325,9 @@ export default function Main({ currentLocation, API_URL }) {
                             <HomeBlock currentData={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast}/>
                         } />
                         <Route path="details/today" element={<ExtendedBlock data={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast}/>} />
+                        {forecast && Object.values(dailyForecast).map((elem, id)=> {
+                            return <Route path={`details/day${id}`} element={<ExtendedBlock data={elem[5] || elem[elem.length - 1]} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast}/>} key={id}/>
+                        })}
                     </Routes>
                 </Container>
             </main>

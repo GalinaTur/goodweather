@@ -50,6 +50,7 @@
         grid-area: weather;
 
         &_text {
+            text-align: center;
             &::first-letter {
                 text-transform: uppercase;
             }

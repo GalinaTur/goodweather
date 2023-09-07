@@ -6,7 +6,7 @@
 
     .container {
         flex-direction: column;
-        height: calc(100% - 60px);
+        height: calc(100% - 50px);
     }
 
     .wind {
@@ -19,7 +19,7 @@
 @include for-phone {
     .main {
         .container {
-            height: calc(100% - 80px);
+            height: calc(100% - 50px);
         }
     }
 }

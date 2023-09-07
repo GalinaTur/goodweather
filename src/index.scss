@@ -16,7 +16,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment:scroll;
+  background-attachment: scroll;
 
   color: rgb(255, 255, 255);
   font-family: 'Oxygen';
@@ -25,7 +25,8 @@ body {
   overflow-x: hidden;
 }
 
-p, ul {
+p,
+ul {
   margin: 0;
   padding: 0;
 }
@@ -47,12 +48,24 @@ a {
   width: 100%;
 }
 
-.logo{
+.logo {
   transition: width 1s ease-in-out;
 }
 
 .logo_active {
   width: 315px !important;
+}
+
+nav {
+  a {
+    font-size: 10px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  a.active {
+    font-size: 16px;
+    color: yellow;
+  }
 }
 
 @include for-phone {
