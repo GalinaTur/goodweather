@@ -199,18 +199,14 @@ const createDataArr = (data, aqi) => {
 }
 
 const getMaxPoP = (list) => {
-    let precipType, tempWhilePrecip;
     let precipitation = list.reduce((maxPoP, elem) => {
-        if (!elem.details) return maxPoP;
-        if (maxPoP < elem.details[7].value) {
-            maxPoP = Math.round(elem.details[7].value);
-            precipType = elem.rain ? "rain" : elem.snow ? 'snow' : '';
-            tempWhilePrecip = elem.temp;
+        if (Object.keys(elem).length < 9) return maxPoP;
+        if (!maxPoP || maxPoP[0] < parseInt(elem.details[7].value)) {
+            maxPoP = [Math.round(parseInt(elem.details[7].value)), elem.precipitationIcon];
         }
         return maxPoP;
     }, 0);
-    precipitation = `${definePrecip(tempWhilePrecip, precipType)} ${precipitation}%`
-    return precipitation;
+    return `${precipitation[1]} ${precipitation[0]} %`;
 }
 
 const getDayByMaxValue = (obj) => {
@@ -238,16 +234,21 @@ const getMaxWindSpeed = (list) => {
 }
 
 const getTempExtremums = (list) => {
-    const temps = [...list.map((e) => {
+    let temps = [...list.map((e) => {
         if (e.temp === '?') return null;
         return Math.round(e.temp)
     })];
+    temps = temps.filter((elem) => +elem)
     return `${Math.min(...temps)}° / ${Math.max(...temps)}°`
 }
 
 const defineCommonWeatherPerDay = (data) => {
 
-    const commonWeather = [...data.map((e) => e.weather)].reduce((acc, weath) => {
+    const commonWeather = [...data.map((e) => {
+        if (!e.weather) return null;
+        return e.weather
+    })].reduce((acc, weath) => {
+        if (weath === null) return acc;
         acc[weath] ? acc[weath] = acc[weath] + 1 : acc[weath] = 1;
         return acc;
     }, {});

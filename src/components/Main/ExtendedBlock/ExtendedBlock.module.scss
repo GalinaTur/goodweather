@@ -18,6 +18,15 @@
     }
 }
 
+.back {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 15px;
+    top: 40px;
+    z-index: 5;
+}
+
 .extended {
     display: flex;
     flex-direction: column;
@@ -25,14 +34,6 @@
     @include block-bg;
     padding: 10px 20px;
     line-height: 1;
-
-    .back {
-        position: absolute;
-        width: 30px;
-        height: 30px;
-        left: 15px;
-        top: 5px;
-    }
 
     .datetime {
         display: flex;

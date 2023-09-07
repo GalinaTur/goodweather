@@ -9,6 +9,11 @@ export default function ExtendedBlock({ data, hourlyForecast, dailyForecast }) {
 
     return data && (
         <>
+            <Link to='/' className={styles.back}>
+                <svg width='30' height='30' viewBox="0 0 100 100" role="img" aria-label="back to main page">
+                    <use href={`${icons}#back`} />
+                </svg>
+            </Link>
             <nav className={styles.navigation}>
                 <NavLink to='/details/today' className={styles.navlink}>Today</NavLink>
                 {dailyForecast && Object.values(dailyForecast).map((value, id) => {
@@ -17,11 +22,6 @@ export default function ExtendedBlock({ data, hourlyForecast, dailyForecast }) {
                 })}
             </nav>
             <div className={styles.extended}>
-            <Link to='/' className={styles.back}>
-                <svg width='30' height='30' viewBox="0 0 100 100" role="img" aria-label="back to main page">
-                    <use href={`${icons}#back`} />
-                </svg>
-            </Link>
                 <div className={styles.datetime}><p>{data.date}</p><p>{data.time}</p></div>
                 <div className={styles.header}>
                     <div className={styles.part}>
