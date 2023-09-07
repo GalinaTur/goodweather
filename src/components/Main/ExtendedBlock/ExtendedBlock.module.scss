@@ -3,7 +3,7 @@
 
 .navigation {
     display: flex;
-    background-color: $blocksBGC;
+    @include block-bg;
     min-height: 30px;
     width: 300px;
     justify-content: space-between;

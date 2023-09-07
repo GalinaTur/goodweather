@@ -6,7 +6,7 @@ import Datalabel from './Datalabel/Datalabel';
 
 Chart.register(...registerables);
 
-export default function ChartBlock({ data, datalabel, weatherKey }) {
+export default function ChartBlock({ data }) {
 
     let extremes = { min: '', max: '' };
 
@@ -20,7 +20,7 @@ export default function ChartBlock({ data, datalabel, weatherKey }) {
             <div className={styles.chartBlock}>
                 <div className={styles.chart}>
                     {data?.map((elem, id) => {
-                        return <Datalabel elem={elem} id={id} key={id} weatherKey={weatherKey}/>
+                        return <Datalabel elem={elem} id={id} key={id} />
                     })}
                     <Line width="850" datasetIdKey="tempByHoursChart" data={{
                         labels: data?.map((elem) => {
@@ -29,7 +29,8 @@ export default function ChartBlock({ data, datalabel, weatherKey }) {
                         datasets: [
                             {
                                 data: data?.map((elem) => {
-                                    checkIfMinOrMaxTemp(elem.temp);
+                                    if (elem.temp === '?') return extremes.min+0.666;
+                                    checkIfMinOrMaxTemp(elem.temp)
                                     return elem.temp;
                                 }),
                                 indexAxis: 'x',
@@ -57,6 +58,7 @@ export default function ChartBlock({ data, datalabel, weatherKey }) {
                                 color: 'white',
                                 align: 'top',
                                 formatter: function (value) {
+                                    if (Math.round(value) !== value) return '?';
                                     return value + '°';
                                 },
                                 font: {
@@ -67,7 +69,7 @@ export default function ChartBlock({ data, datalabel, weatherKey }) {
                         },
                         scales: {
                             y: {
-                                min: (extremes.min -5),
+                                min: (extremes.min - 5),
                                 max: (extremes.max + 40),
                                 ticks: {
                                     beginAtZero: false,

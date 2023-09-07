@@ -19,13 +19,13 @@ import units from '../../utils/store.js';
 import icons from '../../assets/sprite.svg';
 
 const formatDate = (date, offset) => {
-    let oldDate = new Date(date.getTime() + offset*1000).toUTCString();
+    let oldDate = new Date(date.getTime() + offset * 1000).toUTCString();
     let newDate = oldDate.slice(0, 16);
     return newDate;
 }
 
 const formatTime = (time, offset) => {
-    let oldTime = new Date(time.getTime() + offset*1000).toUTCString();
+    let oldTime = new Date(time.getTime() + offset * 1000).toUTCString();
     let newTime = oldTime.slice(17, 22);
     return newTime;
 }
@@ -91,7 +91,7 @@ const defineWindDirection = (deg) => {
         return 'North-West';
 }
 
-let setBgImage = (weather, partOfDay) => {
+const setBgImage = (weather, partOfDay) => {
     if (weather === 'Clear' && partOfDay === 'd') {
         document.body.style.backgroundImage = `url(${bgClearD})`;
     } else if (weather === 'Clear' && partOfDay === 'n') {
@@ -115,12 +115,29 @@ let setBgImage = (weather, partOfDay) => {
     }
 }
 
+const defineAqiDescription = (aqi) => {
+    let aqiDescription;
+    switch (aqi) {
+        case 1: aqiDescription = 'Good';
+            break;
+        case 2: aqiDescription = 'Fair';
+            break;
+        case 3: aqiDescription = 'Moderate';
+            break;
+        case 4: aqiDescription = 'Poor';
+            break;
+        case 5: aqiDescription = 'Very Poor';
+            break;
+    }
+    return aqiDescription;
+}
+
 const createDataArr = (data, aqi) => {
     const dataArr = [
         {
             icon: 'feelsLike',
             key: 'Feels like',
-            value: Math.round(data.main.feels_like) + '\u00a0'+ units.temp.metric,
+            value: Math.round(data.main.feels_like) + '\u00a0' + units.temp.metric,
         },
         {
             icon: 'pressure',
@@ -155,7 +172,7 @@ const createDataArr = (data, aqi) => {
         {
             icon: 'gust',
             key: 'Gust',
-            value: data.wind.gust? data.wind.gust + '\u00a0' + units.gust.metric.en : '--',
+            value: data.wind.gust ? data.wind.gust + '\u00a0' + units.gust.metric.en : '--',
         },
         {
             icon: 'chance',
@@ -171,7 +188,7 @@ const createDataArr = (data, aqi) => {
         {
             icon: 'aqi',
             key: 'Air quality index',
-            value: aqi && aqi.main.aqi,
+            value: aqi && `${aqi.main.aqi} (${defineAqiDescription(aqi.main.aqi)})`,
         },
     ]
     return dataArr;
@@ -181,6 +198,7 @@ const getMaxPoP = (list) => {
 
     let precipType, tempWhilePrecip;
     let precipitation = list.reduce((maxPoP, elem) => {
+        if (!elem.details) return;
         if (maxPoP < elem.details[7].value) {
             maxPoP = Math.round(elem.details[7].value);
             precipType = elem.rain ? "rain" : elem.snow ? 'snow' : '';
@@ -231,10 +249,19 @@ const defineCommonWeatherPerDay = (data) => {
 }
 
 const groupForecastByDay = (forecast) => {
-    const list = forecast.reduce((newList, elem) => {
+    const list = forecast.reduce((newList, elem, id, arr) => {
         const key = elem.date;
         if (!newList[key]) newList[key] = [];
         newList[key].push(elem);
+        if (newList[key].length === 8 && arr[id+1]) newList[key].push(arr[id + 1]);
+        if (newList[key].length < 9 && !arr[id + 1]) {
+            const oldLength = newList[key].length;
+            newList[key].length = 9;
+            newList[key].fill({
+                time: '--:--',
+                temp: '?'
+            }, oldLength)
+        }
         return newList;
     }, {});
     return list;
@@ -258,6 +285,21 @@ const addDetailsForDay = (list) => {
     return groupedList;
 }
 
+const getInitialHourForExt = (elem) => {
+    const init = elem.reduceRight((a, b, id) => {
+        if (id > 4) {
+            a = elem[4];
+        };
+        if (Object.entries(b).length === 2) {
+            return;
+        } else if (Object.entries(elem[id + 1]).length === 2) {
+            return b;
+        } else return a;
+
+    })
+    return init
+}
+
 export default function Main({ currentLocation, API_URL }) {
 
     const params = currentLocation && new URLSearchParams({
@@ -274,15 +316,15 @@ export default function Main({ currentLocation, API_URL }) {
     const currentData = currentWeather && {
         date: formatDate(new Date(Date.now()), currentWeather.timezone),
         time: formatTime(new Date(Date.now()), currentWeather.timezone),
-        timezone: currentWeather.timezone*1000,
+        timezone: currentWeather.timezone * 1000,
         temp: Math.round(currentWeather.main.temp),
         weather: currentWeather.weather[0].description,
         weatherIcon: iconIdCreator(currentWeather.weather[0].description, currentWeather.weather[0].icon.slice(-1)),
         briefWeather: currentWeather.weather[0].main,
         partOfDay: currentWeather.weather[0].icon.slice(-1),
         windDirWords: defineWindDirection(currentWeather?.wind.deg),
-        sunrise: formatTime(new Date(currentWeather.sys.sunrise*1000), currentWeather.timezone),
-        sunset: formatTime(new Date(currentWeather.sys.sunset*1000), currentWeather.timezone),
+        sunrise: formatTime(new Date(currentWeather.sys.sunrise * 1000), currentWeather.timezone),
+        sunset: formatTime(new Date(currentWeather.sys.sunset * 1000), currentWeather.timezone),
         details: createDataArr(currentWeather, airPollut?.list?.[0]),
     }
 
@@ -290,7 +332,7 @@ export default function Main({ currentLocation, API_URL }) {
         const date = new Date(elem.dt * 1000);
         return {
             date: elem && formatDate(date, forecast.city.timezone),
-            timezone: elem && forecast.timezone*1000,
+            timezone: elem && forecast.city.timezone * 1000,
             time: elem && formatTime(date, forecast.city.timezone),
             temp: Math.round(elem.main.temp),
             weather: elem?.weather[0].description,
@@ -301,8 +343,8 @@ export default function Main({ currentLocation, API_URL }) {
             windDirWords: elem && defineWindDirection(elem?.wind.deg),
             dayOfWeek: elem && formatDT(elem.dt, forecast.city.timezone),
             precipitationIcon: elem && definePrecip(elem.main.temp, elem.rain ? "rain" : elem.snow ? 'snow' : ''),
-            sunrise: elem && formatTime(new Date(forecast.city.sunrise*1000), forecast.city.timezone),
-            sunset: elem && formatTime(new Date(forecast.city.sunset*1000), forecast.city.timezone),
+            sunrise: elem && formatTime(new Date(forecast.city.sunrise * 1000), forecast.city.timezone),
+            sunset: elem && formatTime(new Date(forecast.city.sunset * 1000), forecast.city.timezone),
             details: elem && createDataArr(elem, airPollut?.list?.[0]),
         }
     });
@@ -322,11 +364,11 @@ export default function Main({ currentLocation, API_URL }) {
                 <Container className={styles.container}>
                     <Routes>
                         <Route path="/" element={
-                            <HomeBlock currentData={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast}/>
+                            <HomeBlock currentData={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast} />
                         } />
-                        <Route path="details/today" element={<ExtendedBlock data={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast}/>} />
-                        {forecast && Object.values(dailyForecast).map((elem, id)=> {
-                            return <Route path={`details/day${id}`} element={<ExtendedBlock data={elem[5] || elem[elem.length - 1]} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast}/>} key={id}/>
+                        <Route path="details/today" element={<ExtendedBlock data={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast} />} />
+                        {forecast && Object.values(dailyForecast).map((elem, id) => {
+                            return <Route path={`details/day${id}`} element={<ExtendedBlock data={getInitialHourForExt(elem)} hourlyForecast={elem} dailyForecast={dailyForecast} />} key={id} />
                         })}
                     </Routes>
                 </Container>

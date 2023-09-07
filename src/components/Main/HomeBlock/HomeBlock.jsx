@@ -7,7 +7,7 @@ export default function HomeBlock({ currentData, hourlyForecast, dailyForecast }
     return (
         <>
             <CurrentWeather data={currentData} />
-            <ChartBlock data={hourlyForecast} datalabel={true} weatherKey='temp' />
+            <ChartBlock data={hourlyForecast} />
             <TableBlock data={dailyForecast} />
         </>
     )
