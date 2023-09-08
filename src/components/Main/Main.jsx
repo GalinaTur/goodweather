@@ -323,6 +323,7 @@ export default function Main({ currentLocation, API_URL }) {
     const currentData = currentWeather && {
         date: formatDate(new Date(Date.now()), currentWeather.timezone),
         time: formatTime(new Date(Date.now()), currentWeather.timezone),
+        isToday:true,
         timezone: currentWeather.timezone * 1000,
         temp: Math.round(currentWeather.main.temp),
         weather: currentWeather.weather[0].description,
@@ -341,6 +342,7 @@ export default function Main({ currentLocation, API_URL }) {
             date: elem && formatDate(date, forecast.city.timezone),
             timezone: elem && forecast.city.timezone * 1000,
             time: elem && formatTime(date, forecast.city.timezone),
+            isToday: formatDate(date, forecast.city.timezone) === currentData.date,
             temp: Math.round(elem.main.temp),
             weather: elem?.weather[0].description,
             weatherIcon: elem && iconIdCreator(elem?.weather?.[0].description, elem?.sys.pod),
@@ -375,7 +377,7 @@ export default function Main({ currentLocation, API_URL }) {
                         } />
                         <Route path="/details/*" element={<ExtendedBlock data={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast} />} />
                         {forecast && Object.values(dailyForecast).map((elem, id) => {
-                            return <Route path={`details/day${id}`} element={<ExtendedBlock data={getInitialHourForExt(elem)} hourlyForecast={elem} dailyForecast={dailyForecast} />} key={id} />
+                            return <Route path={`/details/${elem[0].dayOfWeek[0].toLowerCase()}/*`} element={<ExtendedBlock data={getInitialHourForExt(elem)} hourlyForecast={elem} dailyForecast={dailyForecast} />} key={id} />
                         })}
                     </Routes>
                 </Container>

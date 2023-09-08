@@ -61,7 +61,7 @@
 
 .popover {
     font-size: 80%;
-    background-color: $blocksBGC;
+    @include block-bg;
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     z-index: 5;
@@ -91,7 +91,7 @@
     &:hover,
     &:focus {
         background-color: rgba(0, 0, 0, 0.4);
-        color: rgb(0, 119, 255);
+        color: #ffbf00;;
     }
 }
 

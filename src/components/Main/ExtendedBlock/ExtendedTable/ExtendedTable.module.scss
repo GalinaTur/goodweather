@@ -1,44 +1,5 @@
-@import '../../../utils/mixins.scss';
-@import '../../../utils/variables.scss';
-
-.navigation {
-    display: flex;
-    @include block-bg;
-    min-height: 30px;
-    width: 300px;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 10px;
-    border-radius: 18px;
-
-    .navlink {
-        position: relative;
-        width: 60px;
-        text-align: center;
-        font-size: 10px;
-        transition: all 0.3s ease-in-out;
-    }
-
-    .active {
-        position: relative;
-        width: 60px;
-        text-align: center;
-        font-size: 10px;
-        transition: all 0.3s ease-in-out;
-        font-size: 16px;
-        color: #ffbf00;
-    }
-
-}
-
-.back {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    left: 15px;
-    top: 35px;
-    z-index: 5;
-}
+@import '../../../../utils/mixins.scss';
+@import '../../../../utils/variables.scss';
 
 .extended {
     display: flex;
