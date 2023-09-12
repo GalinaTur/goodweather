@@ -39,8 +39,9 @@
 
         .temperature {
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
             align-items: center;
+            width: 150px;
 
             span {
                 font-size: 100px;
@@ -50,8 +51,9 @@
         .weather {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
+            width: 130px;
 
             &_text {
                 text-align: center;

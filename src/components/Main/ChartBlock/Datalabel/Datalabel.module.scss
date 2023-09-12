@@ -4,10 +4,12 @@
 .navlink {
     .time {
         transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out;
     }
 
     .icon {
         transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out;
     }
 }
 
@@ -17,12 +19,14 @@
         color: #ffbf00;
         font-size: 14px;
         transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out;
     }
 
     .icon {
         height: 42px;
         width: 42px;
         transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out;
     }
 }
 

@@ -29,7 +29,6 @@ export default function ChartBlock({ data }) {
                         datasets: [
                             {
                                 data: data?.map((elem) => {
-                                    if (elem.temp === '?') return extremes.min+0.666;
                                     checkIfMinOrMaxTemp(elem.temp)
                                     return elem.temp;
                                 }),
@@ -58,7 +57,6 @@ export default function ChartBlock({ data }) {
                                 color: 'white',
                                 align: 'top',
                                 formatter: function (value) {
-                                    if (Math.round(value) !== value) return '?';
                                     return value + '°';
                                 },
                                 font: {
