@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/goodweather/static/css/main.530f8bcb.css",
-    "main.js": "/goodweather/static/js/main.2b7fd8f4.js",
+    "main.css": "/goodweather/static/css/main.7f65dea6.css",
+    "main.js": "/goodweather/static/js/main.c3fe7430.js",
     "static/js/787.ed3ce669.chunk.js": "/goodweather/static/js/787.ed3ce669.chunk.js",
     "static/media/clouds_n.jpg": "/goodweather/static/media/clouds_n.f66d87db31f0c9fd4d93.jpg",
     "static/media/mist.jpg": "/goodweather/static/media/mist.b7be22245f7a326034d2.jpg",
     "static/media/rain.jpg": "/goodweather/static/media/rain.c4d7e0d2dbd02409b490.jpg",
     "static/media/tornado.jpg": "/goodweather/static/media/tornado.6b52d549e53cdb7dd2f8.jpg",
-    "static/media/sprite.svg": "/goodweather/static/media/sprite.69dbf435690652ddf6bcd903dbd07cd8.svg",
+    "static/media/sprite.svg": "/goodweather/static/media/sprite.4e3cff2af125aee64c56d1bec9db8fb8.svg",
     "static/media/clear_d.jpg": "/goodweather/static/media/clear_d.ef50d52040fca4e6e9fb.jpg",
     "static/media/clear_n.jpg": "/goodweather/static/media/clear_n.aa17ed7036093e1c0b27.jpg",
     "static/media/thunder.jpg": "/goodweather/static/media/thunder.2d04cf0d36805b45e0fb.jpg",
@@ -20,12 +20,12 @@
     "static/media/oxygen-latin-ext-400-normal.woff": "/goodweather/static/media/oxygen-latin-ext-400-normal.d94dfbc8cc816a03972a.woff",
     "static/media/logo.svg": "/goodweather/static/media/logo.f6bb827018d5d4de99c5.svg",
     "index.html": "/goodweather/index.html",
-    "main.530f8bcb.css.map": "/goodweather/static/css/main.530f8bcb.css.map",
-    "main.2b7fd8f4.js.map": "/goodweather/static/js/main.2b7fd8f4.js.map",
+    "main.7f65dea6.css.map": "/goodweather/static/css/main.7f65dea6.css.map",
+    "main.c3fe7430.js.map": "/goodweather/static/js/main.c3fe7430.js.map",
     "787.ed3ce669.chunk.js.map": "/goodweather/static/js/787.ed3ce669.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.530f8bcb.css",
-    "static/js/main.2b7fd8f4.js"
+    "static/css/main.7f65dea6.css",
+    "static/js/main.c3fe7430.js"
   ]
 }
