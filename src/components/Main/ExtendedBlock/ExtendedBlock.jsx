@@ -13,13 +13,7 @@ export default function ExtendedBlock({ data, hourlyForecast, dailyForecast }) {
                     <use href={`${icons}#back`} />
                 </svg>
             </Link>
-            <nav className={styles.navigation}>
-                <NavLink to='/details/today' className={({ isActive }) => isActive ? styles.active : styles.navlink}>Today</NavLink>
-                {dailyForecast && Object.values(dailyForecast).map((value, id) => {
-                    if (value.length < 8 && id === 0) return;
-                    return <NavLink to={`/details/${value[0].weekday[0].toLowerCase()}`} key={id} className={({ isActive }) => isActive ? styles.active : styles.navlink}>{value[0].date.slice(0, 3)}</NavLink>
-                })}
-            </nav>
+            
             <Routes>
                 {hourlyForecast && hourlyForecast.map((hour, id) => {
                     return <Route path={`${hour.isToday? '/today/' : ''}${hour.time.replace(':', '')}`} element={<ExtendedTable data={hour} />} key={id} />
@@ -30,6 +24,14 @@ export default function ExtendedBlock({ data, hourlyForecast, dailyForecast }) {
 
             </Routes>
             <ChartBlock data={hourlyForecast} />
+
+            <nav className={styles.navigation}>
+                <NavLink to='/details/today' className={({ isActive }) => isActive ? styles.active : styles.navlink}>Today</NavLink>
+                {dailyForecast && Object.values(dailyForecast).map((value, id) => {
+                    if (value.length < 8 && id === 0) return;
+                    return <NavLink to={`/details/${value[0].weekday[0].toLowerCase()}`} key={id} className={({ isActive }) => isActive ? styles.active : styles.navlink}>{value[0].date.slice(0, 3)}</NavLink>
+                })}
+            </nav>
         </>
     )
 }

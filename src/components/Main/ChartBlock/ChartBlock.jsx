@@ -100,7 +100,7 @@ export default function ChartBlock({ data }) {
                         plugins={[ChartDataLabels]} />
                 </div>
             </div>
-            <p className={styles.title}>24 hours next</p>
+            <p className={styles.title}>24 hours</p>
             <p className={styles.tip}><span>💧Chance of rain</span><span>❄Chance of snow</span></p>
             <p className={styles.details}></p>
         </div>

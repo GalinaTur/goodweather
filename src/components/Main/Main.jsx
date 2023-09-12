@@ -171,8 +171,8 @@ const createDataArr = (data, aqi) => {
         {
             icon: 'wind',
             key: 'Wind',
-            value: <p className={styles.wind}>
-                <svg width='20' height='20' viewBox="0 0 100 100" role="img" aria-roledescription="Wind direction" style={{ transform: `rotate(${data.wind.deg}deg)` }}>
+            value: <p>
+                <svg width='20' height='20' viewBox="0 0 100 100" role="img" aria-roledescription="Wind direction" style={{ transform: `rotate(${data.wind.deg}deg)` }}  className={styles.wind}>
                     <use href={`${icons}#wind_dir`} />
                 </svg>
                 {' ' + Math.round(data.wind.speed) + '\u00a0' + units.speed.metric.en}
@@ -339,8 +339,6 @@ export default function Main({ currentLocation, API_URL }) {
     const hourlyForecast = forecastData?.slice(0, 9);
 
     const dailyForecast = forecastData && addDetailsForDay(forecastData);
-
-console.log(dailyForecast)
 
     return currentWeather && (
         <Router>

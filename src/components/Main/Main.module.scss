@@ -6,13 +6,11 @@
 
     .container {
         flex-direction: column;
-        height: calc(100% - 50px);
+        height: calc(100% - 35px);
     }
 
     .wind {
-        display: flex;
-        align-items: center;
-        gap: 5px;
+        margin-right: 5px;
     }
 }
 
