@@ -22,7 +22,7 @@ export default function ChartBlock({ data }) {
                     {data?.map((elem, id) => {
                         return <Datalabel elem={elem} id={id} key={id} />
                     })}
-                    <Line width="850" datasetIdKey="tempByHoursChart" data={{
+                    <Line width="850" datasetIdKey="tempByHoursChart" className = {styles.line} data={{
                         labels: data?.map((elem) => {
                             return elem.time
                         }),

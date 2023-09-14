@@ -15,7 +15,6 @@ export default function InputForm({ handleChange, handleSubmit, searchResult, ha
             logo.classList.add('logo_active');
         } else if (input.value) {
             handleSubmit(e);
-            
         }
     }
 

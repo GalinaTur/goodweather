@@ -5,11 +5,18 @@
     height: 100%;
 
     .container {
+        height: calc(100vh - 60px);
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: space-between;
     }
 
     .wind {
         margin-right: 5px;
+    }
+}
+
+@include for-phone {
+    .container {
+    height: calc(100vh - 70px);
     }
 }

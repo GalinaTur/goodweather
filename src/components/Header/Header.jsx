@@ -32,6 +32,7 @@ export default function Header({ currentLocation, handleSelect, API_URL }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         fetchSearch(`${API_URL.locationDir}q=${searchTerm}&${API_LIMIT}&appid=${process.env.REACT_APP_API_KEY}`)
+
     }
 
     return (

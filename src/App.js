@@ -36,14 +36,14 @@ function App() {
       limit: 1,
       appid: process.env.REACT_APP_API_KEY
     })
-
+    document.getElementById('hdrnpt').blur();
     fetchLocation(API_URL.locationDir + params.toString());
     setCoords(null);
   }
 
   return (
     <div className="App" style={{height: window.innerHeight}}>
-      <Header currentLocation={currentLocation}  handleSelect={handleSelect} API_URL={API_URL}/>
+      <Header currentLocation={currentLocation} handleSelect={handleSelect} API_URL={API_URL}/>
       {isPending && 'loading...'}
       {currentLocation && <Main currentLocation={currentLocation} API_URL={API_URL}/>}
     </div>
