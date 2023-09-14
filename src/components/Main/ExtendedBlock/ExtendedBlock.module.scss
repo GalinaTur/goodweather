@@ -8,11 +8,10 @@
     width: 300px;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 10px;
+    padding: 1px 10px;
     border-radius: 18px;
 
     .navlink {
-        position: relative;
         width: 60px;
         text-align: center;
         font-size: 10px;
@@ -20,7 +19,6 @@
     }
 
     .active {
-        position: relative;
         width: 60px;
         text-align: center;
         font-size: 10px;
@@ -32,19 +30,16 @@
 }
 
 .back {
-    position: absolute;
-    width: 30px;
+    position: relative;
+    width: 60px;
     height: 30px;
-    left: 15px;
-    top: 5px;
-    z-index: 5;
 
     &::after {
         content: 'main';
         position: absolute;
         text-transform: lowercase;
         font-size: 9px;
-        right: 7px;
-        bottom: -2px;
+        left: 4px;
+        top: 20px;
     }
 }

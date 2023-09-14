@@ -6,26 +6,10 @@
 
     .container {
         flex-direction: column;
-        height: calc(100% - 35px);
+        justify-content: space-around;
     }
 
     .wind {
         margin-right: 5px;
-    }
-}
-
-@include for-phone {
-    .main {
-        .container {
-            height: calc(100% - 50px);
-        }
-    }
-}
-
-@include for-phone-horiz {
-    .main {
-        .container {
-            height: auto;
-        }
     }
 }

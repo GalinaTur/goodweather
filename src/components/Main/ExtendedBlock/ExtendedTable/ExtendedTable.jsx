@@ -37,12 +37,12 @@ export default function ExtendedTable({ data }) {
                     <table className={styles.table}>
                         <tbody>
                             {data?.details?.slice(0, 5).map((item, id) => {
-                                return <TableRow key={id} data={item} />
+                                return <TableRow key={id} data={item} className={styles.row}/>
                             })}
                         </tbody>
                         <tbody>
                             {data?.details?.slice(5).map((item, id) => {
-                                return <TableRow key={id} data={item} />
+                                return <TableRow key={id} data={item} className={styles.row}/>
                             })}
                         </tbody>
                     </table>

@@ -81,9 +81,19 @@
             display: flex;
             justify-content: space-between;
             gap: 20px;
+            height: auto;
 
             tbody {
                 width: 50%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .row {
+                display: flex;
+                height: 20px;
+                align-items: center;
+                padding: calc(25px + 0.6vmin) 0;
             }
         }
     }
@@ -136,6 +146,10 @@
 
             table {
                 gap: 10px;
+
+                .row {
+                    padding: calc(20px + 0.6vmin) 0;
+                }
             }
         }
     }

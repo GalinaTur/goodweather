@@ -181,7 +181,7 @@ const createDataArr = (data, aqi) => {
         {
             icon: 'gust',
             key: 'Gust',
-            value: data.wind.gust ? Math.round(data.wind.gust) + '\u00a0' + units.gust.metric.en : '--',
+            value: data.wind.gust ? Math.round(data.wind.gust) + '\u00a0' + units.gust.metric.en : '—',
         },
         {
             icon: 'chance',
@@ -192,7 +192,7 @@ const createDataArr = (data, aqi) => {
             icon: 'volume',
             key: 'Precipitation volume',
             value: data.rain ? (data.rain?.['1h'] || data.rain?.['3h']) + '\u00a0' + units.precipitation.en :
-                data.snow ? (data.snow?.['1h'] || data.snow?.['3h']) + '\u00a0' + units.precipitation.en : '--',
+                data.snow ? (data.snow?.['1h'] || data.snow?.['3h']) + '\u00a0' + units.precipitation.en : '—',
         },
         {
             icon: 'aqi',
