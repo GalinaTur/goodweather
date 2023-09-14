@@ -4,8 +4,6 @@ import TableRow from '../../TableBlock/TableRow/TableRow';
 
 export default function ExtendedTable({ data }) {
 
-console.log(window.innerHeight)
-
     return data && (
         <>
             <div className={styles.extended}>
@@ -14,7 +12,7 @@ console.log(window.innerHeight)
                     <div className={styles.part}>
                         <p className={styles.temperature}><span>{data.temp}</span> °C</p>
                         <div className={styles.weather}>
-                            <svg width='70' height='70' viewBox="0 0 100 100" role="img" aria-label={`Current weather: ${data.weather}`}>
+                            <svg width='75' height='75' viewBox="0 0 100 100" role="img" aria-label={`Current weather: ${data.weather}`}>
                                 <use href={`${icons}#${data.weatherIcon}`} />
                             </svg>
                             <p className={styles.weather_text}>{data.weather}</p>
@@ -39,12 +37,12 @@ console.log(window.innerHeight)
                     <table className={styles.table}>
                         <tbody>
                             {data?.details?.slice(0, 5).map((item, id) => {
-                                return <TableRow key={id} data={item} className={styles.row}/>
+                                return <TableRow key={id} data={item} className={styles.row} link={false}/>
                             })}
                         </tbody>
                         <tbody>
                             {data?.details?.slice(5).map((item, id) => {
-                                return <TableRow key={id} data={item} className={styles.row}/>
+                                return <TableRow key={id} data={item} className={styles.row} link={false}/>
                             })}
                         </tbody>
                     </table>

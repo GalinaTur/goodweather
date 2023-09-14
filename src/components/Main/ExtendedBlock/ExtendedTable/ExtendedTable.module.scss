@@ -22,7 +22,7 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        gap: 15px;
+        gap: 3px;
         border-bottom: 1px solid currentColor;
         padding-bottom: 15px;
         height: 120px;
@@ -60,7 +60,7 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            margin-right: 10px;
+            margin-right: 3px;
 
             &_text {
                 text-align: center;
@@ -92,10 +92,8 @@
             }
 
             .row {
-                display: flex;
-                align-items: center;
                 padding: 5px 0;
-                flex-grow: 1;
+                flex: 1;
             }
         }
     }
@@ -103,10 +101,10 @@
 
 @include for-phone {
     .extended {
-        font-size: 14px;
+        font-size: 12px;
 
         .header {
-            height: 15svh;
+            height: min(15svh, 80px);
 
             .part {
                 gap: 5px;
@@ -114,14 +112,14 @@
 
             .temperature {
                 span {
-                    font-size: 14svh;
+                    font-size: min(15vw, 80px);
                 }
             }
 
             .weather {
                 svg {
-                    width: 10svh;
-                    height: 10svh;
+                    width: min(12vw, 50px);
+                    height: min(12vw, 50px);
                 }
 
                 p {

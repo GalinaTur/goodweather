@@ -5,6 +5,7 @@
   box-sizing: border-box;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  user-select: none;
 
   &::-webkit-scrollbar {
     display: none;
@@ -13,11 +14,10 @@
 
 body {
   position: relative;
-  background-color: #68a8e4;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: scroll;
+  background-attachment:fixed;
 
   color: rgb(255, 255, 255);
   font-family: 'Oxygen';

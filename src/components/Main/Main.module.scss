@@ -7,7 +7,7 @@
     .container {
         height: calc(100svh - 60px);
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: flex-start;
         flex:1;
     }
 

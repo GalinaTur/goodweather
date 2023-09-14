@@ -1,3 +1,4 @@
+import { sassFalse } from 'sass';
 import styles from './TableBlock.module.scss';
 import TableRow from './TableRow/TableRow';
 
@@ -10,7 +11,7 @@ export default function TableBlock({ data }) {
                     <tbody>
                     {Object.values(data).map((value, id)=> {
                         if (Object.keys(value).length < 2) return; 
-                    return <TableRow key={id} data={value.detailsForTable}/>
+                    return <TableRow key={id} data={value.detailsForTable} link={true}/>
                     })}
                     </tbody>
                 </table>

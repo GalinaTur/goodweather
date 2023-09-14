@@ -1,9 +1,16 @@
 @import '../../../../utils/mixins.scss';
 @import '../../../../utils/variables.scss';
 
-.row {
+tr {
     border-bottom: 1px solid rgb(255, 255, 255);
-    height: 60px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 60px;
+    flex: 1;
 
     &:last-of-type {
         border-bottom: none;
