@@ -8,12 +8,14 @@
     @include block-bg;
     padding: 10px 20px;
     line-height: 1;
+    flex: 1;
 
     .datetime {
         display: flex;
         justify-content: center;
         gap: 15px;
         padding: 5px 0;
+        margin-bottom: 5px;
     }
 
     .header {
@@ -81,7 +83,7 @@
             display: flex;
             justify-content: space-between;
             gap: 20px;
-            height: auto;
+            flex-grow: 1;
 
             tbody {
                 width: 50%;
@@ -91,9 +93,9 @@
 
             .row {
                 display: flex;
-                height: 20px;
                 align-items: center;
-                padding: calc(25px + 0.6vmin) 0;
+                padding: 5px 0;
+                flex-grow: 1;
             }
         }
     }
@@ -104,8 +106,7 @@
         font-size: 14px;
 
         .header {
-            align-items: flex-end;
-            height: 100px;
+            height: 15svh;
 
             .part {
                 gap: 5px;
@@ -113,14 +114,14 @@
 
             .temperature {
                 span {
-                    font-size: 75px;
+                    font-size: 14svh;
                 }
             }
 
             .weather {
                 svg {
-                    width: 50px;
-                    height: 50px;
+                    width: 10svh;
+                    height: 10svh;
                 }
 
                 p {
@@ -141,14 +142,15 @@
         }
 
         .body {
-            flex-direction: column;
             gap: 0;
 
             table {
                 gap: 10px;
 
                 .row {
-                    padding: calc(20px + 0.6vmin) 0;
+                    padding: 2px 0;
+                    min-height: 40px;
+                    flex: 1;
                 }
             }
         }

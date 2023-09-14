@@ -4,6 +4,8 @@ import TableRow from '../../TableBlock/TableRow/TableRow';
 
 export default function ExtendedTable({ data }) {
 
+console.log(window.innerHeight)
+
     return data && (
         <>
             <div className={styles.extended}>

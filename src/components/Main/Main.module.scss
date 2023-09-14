@@ -5,9 +5,10 @@
     height: 100%;
 
     .container {
-        height: calc(100vh - 60px);
+        height: calc(100svh - 60px);
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: space-around;
+        flex:1;
     }
 
     .wind {
@@ -16,7 +17,9 @@
 }
 
 @include for-phone {
+    .main{
     .container {
-    height: calc(100vh - 70px);
+    height: calc(100svh - 60px);
     }
+}
 }
