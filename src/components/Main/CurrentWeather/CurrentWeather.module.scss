@@ -13,7 +13,9 @@
     gap: 5px;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
     @include block-bg;
+    @include onfocus;
 
     .date {
         padding-top: 15px;

@@ -5,27 +5,11 @@ import classNames from 'classnames';
 
 export default function TableRow({ data, className, link }) {
 
-    const isLink = (link) => {
-        if (link) {
-            return (
-                <tr>
-                    <Link to={`/details/${data.weekday.toLowerCase()}/1500`}  className={classNames(styles.row, className)}>
-                        {Object.entries(data).map(([key, value], i) => {
-                            return <TableCell key={i} className={key} data={value} />
-                        })}
-                    </Link>
-                </tr>)
-        } else {
-            return(
-            <tr className={classNames(styles.row, className)}>
+    return data && (
+        <Link to={link ? `/details/${data.weekday.toLowerCase()}` : '#'} className={classNames(styles.row, className)} tabIndex={link? '0' : '-1'}>
                 {Object.entries(data).map(([key, value], i) => {
                     return <TableCell key={i} className={key} data={value} />
                 })}
-            </tr>
-            )
-        }
-    }
-
-    return data && isLink(link)
+        </Link>)
 }
 

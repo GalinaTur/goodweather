@@ -1,5 +1,6 @@
 import styles from './TableCell.module.scss';
 import icons from '../../../../assets/sprite.svg';
+import classNames from 'classnames';
 
 const defineCellData = (className, data) => {
     if (className === 'icon') {
@@ -15,7 +16,7 @@ const defineCellData = (className, data) => {
 
 export default function TableCell({ data, className }) {
     return data ? (
-        <td className={styles[`${className}`]}>{defineCellData(className, data)}</td>
+        <div className={classNames(styles.cell, styles[`${className}`])}>{defineCellData(className, data)}</div>
     ) : ''
 }
 

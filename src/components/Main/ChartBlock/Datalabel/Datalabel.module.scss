@@ -2,11 +2,23 @@
 @import '../../../../utils/variables.scss';
 
 .navlink {
+    position: absolute;
+    width: 50px;
+    top: 20px;
+    padding: 3px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+    font-size: 12px;
+    @include onfocus;
+
     .time {
         transition: all 0.2s ease-in-out;
         -webkit-transition: all 0.2s ease-in-out;
         -moz-transition: all 0.2s ease-in-out;
         -o-transition: all 0.2s ease-in-out;
+        @include onfocus;
     }
 
     .icon {
@@ -20,7 +32,7 @@
 .active {
     .time {
         margin-top: -2px;
-        color: #ffbf00;
+        color: $activeColor;
         font-size: 14px;
         transition: all 0.2s ease-in-out;
         -webkit-transition: all 0.2s ease-in-out;
@@ -30,21 +42,10 @@
 
     .icon {
         transform: scale(1.2);
+        transform-origin: center;
         transition: all 0.2s ease-in-out;
         -webkit-transition: all 0.2s ease-in-out;
         -moz-transition: all 0.2s ease-in-out;
         -o-transition: all 0.2s ease-in-out;
     }
-}
-
-.weather {
-    position: absolute;
-    width: 50px;
-    top: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    align-items: center;
-    font-size: 12px;
-    z-index: 5;
 }

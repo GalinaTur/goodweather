@@ -1,17 +1,16 @@
 @import '../../../../utils/mixins.scss';
 @import '../../../../utils/variables.scss';
 
-tr {
-    border-bottom: 1px solid rgb(255, 255, 255);
-}
-
 .row {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 60px;
-    flex: 1;
-
+    height: 50px;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    padding: 5px 5px;
+    @include onfocus;
+    
     &:last-of-type {
         border-bottom: none;
     }
@@ -19,8 +18,7 @@ tr {
 
 @include for-phone {
     .row {
-        border-bottom: 1px solid rgb(255, 255, 255);
         font-size: 12px;
-        height: 50px;
+        height: 40px;
     }
 }

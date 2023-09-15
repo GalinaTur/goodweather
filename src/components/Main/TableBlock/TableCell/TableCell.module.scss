@@ -1,17 +1,14 @@
 @import '../../../../utils/mixins.scss';
 @import '../../../../utils/variables.scss';
 
-td {
+.cell {
     white-space: wrap;
     text-align: left;
-    width: 100px;
-}
-
-.weatherIcon {
-    width: 60px;
+    width: 10%;
 }
 
 .wind {
+    width: 80px;
     p {
         display: flex;
         align-items: center;
@@ -19,17 +16,22 @@ td {
     }
 }
 
-.popr {
-    text-align: center;
-}
 
-.tempExtr {
-    width: 80px;
-    min-width: 60px;
+.weatherIcon {
+    width: 60px;
 }
 
 .weather {
+    width: 140px;;
+}
+
+.popr,
+.weather {
     text-align: left;
+}
+
+.tempExtr {
+    text-align: right;
 }
 
 .icon {
@@ -63,5 +65,4 @@ td {
         .value {
             white-space: unset;
         }
-
 }

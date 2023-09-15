@@ -45,7 +45,7 @@
     text-align: right;
 
     &::after {
-        content: 'click an hour to see details';
+        content: 'click an hour for details';
     }
 }
 
@@ -85,7 +85,7 @@
     }
 
     .details::after {
-        content: 'touch an hour to see details';
+        content: 'touch an hour for details';
     }
 
     .tip {

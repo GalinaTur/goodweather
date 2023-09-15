@@ -78,14 +78,14 @@
         justify-content: space-between;
         gap: 30px;
 
-        table {
+        .table {
             width: 100%;
             display: flex;
             justify-content: space-between;
             gap: 20px;
             flex-grow: 1;
 
-            tbody {
+            .subtable {
                 width: 50%;
                 display: flex;
                 flex-direction: column;
@@ -94,6 +94,7 @@
             .row {
                 padding: 5px 0;
                 flex: 1;
+                cursor: unset;
             }
         }
     }
@@ -142,7 +143,7 @@
         .body {
             gap: 0;
 
-            table {
+            .table {
                 gap: 10px;
 
                 .row {

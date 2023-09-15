@@ -28,3 +28,11 @@
         background-color: $blocksBGC;
     }
 }
+
+@mixin onfocus {
+    &:focus-visible {
+        outline: 3px solid $activeColor;
+        outline-offset: -1px;
+        border-radius: 5px;
+    }
+}

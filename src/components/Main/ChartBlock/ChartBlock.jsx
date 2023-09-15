@@ -17,12 +17,12 @@ export default function ChartBlock({ data }) {
 
     return !data ? 'Loading' : (
         <div className={styles.chartBlockContainer}>
-            <div className={styles.chartBlock}>
+            <div className={styles.chartBlock} tabIndex='-1'>
                 <div className={styles.chart}>
-                    {data?.map((elem, id) => {
-                        return <Datalabel elem={elem} id={id} key={id} />
+                    {data?.map((elem, id, arr) => {
+                        return <Datalabel elem={elem} id={id} key={id} length={arr.length}/>
                     })}
-                    <Line width="850" datasetIdKey="tempByHoursChart" className = {styles.line} data={{
+                    <Line width='850' datasetIdKey="tempByHoursChart" className={styles.line} data={{
                         labels: data?.map((elem) => {
                             return elem.time
                         }),

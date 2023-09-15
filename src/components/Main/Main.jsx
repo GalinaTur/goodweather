@@ -254,7 +254,7 @@ const groupForecastByDay = (forecast) => {
         newList[key].push(elem);
         if (newList[key].length === 8 && arr[id + 1]) {
             newList[key].push(arr[id + 1]);
-        } else if (newList[key].length < 9 && !arr[id + 1]) {
+        } else if (newList[key].length < 4 && !arr[id + 1]) {
             delete newList[key];
         }
         return newList;
@@ -295,9 +295,10 @@ export default function Main({ currentLocation, API_URL }) {
 
     const currentData = currentWeather && {
         date: formatDateFullDate(new Date(Date.now()), currentWeather.timezone),
-        time: formatTime(new Date(Date.now()), currentWeather.timezone),
-        isToday: true,
         timezone: currentWeather.timezone * 1000,
+        time: formatTime(new Date(Date.now()), currentWeather.timezone),
+        cityID: currentWeather.id,
+        isToday: true,
         temp: Math.round(currentWeather.main.temp),
         weather: currentWeather.weather[0].description,
         weatherIcon: createIconId(currentWeather.weather[0].description, currentWeather.weather[0].icon.slice(-1)),
@@ -312,22 +313,23 @@ export default function Main({ currentLocation, API_URL }) {
     const forecastData = forecast && forecast.list.map((elem) => {
         const date = new Date(elem.dt * 1000);
         return {
-            date: elem && formatDateFullDate(date, forecast.city.timezone),
-            timezone: elem && forecast.city.timezone * 1000,
-            time: elem && formatTime(date, forecast.city.timezone),
+            date: formatDateFullDate(date, forecast.city.timezone),
+            timezone: forecast.city.timezone * 1000,
+            time: formatTime(date, forecast.city.timezone),
+            cityID: forecast.city.timezone.id,
             isToday: formatDateFullDate(date, forecast.city.timezone) === currentData.date,
             temp: Math.round(elem.main.temp),
-            weather: elem?.weather[0].description,
-            weatherIcon: elem && createIconId(elem?.weather?.[0].description, elem?.sys.pod),
-            briefWeather: elem?.weather[0].main,
-            partOfDay: elem && elem.sys.pod,
-            windSpeed: elem && elem.wind.speed,
-            windDirWords: elem && defineWindDirection(elem?.wind.deg),
-            weekday: elem && formatDateFullWeekdayShortDate(elem.dt, forecast.city.timezone),
-            precipitationIcon: elem && definePrecipitationType(elem.main.temp, elem.rain ? "rain" : elem.snow ? 'snow' : ''),
-            sunrise: elem && formatTime(new Date(forecast.city.sunrise * 1000), forecast.city.timezone),
-            sunset: elem && formatTime(new Date(forecast.city.sunset * 1000), forecast.city.timezone),
-            details: elem && createDataArr(elem, airPollut?.list?.[0]),
+            weather: elem.weather[0].description,
+            weatherIcon: createIconId(elem?.weather?.[0].description, elem?.sys.pod),
+            briefWeather: elem.weather[0].main,
+            partOfDay: elem.sys.pod,
+            windSpeed: elem.wind.speed,
+            windDirWords: defineWindDirection(elem?.wind.deg),
+            weekday: formatDateFullWeekdayShortDate(elem.dt, forecast.city.timezone),
+            precipitationIcon: definePrecipitationType(elem.main.temp, elem.rain ? "rain" : elem.snow ? 'snow' : ''),
+            sunrise: formatTime(new Date(forecast.city.sunrise * 1000), forecast.city.timezone),
+            sunset: formatTime(new Date(forecast.city.sunset * 1000), forecast.city.timezone),
+            details: createDataArr(elem, airPollut?.list?.[0]),
         }
     });
 
