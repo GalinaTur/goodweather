@@ -1,5 +1,5 @@
 import './App.scss';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import { useFetch } from './useFetch';
@@ -14,19 +14,21 @@ const API_URL = {
 
 function App() {
   const [coords, setCoords] = useState(null);
+  const input = useRef(null);
 
   const params = coords && new URLSearchParams({
     lat: coords.latitude,
     lon: coords.longitude,
     limit: 1,
     appid: process.env.REACT_APP_API_KEY,
-})
+  })
   const [currentLocation, isPending, error, fetchLocation] = useFetch(API_URL.locationRev, params);
 
   useEffect(() => {
     navigator.geolocation?.getCurrentPosition(pos => {
-      setCoords(pos.coords)});
-    }, []);
+      setCoords(pos.coords)
+    });
+  }, []);
 
   const handleSelect = async (item) => {
     let locationArr = item.split(', ');
@@ -36,16 +38,16 @@ function App() {
       limit: 1,
       appid: process.env.REACT_APP_API_KEY
     })
-    document.getElementById('hdrnpt').blur();
+    input.current.blur();
     fetchLocation(API_URL.locationDir + params.toString());
-    setCoords(null);
+    setCoords(null)
   }
 
   return (
-    <div className="App" style={{height: window.innerHeight}}>
-      <Header currentLocation={currentLocation} handleSelect={handleSelect} API_URL={API_URL}/>
+    <div className="App" style={{ height: window.innerHeight }}>
+      <Header currentLocation={currentLocation} handleSelect={handleSelect} API_URL={API_URL} inputRef={input}/>
       {isPending && 'loading...'}
-      {currentLocation && <Main currentLocation={currentLocation} API_URL={API_URL}/>}
+      {currentLocation && <Main currentLocation={currentLocation} API_URL={API_URL} />}
     </div>
   )
 }

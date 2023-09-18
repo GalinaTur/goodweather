@@ -16,6 +16,12 @@
     }
 }
 
+@include for-tablets {
+    .row {
+    font-size: min(16px, 2.5vw);
+    }
+}
+
 @include for-phone {
     .row {
         font-size: 12px;

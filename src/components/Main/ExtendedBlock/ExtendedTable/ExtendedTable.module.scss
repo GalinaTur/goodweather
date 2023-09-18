@@ -45,22 +45,17 @@
             margin-left: 20px;
         }
 
-        .temperature {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-
-            span {
-                font-size: 100px;
-            }
-        }
-
         .weather {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
             margin-right: 3px;
+
+            .icon {
+                width: 75px;
+                height: 75px;
+            }
 
             &_text {
                 text-align: center;
@@ -111,14 +106,8 @@
                 gap: 5px;
             }
 
-            .temperature {
-                span {
-                    font-size: min(15vw, 80px);
-                }
-            }
-
             .weather {
-                svg {
+                .icon {
                     width: min(12vw, 50px);
                     height: min(12vw, 50px);
                 }

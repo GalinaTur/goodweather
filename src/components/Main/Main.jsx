@@ -17,6 +17,7 @@ import bgTornado from '../../assets/img/tornado.jpg';
 import bgMist from '../../assets/img/mist.jpg';
 import units from '../../utils/store.js';
 import icons from '../../assets/sprite.svg';
+import WeatherIcon from './WeatherIcon/WeatherIcon';
 
 const formatDateFullDate = (date, offset) => {
     const options = {
@@ -53,7 +54,7 @@ const formatDateFullWeekdayShortDate = (dt, offset) => {
         month: "2-digit",
     }
     const date = new Date((dt + offset) * 1000);
-    const weekday = new Intl.DateTimeFormat("en-GB", optionsWeekday).format(date);
+    const weekday = new Intl.DateTimeFormat("en-GB", optionsWeekday).format(date).toLocaleLowerCase();
     const day = new Intl.DateTimeFormat("en-GB", optionsDay).format(date);
     return [weekday, day];
 }
@@ -166,13 +167,13 @@ const createDataArr = (data, aqi) => {
         {
             icon: 'visibility',
             key: 'Visibility',
-            value: data.visibility / 1000 + '\u00a0' + units.visibility.en,
+            value: Math.round(data.visibility / 100) / 10 + '\u00a0' + units.visibility.en,
         },
         {
             icon: 'wind',
             key: 'Wind',
             value: <p>
-                <svg width='20' height='20' viewBox="0 0 100 100" role="img" aria-roledescription="Wind direction" style={{ transform: `rotate(${data.wind.deg}deg)` }}  className={styles.wind}>
+                <svg width='20' height='20' viewBox="0 0 100 100" role="img" aria-roledescription="Wind direction" style={{ transform: `rotate(${data.wind.deg}deg)` }} className={styles.wind}>
                     <use href={`${icons}#wind_dir`} />
                 </svg>
                 {' ' + Math.round(data.wind.speed) + '\u00a0' + units.speed.metric.en}
@@ -268,9 +269,7 @@ const addDetailsForDay = (list) => {
         groupedList[key].detailsForTable = {
             weekday: value[0].weekday[0],
             date: value[0].weekday[1],
-            weatherIcon: <svg width='50' height='50' viewBox="0 0 100 100" role="img" aria-roledescription="">
-                <use href={`${icons}#${createIconId(defineCommonWeatherPerDay(value), 'd')}`} />
-            </svg>,
+            weatherIcon: <WeatherIcon data={createIconId(defineCommonWeatherPerDay(value), 'd')}/>,
             weather: defineCommonWeatherPerDay(value),
             popr: getMaxPoP(value),
             wind: getMaxWindSpeed(value),
@@ -342,6 +341,8 @@ export default function Main({ currentLocation, API_URL }) {
 
     const dailyForecast = forecastData && addDetailsForDay(forecastData);
 
+    const initialActiveIndex = 3;
+
     return currentWeather && (
         <Router>
             <main className={styles.main}>
@@ -350,9 +351,11 @@ export default function Main({ currentLocation, API_URL }) {
                         <Route path="/" element={
                             <HomeBlock currentData={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast} />
                         } />
-                        <Route path="/details/*" element={<ExtendedBlock data={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast} />} />
+                        <Route path="/details/*" element={
+                            <ExtendedBlock data={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast} />} />
                         {forecast && Object.values(dailyForecast).map((elem, id) => {
-                            return <Route path={`/details/${elem[0].weekday[0].toLowerCase()}/*`} element={<ExtendedBlock data={elem[4]} hourlyForecast={elem} dailyForecast={dailyForecast} />} key={id} />
+                            return <Route path={`/details/${elem[0].weekday[0]}/*`} element={
+                                <ExtendedBlock data={elem[initialActiveIndex]} hourlyForecast={elem} dailyForecast={dailyForecast} />} key={id} />
                         })}
                     </Routes>
                 </Container>

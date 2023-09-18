@@ -1,38 +1,37 @@
 import { useState, useEffect } from 'react';
 import styles from './CurrentWeather.module.scss';
-import icons from '../../../assets/sprite.svg';
 import { Link } from 'react-router-dom';
+import TemperatureBig from '../TemperatureBig/TemperatureBig';
+import WeatherIcon from '../WeatherIcon/WeatherIcon';
+
+const formatDate = date => new Date(date).toUTCString().slice(0, 16);
+const formatTime = time => new Date(time).toUTCString().slice(17, 22);
 
 export default function CurrentWeather({ data }) {
-    const [currentDate, setCurrentDate] = useState(null);
-    const [currentTime, setCurrentTime] = useState(null);
+    const [currentDateTime, setCurrentDateTime] = useState(null);
 
     useEffect(() => {
         let dateTime = new Date(Date.now() + data.timezone);
-        setCurrentDate(dateTime.toUTCString().slice(0, 16));
-        setCurrentTime(dateTime.toUTCString().slice(17, 22));
+        setCurrentDateTime(dateTime);
 
         setInterval(() => {
             dateTime = new Date(Date.now() + data.timezone);
-            setCurrentDate(dateTime.toUTCString().slice(0, 16));
-            setCurrentTime(dateTime.toUTCString().slice(17, 22));
+            setCurrentDateTime(dateTime);
         }, 60000);
     }, [data]);
 
     return (
-            <Link to='/details/today' className={styles.current}>
-                {!data ? 'Loading...' :
-                    <>
-                        <div className={styles.date}>
-                            <p className={styles.time} data-testid='currTime'>{currentTime}</p>
-                            <p data-testid='currDate'>{currentDate}</p>
-                        </div>
+        <Link to='/details/today' className={styles.current}>
+            {!data ? 'Loading...' :
+                <>
+                    <div className={styles.date}>
+                        <p className={styles.time} data-testid='currTime'>{formatTime(currentDateTime)}</p>
+                        <p data-testid='currDate'>{formatDate(currentDateTime)}</p>
+                    </div>
 
-                        <p className={styles.temperature} data-testid='currTemp'><span>{data.temp}</span>°C</p>
+                    <TemperatureBig data={data.temp} className={styles.temperature}/>
                         <div className={styles.weather}>
-                            <svg width='90' height='90' viewBox="0 0 100 100" role="img" aria-label={`Current weather: ${data?.weather}`}>
-                                <use href={`${icons}#${data?.weatherIcon}`} data-testid={data?.weatherIcon} />
-                            </svg>
+                        <WeatherIcon data={data.weatherIcon} className={styles.icon} />
                             <p className={styles.weather_text}>{data?.weather}</p>
                         </div>
                         <div className={styles.details}>
@@ -46,7 +45,7 @@ export default function CurrentWeather({ data }) {
                         </div>
                     </>
                 }
-            </Link>
+                </Link>
     )
 }
 

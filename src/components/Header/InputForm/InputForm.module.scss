@@ -17,13 +17,19 @@
         border: 1px solid transparent;
         border-radius: 18px;
         transition: border-color 1.2s cubic-bezier(1, 0, 1, 0);
+        overflow: hidden;
 
         &:focus-within {
             border-color: currentColor;
             transition: border-color 1s cubic-bezier(0, 1, 0, 1);
         }
 
+        &:focus-visible {
+            @include onfocus;
+        }
+
         .input {
+            position: relative;
             font-size: 14px;
             width: 0;
             height: 30px;
@@ -38,14 +44,14 @@
             &_active {
                 outline: none;
                 color: inherit;
-                padding: 2px 5px;
+                padding: 2px 15px 2px 5px;
                 width: 190px;
                 caret-color: currentColor;
             }
         }
 
 
-        .button {
+        .search {
             cursor: pointer;
             transition: all 0.1s ease-in-out;
             padding: 5px 0;
@@ -56,7 +62,31 @@
             }
         }
 
+        .clear {
+            display: none;
+            cursor: pointer;
+            padding: 5px 0;
+            width: 2px;
+            height: 2px;
+            color: transparent;
+            position: absolute;
+            right: 25px;
+            transition: all 1s ease-in-out;
+
+            &_active {
+                display: unset;
+                width: 30px;
+                height: 30px;
+                color: inherit;
+                transition: all 1s ease-in-out;
+            }
+        }
+
     }
+}
+
+.logo_active {
+    width: 315px !important;
 }
 
 .popover {
@@ -87,6 +117,11 @@
         border-bottom: none;
     }
 
+    &_noresults {
+        font-size: 12px;
+        text-align: center;
+    }
+
     &[aria-selected='true'],
     &:hover,
     &:focus {
@@ -94,6 +129,7 @@
         color: $activeColor;
     }
 }
+
 
 
 @include for-phone {
@@ -106,7 +142,7 @@
                 width: 135px !important;
             }
 
-            .button {
+            .search {
                 right: 12px;
                 top: 2px
             }

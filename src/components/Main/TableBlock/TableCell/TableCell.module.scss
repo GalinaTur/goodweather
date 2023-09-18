@@ -9,6 +9,7 @@
 
 .wind {
     width: 80px;
+
     p {
         display: flex;
         align-items: center;
@@ -16,22 +17,28 @@
     }
 }
 
+.weekday {
+    width: 100px;
+    text-transform: capitalize;
+}
 
 .weatherIcon {
-    width: 60px;
+    svg {
+        width: 50px;
+        height: 50px;
+    }
 }
 
-.weather {
-    width: 140px;;
-}
-
-.popr,
-.weather {
+.weather,
+.popr {
+    min-width: 70px;
+    word-wrap: normal;
     text-align: left;
 }
 
 .tempExtr {
     text-align: right;
+    width: 90px;
 }
 
 .icon {
@@ -50,19 +57,32 @@
 }
 
 @include for-phone {
-        .wind,
-        .weather {
-            display: none
-        }
 
-        .weatherIcon {
-            svg {
+    .wind,
+    .weather {
+        display: none
+    }
+
+    .weatherIcon {
+        svg {
             width: 40px;
             height: 40px;
-            }
         }
+    }
 
-        .value {
-            white-space: unset;
-        }
+    .weekday {
+        width: 70px;
+    }
+
+    .popr {
+        min-width: 50px;
+    }
+
+    .tempExtr {
+        width: 65px;
+    }
+
+    .value {
+        white-space: unset;
+    }
 }

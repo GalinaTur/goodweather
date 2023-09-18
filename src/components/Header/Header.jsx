@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useFetch } from '../../useFetch';
 import Container from '../Container/Container';
 import styles from './Header.module.scss';
@@ -16,9 +16,11 @@ const setLocationText = (location, isPending) => {
     }
 }
 
-export default function Header({ currentLocation, handleSelect, API_URL }) {
+export default function Header({ currentLocation, handleSelect, API_URL, inputRef }) {
     const [searchResult, isPending, error, fetchSearch] = useFetch();
     const [searchTerm, setSearchTerm] = useState(null);
+    const clearBtn = useRef(null);
+    const logo = useRef(null);
 
     const city = currentLocation?.[0]['name'];
     const state = currentLocation?.[0]['state'] || '';
@@ -29,16 +31,20 @@ export default function Header({ currentLocation, handleSelect, API_URL }) {
         setSearchTerm(e.target.value);
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        fetchSearch(`${API_URL.locationDir}q=${searchTerm}&${API_LIMIT}&appid=${process.env.REACT_APP_API_KEY}`)
-
+    const handleClear = (e) => {
+        inputRef.current.focus();
+        inputRef.current.value = '';
+        setSearchTerm(null);
     }
+
+    useEffect(() => {
+        searchTerm && fetchSearch(`${API_URL.locationDir}q=${searchTerm}&${API_LIMIT}&appid=${process.env.REACT_APP_API_KEY}`)
+    }, [searchTerm])
 
     return (
         <header className={styles.header}>
             <Container className={styles.container}>
-                <p id='hdrlg' className={classNames('logo', styles.logo)}>GOODWEATHER</p>
+                <p ref={logo} className={classNames(styles.logo)}>GOODWEATHER</p>
                 <p className={styles.location}>
                     <svg width='16' height='20' viewBox="0 0 100 100" role="img" aria-roledescription={`Location: ${locText}`}>
                         <use href={`${icons}#location`} />
@@ -46,7 +52,7 @@ export default function Header({ currentLocation, handleSelect, API_URL }) {
                     {locText || setLocationText(currentLocation, isPending)}
                 </p>
                 <div className={styles.btn_container}>
-                    <InputForm handleChange={handleChange} handleSubmit={handleSubmit} searchResult={searchResult} handleSelect={handleSelect} />
+                    <InputForm handleChange={handleChange} searchTerm={searchTerm} searchResult={searchResult} handleSelect={handleSelect} handleClear={handleClear} inputRef={inputRef} logoRef={logo} clearBtnRef={clearBtn} />
                     <svg role='button' width='30' height='30' viewBox="0 0 30 30" className={styles.settings}>
                         <use href={`${icons}#settings`} />
                     </svg>

@@ -14,9 +14,9 @@
 
 body {
   position: relative;
-  background-position: top;
+  background-position: center;
   background-repeat: no-repeat;
-  background-size: 110% auto ;
+  background-size: cover;
   background-attachment: scroll;
 
   color: rgb(255, 255, 255);
@@ -48,16 +48,15 @@ a {
   width: 100%;
 }
 
-.logo {
-  transition: width 1s ease-in-out;
-}
-
-.logo_active {
-  width: 315px !important;
-}
-
 @include for-phone {
   body {
     font-size: 12px;
+    background-size: auto 110vh;
+  }
+}
+
+@include for-phone-horiz {
+  body {
+    background-size: 110vh auto;
   }
 }

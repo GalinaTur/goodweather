@@ -1,7 +1,8 @@
 @import '../../../../utils/mixins.scss';
 @import '../../../../utils/variables.scss';
 
-.navlink {
+.navlink,
+.active {
     position: absolute;
     width: 50px;
     top: 20px;
@@ -11,8 +12,11 @@
     gap: 6px;
     align-items: center;
     font-size: 12px;
+    z-index: 5;
     @include onfocus;
+}
 
+.navlink {
     .time {
         transition: all 0.2s ease-in-out;
         -webkit-transition: all 0.2s ease-in-out;
@@ -22,6 +26,8 @@
     }
 
     .icon {
+        width: 40px;
+        height: 40px;
         transition: all 0.2s ease-in-out;
         -webkit-transition: all 0.2s ease-in-out;
         -moz-transition: all 0.2s ease-in-out;

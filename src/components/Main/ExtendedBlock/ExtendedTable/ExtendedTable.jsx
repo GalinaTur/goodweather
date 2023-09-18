@@ -1,6 +1,8 @@
 import styles from './ExtendedTable.module.scss';
 import icons from '../../../../assets/sprite.svg';
 import TableRow from '../../TableBlock/TableRow/TableRow';
+import TemperatureBig from '../../TemperatureBig/TemperatureBig';
+import WeatherIcon from '../../WeatherIcon/WeatherIcon';
 
 export default function ExtendedTable({ data }) {
 
@@ -10,11 +12,9 @@ export default function ExtendedTable({ data }) {
                 <div className={styles.datetime}><p>{data.date}</p><p>{data.time}</p></div>
                 <div className={styles.header}>
                     <div className={styles.part}>
-                        <p className={styles.temperature}><span>{data.temp}</span> °C</p>
+                        <TemperatureBig data={data.temp} />
                         <div className={styles.weather}>
-                            <svg width='75' height='75' viewBox="0 0 100 100" role="img" aria-label={`Current weather: ${data.weather}`}>
-                                <use href={`${icons}#${data.weatherIcon}`} />
-                            </svg>
+                        <WeatherIcon data={data.weatherIcon} className={styles.icon}/>
                             <p className={styles.weather_text}>{data.weather}</p>
                         </div>
                     </div>

@@ -34,14 +34,8 @@
     }
 
     .temperature {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         grid-area: temp;
-
-        span {
-            font-size: 100px;
-        }
+        justify-content: center;
     }
 
     .weather {
@@ -53,6 +47,7 @@
 
         &_text {
             text-align: center;
+
             &::first-letter {
                 text-transform: uppercase;
             }
@@ -123,7 +118,7 @@
         }
 
         .weather {
-            svg {
+            .icon {
                 width: 60px;
                 height: 60px;
             }
