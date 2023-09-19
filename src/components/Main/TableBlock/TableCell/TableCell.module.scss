@@ -4,7 +4,7 @@
 .cell {
     white-space: wrap;
     text-align: left;
-    width: 10%;
+    width: 15%;
 }
 
 .wind {
@@ -23,6 +23,7 @@
 }
 
 .weatherIcon {
+    width: 60px;
     svg {
         width: 50px;
         height: 50px;
@@ -63,11 +64,9 @@
         display: none
     }
 
-    .weatherIcon {
-        svg {
+    .weatherIcon svg {
             width: 40px;
             height: 40px;
-        }
     }
 
     .weekday {
@@ -75,7 +74,7 @@
     }
 
     .popr {
-        min-width: 50px;
+        min-width: 60px;
     }
 
     .tempExtr {

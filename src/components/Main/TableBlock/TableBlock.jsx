@@ -7,9 +7,8 @@ export default function TableBlock({ data }) {
         <div className={styles.tableBlock}>
             <div className={styles.tableContainer}>
                 {Object.values(data).map((value, id) => {
-                    if (value[0].isToday) return;
-                    if (Object.keys(value).length < 2) return;
-                    return <TableRow key={id} data={value.detailsForTable} link={true} />
+                    if (id !== 0 && Object.keys(value).length < 2) return;
+                    return <TableRow key={id} id={id} data={value.detailsForTable} link={true} />
                 })}
             </div>
         </div>

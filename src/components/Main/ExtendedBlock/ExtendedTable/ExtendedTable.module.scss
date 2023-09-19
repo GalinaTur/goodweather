@@ -5,10 +5,10 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    @include block-bg;
     padding: 10px 20px;
     line-height: 1;
     flex: 1;
+    @include block-bg;
 
     .datetime {
         display: flex;

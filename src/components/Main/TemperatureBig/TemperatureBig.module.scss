@@ -12,9 +12,7 @@
 }
 
 @include for-phone {
-    .temperature {
-        span {
-            font-size: min(15vw, 80px);
-        }
+    .temperature span {
+        font-size: min(15vw, 80px);
     }
 }

@@ -6,6 +6,7 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 
   &::-webkit-scrollbar {
     display: none;
@@ -16,8 +17,16 @@ body {
   position: relative;
   background-position: center;
   background-repeat: no-repeat;
+  background-size: 100%;
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
   background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-attachment: scroll;
+  padding: env(safe-area-inset-right);
 
   color: rgb(255, 255, 255);
   font-family: 'Oxygen';
@@ -48,15 +57,21 @@ a {
   width: 100%;
 }
 
-@include for-phone {
+@include for-phone-horiz {
   body {
-    font-size: 12px;
-    background-size: auto 110vh;
+    background-size: 100lvw auto;
+    -webkit-background-size: 100lvw auto;
+    -moz-background-size: 100lvw auto;
+    -o-background-size: 100lvw auto;
   }
 }
 
-@include for-phone-horiz {
+@include for-phone {
   body {
-    background-size: 110vh auto;
+    font-size: 12px;
+    background-size: auto 100vh;
+    -webkit-background-size: auto 100vh;
+    -moz-background-size: auto 100vh;
+    -o-background-size: auto 100vh;
   }
 }

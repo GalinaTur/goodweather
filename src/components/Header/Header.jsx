@@ -16,7 +16,7 @@ const setLocationText = (location, isPending) => {
     }
 }
 
-export default function Header({ currentLocation, handleSelect, API_URL, inputRef }) {
+export default function Header({ currentLocation, handleChangeLocation, API_URL, inputRef }) {
     const [searchResult, isPending, error, fetchSearch] = useFetch();
     const [searchTerm, setSearchTerm] = useState(null);
     const clearBtn = useRef(null);
@@ -31,6 +31,15 @@ export default function Header({ currentLocation, handleSelect, API_URL, inputRe
         setSearchTerm(e.target.value);
     }
 
+    const handleSelect = (item) => {
+        if (!item) return;
+        let locationArr = item.split(', ');
+        if (locationArr.length === 2) locationArr.splice(1, 0, '');
+        setSearchTerm(null);
+        inputRef.current.blur();
+        handleChangeLocation(locationArr);
+    }
+
     const handleClear = (e) => {
         inputRef.current.focus();
         inputRef.current.value = '';
@@ -38,7 +47,7 @@ export default function Header({ currentLocation, handleSelect, API_URL, inputRe
     }
 
     useEffect(() => {
-        searchTerm && fetchSearch(`${API_URL.locationDir}q=${searchTerm}&${API_LIMIT}&appid=${process.env.REACT_APP_API_KEY}`)
+        searchTerm && fetchSearch(`${API_URL.locationDir}q=${searchTerm}&${API_LIMIT}&appid=${process.env.REACT_APP_API_KEY}`);
     }, [searchTerm])
 
     return (
@@ -52,7 +61,7 @@ export default function Header({ currentLocation, handleSelect, API_URL, inputRe
                     {locText || setLocationText(currentLocation, isPending)}
                 </p>
                 <div className={styles.btn_container}>
-                    <InputForm handleChange={handleChange} searchTerm={searchTerm} searchResult={searchResult} handleSelect={handleSelect} handleClear={handleClear} inputRef={inputRef} logoRef={logo} clearBtnRef={clearBtn} />
+                    <InputForm handleChange={handleChange} searchTerm={searchTerm} searchResult={searchResult} handleSelect={handleSelect} handleClear={handleClear} inputRef={inputRef} logoRef={logo} clearBtnRef={clearBtn}/>
                     <svg role='button' width='30' height='30' viewBox="0 0 30 30" className={styles.settings}>
                         <use href={`${icons}#settings`} />
                     </svg>

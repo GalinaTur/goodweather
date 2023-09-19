@@ -3,19 +3,19 @@
 
 .navigation {
     display: flex;
-    @include block-bg;
     min-height: 30px;
     width: 300px;
     align-items: center;
     padding: 1px 10px;
     border-radius: 18px;
+    @include block-bg;
 
     .navlink {
         width: 60px;
         text-align: center;
         font-size: 10px;
-        transition: all 0.3s ease-in-out;
         padding: 5px 2px;
+        @include transEaseInOut(all, 0.3s);
         @include onfocus;
     }
 
@@ -23,9 +23,10 @@
         width: 60px;
         text-align: center;
         font-size: 10px;
-        transition: all 0.3s ease-in-out;
         font-size: 16px;
         color: $activeColor;
+        @include transEaseInOut(all, 0.3s);
+        @include onfocus;
     }
 }
 
@@ -33,6 +34,7 @@
     position: relative;
     width: 60px;
     height: 30px;
+    @include onfocus;
 
     &::after {
         content: 'main';

@@ -17,9 +17,8 @@
 }
 
 @include for-phone {
-    .main{
-    .container {
+    .main .container {
     height: calc(100svh - 60px);
     }
 }
-}
+

@@ -36,3 +36,10 @@
         border-radius: 5px;
     }
 }
+
+@mixin transEaseInOut($property, $duration) {
+    transition: $property $duration ease-in-out;
+    -webkit-transition: $property $duration ease-in-out;
+    -moz-transition: $property $duration ease-in-out;
+    -o-transition: $property $duration ease-in-out;
+}

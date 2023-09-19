@@ -9,8 +9,8 @@
 .chartBlock {
     height: 170px;
     font-size: 12px;
-    @include block-bg;
     overflow-y: hidden;
+    @include block-bg;
 
     .chart {
         position: relative;
@@ -92,8 +92,6 @@
         gap: 10px;
     }
 }
-
-
 
 @include for-phone-horiz {
 

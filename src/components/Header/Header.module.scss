@@ -23,7 +23,7 @@
         background-repeat: no-repeat;
         padding: 18px 0 18px 18px;
         width: 125px;
-        transition: width 1s ease-in-out;
+        @include transEaseInOut(width, 1s);
     }
 
     .location {
@@ -47,41 +47,29 @@
         gap: 5px;
     }
 
-    .settings {
-        padding: 3px 3px;
-        transition: border-color 0.1s ease-in-out; 
-        transition: transform 0.5s ease-in-out; 
-        border: 1px solid transparent;
-        border-radius: 50%;
-        cursor: pointer;
+.settings,
+.menu {
+    padding: 3px 3px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    @include transEaseInOut(border-color, 0.1s);
+    @include transEaseInOut(transform, 0.5s);
 
-        &:hover {
+    &:active {
+        border-color: currentColor;
+    }
+}
+
+    .settings:hover {
             padding: 2px 2px;
             transform: rotate(50deg);
         }
 
-        &:active {
-            border-color: currentColor;
-        }
-    }
-
-    .menu {
-        padding: 2px 2px;
-        transition: border-color 0.1s ease-in-out;
-        transition: transform 0.5s ease-in-out;  
-        border: 1px solid transparent;
-        border-radius: 50%;
-        cursor: pointer;
-        
-        &:hover {
+    .menu:hover {
             padding: 0 0;
             transform: rotate(90deg);
         }
-
-        &:active {
-            border-color: currentColor;
-        }
-    }
 }
 
 @include for-phone {

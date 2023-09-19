@@ -30,22 +30,19 @@ function App() {
     });
   }, []);
 
-  const handleSelect = async (item) => {
-    let locationArr = item.split(', ');
-    if (locationArr.length === 2) locationArr.splice(1, 0, '');
+  const handleChangeLocation = async (location) => {
     const params = new URLSearchParams({
-      q: [...locationArr],
+      q: [...location],
       limit: 1,
       appid: process.env.REACT_APP_API_KEY
     })
-    input.current.blur();
     fetchLocation(API_URL.locationDir + params.toString());
     setCoords(null)
   }
 
   return (
     <div className="App" style={{ height: window.innerHeight }}>
-      <Header currentLocation={currentLocation} handleSelect={handleSelect} API_URL={API_URL} inputRef={input}/>
+      <Header currentLocation={currentLocation} handleChangeLocation={handleChangeLocation} API_URL={API_URL} inputRef={input} />
       {isPending && 'loading...'}
       {currentLocation && <Main currentLocation={currentLocation} API_URL={API_URL} />}
     </div>

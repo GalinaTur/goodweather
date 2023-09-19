@@ -103,10 +103,8 @@
         grid-template-rows: 3rem 4rem 2rem;
         row-gap: 20px;
 
-        .temperature {
-            span {
-                font-size: 88px;
-            }
+        .temperature span {
+            font-size: 88px;
         }
 
         .date {

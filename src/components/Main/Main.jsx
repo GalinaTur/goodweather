@@ -187,7 +187,7 @@ const createDataArr = (data, aqi) => {
         {
             icon: 'chance',
             key: `Chance of ${data.rain ? 'rain' : data.snow ? 'snow' : 'precipitation'}`,
-            value: (Math.round(data.pop) * 100 || 0) + '\u00a0' + units.pop,
+            value: (Math.round(data.pop * 100) || 0) + '\u00a0' + units.pop,
         },
         {
             icon: 'volume',
@@ -254,7 +254,7 @@ const groupForecastByDay = (forecast) => {
         if (!newList[key]) newList[key] = [];
         newList[key].push(elem);
         if (newList[key].length === 8 && arr[id + 1]) {
-            newList[key].push(arr[id + 1]);
+            arr[id + 4] && newList[key].push(arr[id + 1]);
         } else if (newList[key].length < 4 && !arr[id + 1]) {
             delete newList[key];
         }
@@ -269,7 +269,7 @@ const addDetailsForDay = (list) => {
         groupedList[key].detailsForTable = {
             weekday: value[0].weekday[0],
             date: value[0].weekday[1],
-            weatherIcon: <WeatherIcon data={createIconId(defineCommonWeatherPerDay(value), 'd')}/>,
+            weatherIcon: <WeatherIcon data={createIconId(defineCommonWeatherPerDay(value), 'd')} />,
             weather: defineCommonWeatherPerDay(value),
             popr: getMaxPoP(value),
             wind: getMaxWindSpeed(value),

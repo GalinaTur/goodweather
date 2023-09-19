@@ -24,25 +24,17 @@
             transition: border-color 1s cubic-bezier(0, 1, 0, 1);
         }
 
-        &:focus-visible {
-            @include onfocus;
-        }
-
         .input {
             position: relative;
             font-size: 14px;
             width: 0;
             height: 30px;
-            transition: all 1s ease-in-out;
             color: transparent;
             caret-color: transparent;
-
-            &:placeholder {
-                display: none;
-            }
+            outline: none;
+            @include transEaseInOut(all, 1s);
 
             &_active {
-                outline: none;
                 color: inherit;
                 padding: 2px 15px 2px 5px;
                 width: 190px;
@@ -50,11 +42,13 @@
             }
         }
 
-
         .search {
-            cursor: pointer;
-            transition: all 0.1s ease-in-out;
+            width: 30px;
+            height: 30px;
             padding: 5px 0;
+            cursor: pointer;
+            outline: none;
+            @include transEaseInOut(all, 0.1s);
 
             &:hover {
                 background-size: 18px;
@@ -63,38 +57,36 @@
         }
 
         .clear {
-            display: none;
             cursor: pointer;
-            padding: 5px 0;
-            width: 2px;
-            height: 2px;
+            width: 10px;
+            height: 10px;
             color: transparent;
             position: absolute;
-            right: 25px;
-            transition: all 1s ease-in-out;
+            right: 35px;
+            pointer-events: none;
+            @include transEaseInOut(all, 0.2s);
 
             &_active {
-                display: unset;
-                width: 30px;
-                height: 30px;
+                transform: scale(3);
                 color: inherit;
-                transition: all 1s ease-in-out;
+                pointer-events: unset;
+                @include onfocus;
             }
         }
-
     }
 }
 
 .logo_active {
     width: 315px !important;
+    @include transEaseInOut(width, 1s);
 }
 
 .popover {
     font-size: 80%;
-    @include block-bg;
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     z-index: 5;
+    @include block-bg;
 }
 
 .list {
@@ -130,15 +122,11 @@
     }
 }
 
-
-
 @include for-phone {
-
     .formContainer {
         margin-left: 5px;
 
-        .input {
-            &_active {
+        .input &_active {
                 width: 135px !important;
             }
 
@@ -147,7 +135,6 @@
                 top: 2px
             }
         }
-    }
 
     .popover {
         width: 165px !important;
