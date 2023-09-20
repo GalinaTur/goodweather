@@ -1,0 +1,43 @@
+@import '../../utils/mixins.scss';
+@import '../../utils/variables.scss';
+
+.modalContainer {
+    display: none;
+    padding-top: 50px;
+    position: absolute;
+    width: 100vw;
+    height: 100lvh;
+    top: 0;
+    left: 0;
+    justify-content: flex-end;
+    align-items: flex-start;
+    z-index: 9;
+
+    &_active {
+        display: flex;
+    }
+
+    .modal {
+        position: absolute;
+        margin: auto;
+        width: 300px;
+        padding: 20px;
+        background-color: rgba(22, 22, 43, 1);
+        z-index: 10;
+
+        .close {
+            position: absolute;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            left: 5px;
+            top: 5px;
+        }
+
+        .row {
+            text-transform: capitalize;
+        }
+    }
+}
+
+@include for-phone {}

@@ -16,7 +16,9 @@ const setLocationText = (location, isPending) => {
     }
 }
 
-export default function Header({ currentLocation, handleChangeLocation, API_URL, inputRef }) {
+let activeBtn;
+
+export default function Header({ currentLocation, handleChangeLocation, handleModalOpen, API_URL, inputRef, menuBtnRef, activeModal }) {
     const [searchResult, isPending, error, fetchSearch] = useFetch();
     const [searchTerm, setSearchTerm] = useState(null);
     const clearBtn = useRef(null);
@@ -46,9 +48,23 @@ export default function Header({ currentLocation, handleChangeLocation, API_URL,
         setSearchTerm(null);
     }
 
+    const handleClick = (e) => {
+        if (e.currentTarget === menuBtnRef.current && activeModal !== 'menu') {
+            menuBtnRef.current.classList.add(styles.menu_active);
+            activeBtn = [menuBtnRef.current, 'menu'];
+            handleModalOpen(e)
+        } 
+        }
+
     useEffect(() => {
         searchTerm && fetchSearch(`${API_URL.locationDir}q=${searchTerm}&${API_LIMIT}&appid=${process.env.REACT_APP_API_KEY}`);
-    }, [searchTerm])
+    }, [searchTerm]);
+
+    useEffect(() => {
+        if (!activeModal && activeBtn) {
+            activeBtn[0].classList.remove(styles[`${activeBtn[1]}_active`])
+        }
+    }, [activeModal])
 
     return (
         <header className={styles.header}>
@@ -61,11 +77,11 @@ export default function Header({ currentLocation, handleChangeLocation, API_URL,
                     {locText || setLocationText(currentLocation, isPending)}
                 </p>
                 <div className={styles.btn_container}>
-                    <InputForm handleChange={handleChange} searchTerm={searchTerm} searchResult={searchResult} handleSelect={handleSelect} handleClear={handleClear} inputRef={inputRef} logoRef={logo} clearBtnRef={clearBtn}/>
-                    <svg role='button' width='30' height='30' viewBox="0 0 30 30" className={styles.settings}>
+                    <InputForm handleChange={handleChange} searchTerm={searchTerm} searchResult={searchResult} handleSelect={handleSelect} handleClear={handleClear} inputRef={inputRef} logoRef={logo} clearBtnRef={clearBtn} />
+                    <svg role='button' width='30' height='30' viewBox="0 0 30 30" className={styles.settings} onClick={handleClick}> 
                         <use href={`${icons}#settings`} />
                     </svg>
-                    <svg role='button' width='30' height='30' viewBox="0 0 30 30" className={styles.menu}>
+                    <svg ref={menuBtnRef} role='button' width='30' height='30' viewBox="0 0 30 30" className={styles.menu} onClick={handleClick}> 
                         <use href={`${icons}#menu`} />
                     </svg>
                 </div>

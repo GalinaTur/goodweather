@@ -8,7 +8,7 @@ const formatDate = date => new Date(date).toUTCString().slice(0, 16);
 const formatTime = time => new Date(time).toUTCString().slice(17, 22);
 
 export default function CurrentWeather({ data }) {
-    const [currentDateTime, setCurrentDateTime] = useState(null);
+    const [currentDateTime, setCurrentDateTime] = useState(data && new Date(Date.now() + data.timezone));
 
     useEffect(() => {
         let dateTime = new Date(Date.now() + data.timezone);

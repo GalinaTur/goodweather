@@ -4,7 +4,6 @@
 * {
   box-sizing: border-box;
   scrollbar-width: none;
-  -ms-overflow-style: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 
@@ -14,6 +13,7 @@
 }
 
 body {
+  overflow: hidden;
   position: relative;
   background-position: center;
   background-repeat: no-repeat;
@@ -25,8 +25,8 @@ body {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-attachment: scroll;
-  padding: env(safe-area-inset-right);
+  background-attachment: fixed;
+  // padding: env(safe-area-inset-right);
 
   color: rgb(255, 255, 255);
   font-family: 'Oxygen';

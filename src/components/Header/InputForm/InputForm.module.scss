@@ -31,8 +31,8 @@
             height: 30px;
             color: transparent;
             caret-color: transparent;
-            outline: none;
             @include transEaseInOut(all, 1s);
+            outline: none;
 
             &_active {
                 color: inherit;

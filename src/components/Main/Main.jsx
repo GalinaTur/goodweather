@@ -4,7 +4,7 @@ import Container from '../Container/Container';
 import HomeBlock from './HomeBlock/HomeBlock';
 import ExtendedBlock from './ExtendedBlock/ExtendedBlock';
 import styles from './Main.module.scss';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import bgClearD from '../../assets/img/clear_d.jpg';
 import bgClearN from '../../assets/img/clear_n.jpg';
 import bgCloudsD from '../../assets/img/clouds_d.jpg';
@@ -344,7 +344,6 @@ export default function Main({ currentLocation, API_URL }) {
     const initialActiveIndex = 3;
 
     return currentWeather && (
-        <Router>
             <main className={styles.main}>
                 <Container className={styles.container}>
                     <Routes>
@@ -360,6 +359,5 @@ export default function Main({ currentLocation, API_URL }) {
                     </Routes>
                 </Container>
             </main>
-        </Router>
     )
 }

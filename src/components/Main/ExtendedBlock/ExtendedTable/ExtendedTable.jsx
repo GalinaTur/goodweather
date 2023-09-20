@@ -37,12 +37,12 @@ export default function ExtendedTable({ data }) {
                     <div className={styles.table}>
                         <div className={styles.subtable}>
                             {data?.details?.slice(0, 5).map((item, id) => {
-                                return <TableRow key={id} data={item} className={styles.row} link={false}/>
+                                return <TableRow key={id} data={item} className={styles.row} link={'#'}/>
                             })}
                         </div>
                         <div className={styles.subtable}>
                             {data?.details?.slice(5).map((item, id) => {
-                                return <TableRow key={id} data={item} className={styles.row} link={false}/>
+                                return <TableRow key={id} data={item} className={styles.row} link={'#'}/>
                             })}
                         </div>
                     </div>

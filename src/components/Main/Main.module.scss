@@ -1,14 +1,13 @@
 @import '../../utils/mixins.scss';
 
 .main {
-    padding: 5px 0;
     height: 100%;
 
     .container {
         height: calc(100svh - 60px);
         flex-direction: column;
         justify-content: flex-start;
-        flex:1;
+        flex: 1;
     }
 
     .wind {
@@ -19,6 +18,13 @@
 @include for-phone {
     .main .container {
     height: calc(100svh - 60px);
+    }
+}
+
+@include for-phone-horiz {
+    .main .container {
+    height: auto;
+    padding-bottom: 10px; 
     }
 }
 

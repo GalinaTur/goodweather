@@ -4,9 +4,9 @@
 .header {
     font-size: 1rem;
     @include block-bg;
+    margin-bottom: 5px;
 
     .container {
-        position: relative;
         padding: 0 30px;
         width: auto;
         justify-content: space-between;
@@ -47,29 +47,21 @@
         gap: 5px;
     }
 
-.settings,
-.menu {
-    padding: 3px 3px;
-    border: 1px solid transparent;
-    border-radius: 50%;
-    cursor: pointer;
-    @include transEaseInOut(border-color, 0.1s);
-    @include transEaseInOut(transform, 0.5s);
+    .settings,
+    .menu {
+        position: relative;
+        padding: 3px 3px;
+        border: 1px solid transparent;
+        border-radius: 50%;
+        cursor: pointer;
+        @include transEaseInOut(border-color, 0.1s);
+        @include transEaseInOut(transform, 0.5s);
 
-    &:active {
-        border-color: currentColor;
-    }
-}
-
-    .settings:hover {
-            padding: 2px 2px;
-            transform: rotate(50deg);
-        }
-
-    .menu:hover {
-            padding: 0 0;
+        &_active {
+            border-color: currentColor;
             transform: rotate(90deg);
         }
+    }
 }
 
 @include for-phone {
@@ -87,5 +79,13 @@
         .location {
             padding-left: 0;
         }
+    }
+}
+
+@include for-phone-horiz {
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
     }
 }

@@ -1,8 +1,10 @@
 import './App.scss';
 import { useState, useEffect, useRef } from 'react';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import { useFetch } from './useFetch';
+import Modal from './components/Modal/Modal';
 
 const API_URL = {
   weather: "https://api.openweathermap.org/data/2.5/weather?",
@@ -14,7 +16,12 @@ const API_URL = {
 
 function App() {
   const [coords, setCoords] = useState(null);
+  const [activeModal, setActiveModal] = useState(null);
   const input = useRef(null);
+  const modal = useRef(null);
+  const modalWindow = useRef(null);
+  const menuBtn = useRef(null);
+  const closeModalBtn = useRef(null);
 
   const params = coords && new URLSearchParams({
     lat: coords.latitude,
@@ -40,11 +47,26 @@ function App() {
     setCoords(null)
   }
 
+  const handleModalOpen = (e) => {
+    if (e.currentTarget === menuBtn.current) {
+      setActiveModal('menu');
+    }
+  }
+
+  const handleModalClose = (e) => {
+    if (e.target !== modal.current && e.target !== closeModalBtn.current) {
+      return;
+    } else setActiveModal(null);
+  }
+
   return (
-    <div className="App" style={{ height: window.innerHeight }}>
-      <Header currentLocation={currentLocation} handleChangeLocation={handleChangeLocation} API_URL={API_URL} inputRef={input} />
-      {isPending && 'loading...'}
-      {currentLocation && <Main currentLocation={currentLocation} API_URL={API_URL} />}
+    <div className="App">
+      <Router>
+        <Header currentLocation={currentLocation} handleChangeLocation={handleChangeLocation} handleModalOpen={handleModalOpen} handleModalClose={handleModalClose} API_URL={API_URL} inputRef={input} menuBtnRef={menuBtn} activeModal={activeModal} />
+        {isPending && 'loading...'}
+        {currentLocation && <Main currentLocation={currentLocation} API_URL={API_URL} />}
+        <Modal modalRef={modal} modalWindowRef={modalWindow} closeModalBtnRef={closeModalBtn} activeModal={activeModal} handleModalClose={handleModalClose} />
+      </Router>
     </div>
   )
 }

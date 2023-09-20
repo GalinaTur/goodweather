@@ -2,6 +2,7 @@
 @import './utils/variables.scss';
 
 .App {
+    position: relative;
     display: flex;
     flex-direction: column;    
     height: 100vh;
@@ -10,7 +11,7 @@
 
 @include for-phone-horiz {
     .App {
-        overflow: auto;
-        height: auto;
+        overflow: scroll;
+        height:auto;
     }
 }
