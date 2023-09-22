@@ -5,16 +5,6 @@ import HomeBlock from './HomeBlock/HomeBlock';
 import ExtendedBlock from './ExtendedBlock/ExtendedBlock';
 import styles from './Main.module.scss';
 import { Route, Routes } from 'react-router-dom';
-import bgClearD from '../../assets/img/clear_d.jpg';
-import bgClearN from '../../assets/img/clear_n.jpg';
-import bgCloudsD from '../../assets/img/clouds_d.jpg';
-import bgCloudsN from '../../assets/img/clouds_n.jpg';
-import bgRain from '../../assets/img/rain.jpg';
-import bgSnowD from '../../assets/img/snow_d.jpg';
-import bgSnowN from '../../assets/img/snow_n.jpg';
-import bgThunder from '../../assets/img/thunder.jpg';
-import bgTornado from '../../assets/img/tornado.jpg';
-import bgMist from '../../assets/img/mist.jpg';
 import units from '../../utils/store.js';
 import icons from '../../assets/sprite.svg';
 import WeatherIcon from './WeatherIcon/WeatherIcon';
@@ -95,30 +85,30 @@ const defineWindDirection = (deg) => {
 }
 
 const setBgImage = (weather, partOfDay) => {
-    let bgUrl;
+    let bgImage;
     if (weather === 'Clear' && partOfDay === 'd') {
-        bgUrl = `url(${bgClearD})`;
+        bgImage = require('../../assets/img/clear_d.jpg');
     } else if (weather === 'Clear' && partOfDay === 'n') {
-        bgUrl = `url(${bgClearN})`;
+        bgImage = require('../../assets/img/clear_n.jpg');
     } else if (weather === 'Clouds' && partOfDay === 'd') {
-        bgUrl = `url(${bgCloudsD})`;
+        bgImage = require('../../assets/img/clouds_d.jpg');
     } else if (weather === 'Clouds' && partOfDay === 'n') {
-        bgUrl = `url(${bgCloudsN})`;
+        bgImage = require('../../assets/img/clouds_n.jpg');
     } else if (weather === 'Rain' || weather === 'Drizzle') {
-        bgUrl = `url(${bgRain})`;
+        bgImage = require('../../assets/img/rain.jpg');
     } else if (weather === 'Snow' && partOfDay === 'd') {
-        bgUrl = `url(${bgSnowD})`;
+        bgImage = require('../../assets/img/snow_d.jpg');
     } else if (weather === 'Snow' && partOfDay === 'n') {
-        bgUrl = `url(${bgSnowN})`;
+        bgImage = require('../../assets/img/snow_n.jpg');
     } else if (weather === 'Thunderstorm') {
-        bgUrl = `url(${bgThunder})`;
+        bgImage = require('../../assets/img/thunder.jpg');
     } else if (weather === 'Tornado') {
-        bgUrl = `url(${bgTornado})`;
+        bgImage = require('../../assets/img/tornado.jpg');
     } else {
-        bgUrl = `url(${bgMist})`;
+        bgImage = require('../../assets/img/mist.jpg');
     }
 
-    document.body.style.backgroundImage = bgUrl;
+    document.body.style.backgroundImage = `url(${bgImage})`;
 }
 
 const defineAqiDescription = (aqi) => {

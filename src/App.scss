@@ -11,7 +11,7 @@
 
 @include for-phone-horiz {
     .App {
-        height:max-content;
-        overflow: scroll;
+        height: max-content;
+        overflow: auto;
     }
 }

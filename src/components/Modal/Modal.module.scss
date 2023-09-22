@@ -2,42 +2,44 @@
 @import '../../utils/variables.scss';
 
 .modalContainer {
-    display: none;
+    display: flex;
     padding-top: 50px;
     position: absolute;
     width: 100vw;
     height: 100lvh;
     top: 0;
-    left: 0;
+    left: 100vw;
     justify-content: flex-end;
     align-items: flex-start;
     z-index: 9;
+    @include transEaseInOut(all, 0.3s);
 
     &_active {
-        display: flex;
+        left: 0;
     }
 
     .modal {
         position: absolute;
         margin: auto;
         width: 300px;
-        padding: 20px;
+        padding: 30px 20px;
         background-color: rgba(22, 22, 43, 1);
         z-index: 10;
+        height: 100%;
 
         .close {
             position: absolute;
             cursor: pointer;
             width: 20px;
             height: 20px;
-            left: 5px;
-            top: 5px;
+            left: 15px;
+            top: 15px;
         }
 
         .row {
+            font-size: 18px;
             text-transform: capitalize;
+            height: 80px;
         }
     }
 }
-
-@include for-phone {}
