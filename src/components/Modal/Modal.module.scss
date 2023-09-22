@@ -11,7 +11,7 @@
     left: 100vw;
     justify-content: flex-end;
     align-items: flex-start;
-    z-index: 9;
+    z-index: 21;
     @include transEaseInOut(all, 0.3s);
 
     &_active {
@@ -24,14 +24,14 @@
         width: 300px;
         padding: 30px 20px;
         background-color: rgba(22, 22, 43, 1);
-        z-index: 10;
+        z-index: 22;
         height: 100%;
 
         .close {
             position: absolute;
             cursor: pointer;
-            width: 20px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
             left: 15px;
             top: 15px;
         }
@@ -40,6 +40,25 @@
             font-size: 18px;
             text-transform: capitalize;
             height: 80px;
+        }
+    }
+}
+
+@include for-phone-horiz {
+    .modalContainer {
+        height: 100vh;
+
+        .modal {
+            display: flex;
+            flex-direction: column;
+            top: 0;
+            height: 100vh;
+
+            .row {
+                font-size: 14px;
+                min-height: 30px;
+                flex-grow: 1;
+            }
         }
     }
 }

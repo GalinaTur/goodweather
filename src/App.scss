@@ -6,12 +6,11 @@
     display: flex;
     flex-direction: column;    
     height: 100vh;
-    overflow: hidden;
 }
 
 @include for-phone-horiz {
     .App {
-        height: max-content;
+        height: min-content;
         overflow: auto;
     }
 }

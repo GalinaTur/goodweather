@@ -13,7 +13,7 @@
 }
 
 body {
-  overflow: auto;
+  overflow-y: hidden;
   position: relative;
   background-position: center;
   background-repeat: no-repeat;
@@ -58,12 +58,16 @@ a {
 
 @include for-phone-horiz {
   body {
-    background-size: contain;
-    background-size: 100lvw auto;
-    -webkit-background-size: 100lvw auto;
-    -moz-background-size: 100lvw auto;
-    -o-background-size: 100lvw auto;
     overflow: auto;
+    background-size: contain;
+    background-size: 100vw auto;
+    -webkit-background-size: 100vw auto;
+    -moz-background-size: 100vw auto;
+    -o-background-size: 100vw auto;
+
+  }
+  .modalOpen {
+    overflow: hidden;
   }
 }
 

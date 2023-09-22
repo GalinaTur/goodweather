@@ -67,7 +67,7 @@
             @include transEaseInOut(all, 0.2s);
 
             &_active {
-                transform: scale(3);
+                transform: scale(2);
                 color: inherit;
                 pointer-events: unset;
                 @include onfocus;
