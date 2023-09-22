@@ -3426,20 +3426,20 @@
 	<symbol id="back" viewBox="0 0 42 42">
 		<path d="M14.389 7.956v4.374l1.056 0.010c7.335 0.071 11.466 3.333 12.543 9.944-4.029-4.661-8.675-4.663-12.532-4.664h-1.067v4.337l-9.884-7.001 9.884-7zM15.456 5.893l-12.795 9.063 12.795 9.063v-5.332c5.121 0.002 9.869 0.26 13.884 7.42 0-4.547-0.751-14.706-13.884-14.833v-5.381z" fill="currentColor"> </path> 
 	</symbol>
-	<symbol id="clearForm" width="24px" height="24px" viewBox="-7 -5 26 26" fill="none">
+	<symbol id="clearForm" width="64px" height="64px" viewBox="0 0 52 52" fill="none">
 		<path d="M8 8L16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 		<path d="M16 8L8 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 	</symbol>
-	<symbol id="details" fill="currentColor" width="256px" height="256px" viewBox="0 0 60 60" stroke-width="0.3">
+	<symbol id="details" fill="currentColor" width="100px" height="100px" viewBox="0 0 24 24" stroke-width="0.3">
 		<path d="M21,4a1,1,0,0,0-1-1H17V2a1,1,0,0,0-1-1H8A1,1,0,0,0,7,2V3H4A1,1,0,0,0,3,4V22a1,1,0,0,0,1,1H20a1,1,0,0,0,1-1ZM9,3h6V5H9ZM19,21H5V5H7V6A1,1,0,0,0,8,7h8a1,1,0,0,0,1-1V5h2Zm-6-3a1,1,0,0,1-1,1H8a1,1,0,0,1,0-2h4A1,1,0,0,1,13,18Zm4-4a1,1,0,0,1-1,1H8a1,1,0,0,1,0-2h8A1,1,0,0,1,17,14Zm0-4a1,1,0,0,1-1,1H8A1,1,0,0,1,8,9h8A1,1,0,0,1,17,10Z"></path>
 	</symbol>
-	<symbol id="radar" height="100px" width="100px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+	<symbol id="radar" height="100px" width="100px" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="0.5">
 		<path d="M12 3C16.9706 3 21 7.02944 21 12M12 7C14.7614 7 17 9.23858 17 12M10 14L12 12M10 21C6.13401 21 3 17.866 3 14C3 12.067 3.7835 10.317 5.05025 9.05029L14.9512 18.9512C13.6844 20.2179 11.933 21 10 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
 	</symbol>
 	<symbol id='favorite' width="100px" height="100px" viewBox="0 0 22 22" stroke="currentColor">
 		<path fill='none' fill-rule="evenodd" clip-rule="evenodd" d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 	</symbol>
-	<symbol id="about" width="240px" height="240px" viewBox="0 0 1024 1024" fill="currentColor">
+	<symbol id="about" width="100px" height="100px" viewBox="0 0 425 425" fill="currentColor">
     <path d="M213.333333,3.55271368e-14 C95.51296,3.55271368e-14 3.55271368e-14,95.51168 3.55271368e-14,213.333333 C3.55271368e-14,331.153707 95.51296,426.666667 213.333333,426.666667 C331.154987,426.666667 426.666667,331.153707 426.666667,213.333333 C426.666667,95.51168 331.154987,3.55271368e-14 213.333333,3.55271368e-14 Z M213.333333,384 C119.227947,384 42.6666667,307.43872 42.6666667,213.333333 C42.6666667,119.227947 119.227947,42.6666667 213.333333,42.6666667 C307.44,42.6666667 384,119.227947 384,213.333333 C384,307.43872 307.44,384 213.333333,384 Z M240.04672,128 C240.04672,143.46752 228.785067,154.666667 213.55008,154.666667 C197.698773,154.666667 186.713387,143.46752 186.713387,127.704107 C186.713387,112.5536 197.99616,101.333333 213.55008,101.333333 C228.785067,101.333333 240.04672,112.5536 240.04672,128 Z M192.04672,192 L234.713387,192 L234.713387,320 L192.04672,320 L192.04672,192 Z"> </path>
 	</symbol>
 	</svg> 
