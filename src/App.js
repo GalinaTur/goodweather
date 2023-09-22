@@ -14,6 +14,8 @@ const API_URL = {
   airPollution: "http://api.openweathermap.org/data/2.5/air_pollution?"
 };
 
+const viewport = document.querySelector("meta[name=viewport]");
+
 function App() {
   const [coords, setCoords] = useState(null);
   const [activeModal, setActiveModal] = useState(null);
@@ -36,6 +38,27 @@ function App() {
       setCoords(pos.coords)
     });
   }, []);
+
+  useEffect(() => {
+    const onOrientationChange = () => {
+      if (window.screen.orientation.type === 'landscape-primary') {
+        viewport.setAttribute("content", viewport.content + ", height=" + document.body.clientHeight);
+      } else if (window.screen.orientation.type === 'portrait-primary') {
+        viewport.setAttribute("content", viewport.content + ", height=" + window.innerHeight);
+      }
+    }
+    window.screen.orientation.addEventListener('change', onOrientationChange);
+
+    return window.screen.orientation.removeEventListener('change', onOrientationChange);
+  })
+
+  // useEffect(() => {
+
+  //   window.addEventListener("load", function () {
+  //     const viewport = document.querySelector("meta[name=viewport]");
+  //     viewport.setAttribute("content", viewport.content + ", height=" + window.innerHeight);
+  //   });
+  // })
 
   const handleChangeLocation = async (location) => {
     const params = new URLSearchParams({

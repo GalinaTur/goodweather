@@ -22,6 +22,8 @@
     .icon {
         width: 40px;
         height: 40px;
+        transform: scale(1);
+        -webkit-transform: scale(1);
         @include transEaseInOut(all, 0.2s);
     }
 }
@@ -35,6 +37,6 @@
 
     .icon {
         transform: scale(1.2);
-        transform-origin: center;
+        -webkit-transform: scale(1.2);
     }
 }
