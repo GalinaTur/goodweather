@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/goodweather/static/css/main.08e5614f.css",
-    "main.js": "/goodweather/static/js/main.ab64cbdf.js",
+    "main.css": "/goodweather/static/css/main.270a55bc.css",
+    "main.js": "/goodweather/static/js/main.f2a4109d.js",
     "static/js/787.ed3ce669.chunk.js": "/goodweather/static/js/787.ed3ce669.chunk.js",
     "static/media/clouds_n.jpg": "/goodweather/static/media/clouds_n.f66d87db31f0c9fd4d93.jpg",
     "static/media/mist.jpg": "/goodweather/static/media/mist.b7be22245f7a326034d2.jpg",
     "static/media/rain.jpg": "/goodweather/static/media/rain.c4d7e0d2dbd02409b490.jpg",
     "static/media/tornado.jpg": "/goodweather/static/media/tornado.6b52d549e53cdb7dd2f8.jpg",
-    "static/media/sprite.svg": "/goodweather/static/media/sprite.9dba3ab4a66329fa61e2786dc469f3c1.svg",
+    "static/media/sprite.svg": "/goodweather/static/media/sprite.3ede8bbaa46181dcc3d996bfe8c833db.svg",
     "static/media/clear_d.jpg": "/goodweather/static/media/clear_d.ef50d52040fca4e6e9fb.jpg",
     "static/media/clear_n.jpg": "/goodweather/static/media/clear_n.aa17ed7036093e1c0b27.jpg",
     "static/media/thunder.jpg": "/goodweather/static/media/thunder.2d04cf0d36805b45e0fb.jpg",
@@ -20,12 +20,12 @@
     "static/media/oxygen-latin-ext-400-normal.woff": "/goodweather/static/media/oxygen-latin-ext-400-normal.d94dfbc8cc816a03972a.woff",
     "static/media/logo.svg": "/goodweather/static/media/logo.4b8cacd7dcdc50fde1ca.svg",
     "index.html": "/goodweather/index.html",
-    "main.08e5614f.css.map": "/goodweather/static/css/main.08e5614f.css.map",
-    "main.ab64cbdf.js.map": "/goodweather/static/js/main.ab64cbdf.js.map",
+    "main.270a55bc.css.map": "/goodweather/static/css/main.270a55bc.css.map",
+    "main.f2a4109d.js.map": "/goodweather/static/js/main.f2a4109d.js.map",
     "787.ed3ce669.chunk.js.map": "/goodweather/static/js/787.ed3ce669.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.08e5614f.css",
-    "static/js/main.ab64cbdf.js"
+    "static/css/main.270a55bc.css",
+    "static/js/main.f2a4109d.js"
   ]
 }
