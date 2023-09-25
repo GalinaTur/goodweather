@@ -13,7 +13,7 @@ const calculateStyleLeft = (id, length) => {
 export default function Datalabel({ elem, id, length }) {
 
     return !elem ? 'Loading..' : (
-        <NavLink to={`${elem.isToday ? '/details/today/' : `/details/${elem.weekday[0]}/`}${elem.time.replace(':', '')}`} 
+        <NavLink to={`${elem.isToday ? `/details/${elem.cityID}/today` : `/details/${elem.cityID}/${elem.date.slice(0,3)}`}/${elem.time.replace(':', '-')}`} 
         className={({isActive}) => isActive ? styles.active : styles.navlink}
         style={{ left: calculateStyleLeft(id, length) }} data-testid={`datalabel_${id}`}>
                     <p className={styles.time}>{elem.time}</p>

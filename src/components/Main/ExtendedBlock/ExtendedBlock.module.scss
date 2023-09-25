@@ -8,6 +8,7 @@
     align-items: center;
     padding: 1px 10px;
     border-radius: 18px;
+    text-transform: capitalize;
     @include block-bg;
 
     .navlink {

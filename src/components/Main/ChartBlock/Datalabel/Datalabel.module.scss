@@ -22,10 +22,13 @@
     .icon {
         width: 40px;
         height: 40px;
-        transform: scale(1);
-        -webkit-transform: scale(1);
         @include transEaseInOut(all, 0.2s);
     }
+}
+
+.navlink .icon {
+    transform: scale(1);
+    -webkit-transform: scale(1, 1);
 }
 
 .active {
@@ -37,6 +40,6 @@
 
     .icon {
         transform: scale(1.2);
-        -webkit-transform: scale(1.2);
+        -webkit-transform: scale(1.2, 1.2);
     }
 }

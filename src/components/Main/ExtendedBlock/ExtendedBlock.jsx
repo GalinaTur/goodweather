@@ -1,37 +1,42 @@
 import styles from './ExtendedBlock.module.scss';
 import icons from '../../../assets/sprite.svg';
 import ChartBlock from '../ChartBlock/ChartBlock';
-import { Routes, Route, NavLink, Link } from 'react-router-dom';
-import ExtendedTable from './ExtendedTable/ExtendedTable';
+import { NavLink, Link, useOutletContext, useParams, Outlet } from 'react-router-dom';
 
-export default function ExtendedBlock({ data, hourlyForecast, dailyForecast }) {
+export default function ExtendedBlock() {
 
-    return data && (
+    const { currentData, hourlyForecast, dailyForecast } = useOutletContext();
+
+console.log(currentData)
+
+    const { cityId, day, time } = useParams();
+
+const defineOutletContext = (day, time)=> {
+if (!day && !time) return currentData; 
+if (day && !time) return dailyForecast[day][4];
+if (time) return Object.values(dailyForecast[day || currentData.date.slice(0,3)]).find((e) => e.time.slice(0, 2) === time.slice(0, 2));
+}
+
+    const ctx = {
+        data: defineOutletContext(day, time),
+    }
+
+    return currentData && (
         <>
             <nav className={styles.navigation}>
-            
-            <Link to='/' className={styles.back}>
-                <svg width='30' height='30' viewBox="0 0 100 100" role="img" aria-label="back to main page">
-                    <use href={`${icons}#back`} />
-                </svg>
-            </Link>
-                <NavLink to='/details/today' className={({ isActive }) => isActive ? styles.active : styles.navlink}>Today</NavLink>
-                {dailyForecast && Object.values(dailyForecast).map((value, id) => {
+                <Link to={`/main/${currentData.cityID}`} className={styles.back}>
+                    <svg width='30' height='30' viewBox="0 0 100 100" role="img" aria-label="back to main page">
+                        <use href={`${icons}#back`} />
+                    </svg>
+                </Link>
+                <NavLink to={`today`} className={({ isActive }) => isActive ? styles.active : styles.navlink}>Today</NavLink>
+                {dailyForecast && Object.entries(dailyForecast).map(([key, value], id) => {
                     if (value.length < 8 && id === 0) return;
-                    return <NavLink to={`/details/${value[0].weekday[0]}`} key={id} className={({ isActive }) => isActive ? styles.active : styles.navlink}>{value[0].date.slice(0, 3)}</NavLink>
+                    return <NavLink to={`${key}`} key={id} className={({ isActive }) => isActive ? styles.active : styles.navlink}>{key}</NavLink>
                 })}
             </nav>
-
-            <Routes>
-                {hourlyForecast && hourlyForecast.map((hour, id) => {
-                    return <Route path={`${hour.isToday? '/today/' : ''}${hour.time.replace(':', '')}`} element={<ExtendedTable data={hour} />} key={id} />
-                })}
-
-                <Route path='today' element={<ExtendedTable data={data} />} />
-                <Route path='' element={<ExtendedTable data={data} />} />
-
-            </Routes>
-            <ChartBlock data={hourlyForecast} />
+            <Outlet context={ctx} />
+            <ChartBlock data={day ? dailyForecast[day] : hourlyForecast} />
         </>
     )
 }

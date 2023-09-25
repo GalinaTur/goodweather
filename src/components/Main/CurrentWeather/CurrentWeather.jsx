@@ -21,7 +21,7 @@ export default function CurrentWeather({ data }) {
     }, [data]);
 
     return (
-        <Link to='/details/today' className={styles.current}>
+        <Link to={`/details/${data.cityID}/today`} className={styles.current}>
             {!data ? 'Loading...' :
                 <>
                     <div className={styles.date}>
@@ -29,23 +29,23 @@ export default function CurrentWeather({ data }) {
                         <p data-testid='currDate'>{formatDate(currentDateTime)}</p>
                     </div>
 
-                    <TemperatureBig data={data.temp} className={styles.temperature}/>
-                        <div className={styles.weather}>
+                    <TemperatureBig data={data.temp} className={styles.temperature} />
+                    <div className={styles.weather}>
                         <WeatherIcon data={data.weatherIcon} className={styles.icon} />
-                            <p className={styles.weather_text}>{data?.weather}</p>
+                        <p className={styles.weather_text}>{data?.weather}</p>
+                    </div>
+                    <div className={styles.details}>
+                        <div className={styles.feelsLike}>
+                            <p>Feels like: {data?.details?.[0].value}</p>
                         </div>
-                        <div className={styles.details}>
-                            <div className={styles.feelsLike}>
-                                <p>Feels like: {data?.details?.[0].value}</p>
-                            </div>
-                            <div className={styles.wind}>
-                                <div>Wind:{data.details?.[5].value}</div>
-                                {data?.windDirWords}
-                            </div>
+                        <div className={styles.wind}>
+                            <div>Wind:{data.details?.[5].value}</div>
+                            {data?.windDirWords}
                         </div>
-                    </>
-                }
-                </Link>
+                    </div>
+                </>
+            }
+        </Link>
     )
 }
 

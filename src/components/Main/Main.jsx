@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 import { useFetch } from '../../useFetch';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Container from '../Container/Container';
-import HomeBlock from './HomeBlock/HomeBlock';
-import ExtendedBlock from './ExtendedBlock/ExtendedBlock';
 import styles from './Main.module.scss';
-import { Route, Routes } from 'react-router-dom';
 import units from '../../utils/store.js';
 import icons from '../../assets/sprite.svg';
 import WeatherIcon from './WeatherIcon/WeatherIcon';
@@ -18,7 +16,7 @@ const formatDateFullDate = (date, offset) => {
         year: 'numeric',
     }
     const oldDate = new Date(date.getTime() + offset * 1000);
-    const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(oldDate);
+    const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(oldDate).toLowerCase();
     return formattedDate;
 }
 
@@ -240,7 +238,7 @@ const defineCommonWeatherPerDay = (data) => {
 
 const groupForecastByDay = (forecast) => {
     const list = forecast.reduce((newList, elem, id, arr) => {
-        const key = elem.date;
+        const key = elem.date.slice(0, 3);
         if (!newList[key]) newList[key] = [];
         newList[key].push(elem);
         if (newList[key].length === 8 && arr[id + 1]) {
@@ -271,6 +269,8 @@ const addDetailsForDay = (list) => {
 
 export default function Main({ currentLocation, API_URL }) {
 
+    const navigate = useNavigate();
+
     const params = currentLocation && new URLSearchParams({
         lat: currentLocation[0]["lat"],
         lon: currentLocation[0]["lon"],
@@ -281,6 +281,11 @@ export default function Main({ currentLocation, API_URL }) {
     const [currentWeather, isPendingCurrent, errorCurrent, fetchWeather] = useFetch(API_URL.weather, params);
     const [forecast, isPendingForecast, errorForecast, fetchForecast] = useFetch(API_URL.forecast, params);
     const [airPollut, isPendingAirPollut, errorAirPollut, fetchAirPollut] = useFetch(API_URL.airPollution, params);
+    
+    useEffect(() => {
+        if (!currentWeather) return;
+        navigate(`main/${currentWeather.id}`);
+    }, [currentLocation]);
 
     const currentData = currentWeather && {
         date: formatDateFullDate(new Date(Date.now()), currentWeather.timezone),
@@ -305,7 +310,7 @@ export default function Main({ currentLocation, API_URL }) {
             date: formatDateFullDate(date, forecast.city.timezone),
             timezone: forecast.city.timezone * 1000,
             time: formatTime(date, forecast.city.timezone),
-            cityID: forecast.city.timezone.id,
+            cityID: forecast.city.id,
             isToday: formatDateFullDate(date, forecast.city.timezone) === currentData.date,
             temp: Math.round(elem.main.temp),
             weather: elem.weather[0].description,
@@ -322,6 +327,7 @@ export default function Main({ currentLocation, API_URL }) {
         }
     });
 
+
     useEffect(() => {
         if (!currentData) return;
         setBgImage(currentData.briefWeather, currentData.partOfDay);
@@ -331,23 +337,17 @@ export default function Main({ currentLocation, API_URL }) {
 
     const dailyForecast = forecastData && addDetailsForDay(forecastData);
 
-    const initialActiveIndex = 3;
+    const ctx = {
+        currentData: currentData,
+        hourlyForecast: hourlyForecast,
+        dailyForecast: dailyForecast,
+    }
 
     return currentWeather && (
-            <main className={styles.main}>
-                <Container className={styles.container}>
-                    <Routes>
-                        <Route path="/" element={
-                            <HomeBlock currentData={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast} />
-                        } />
-                        <Route path="/details/*" element={
-                            <ExtendedBlock data={currentData} hourlyForecast={hourlyForecast} dailyForecast={dailyForecast} />} />
-                        {forecast && Object.values(dailyForecast).map((elem, id) => {
-                            return <Route path={`/details/${elem[0].weekday[0]}/*`} element={
-                                <ExtendedBlock data={elem[initialActiveIndex]} hourlyForecast={elem} dailyForecast={dailyForecast} />} key={id} />
-                        })}
-                    </Routes>
-                </Container>
-            </main>
+        <main className={styles.main}>
+            <Container className={styles.container}>
+                <Outlet context={ctx} />
+            </Container>
+        </main>
     )
 }

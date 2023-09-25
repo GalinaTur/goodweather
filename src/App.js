@@ -1,97 +1,26 @@
 import './App.scss';
-import { useState, useEffect, useRef } from 'react';
-import { createHashRouter, createRoutesFromElements, RouterProvider, HashRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/Header/Header';
-import Main from './components/Main/Main';
-import { useFetch } from './useFetch';
-import Modal from './components/Modal/Modal';
+import { createHashRouter, createRoutesFromElements, RouterProvider, Route, Navigate } from 'react-router-dom';
+import Root from './components/Root';
+import HomeBlock from './components/Main/HomeBlock/HomeBlock';
+import ExtendedBlock from './components/Main/ExtendedBlock/ExtendedBlock';
+import ExtendedTable from './components/Main/ExtendedBlock/ExtendedTable/ExtendedTable';
 
-// const router = createHashRouter(createRoutesFromElements(
-//   <Route path="/" element={<Root />} >
-//   </Route>
-// ));
-
-const API_URL = {
-  weather: "https://api.openweathermap.org/data/2.5/weather?",
-  forecast: "https://api.openweathermap.org/data/2.5/forecast?",
-  locationDir: "http://api.openweathermap.org/geo/1.0/direct?",
-  locationRev: "https://api.openweathermap.org/geo/1.0/reverse?",
-  airPollution: "http://api.openweathermap.org/data/2.5/air_pollution?"
-};
-
-const viewport = document.querySelector("meta[name=viewport]");
+const router = createHashRouter(createRoutesFromElements(
+  <Route path="/" element={<Root />} >
+    <Route index elemement={<Navigate to='main/:cityId' replace />} />
+    <Route path='main/:cityId?' element={<HomeBlock />} />
+    <Route path='details/:cityId' element={<ExtendedBlock />} >
+      <Route path=':day/:time?' element={<ExtendedTable />} />
+      <Route path='today/:time?' element={<ExtendedTable />} />
+    </Route>
+  </Route>
+));
 
 function App() {
-  const [coords, setCoords] = useState(null);
-  const [activeModal, setActiveModal] = useState(null);
-  const input = useRef(null);
-  const modal = useRef(null);
-  const modalWindow = useRef(null);
-  const menuBtn = useRef(null);
-  const closeModalBtn = useRef(null);
-
-  const params = coords && new URLSearchParams({
-    lat: coords.latitude,
-    lon: coords.longitude,
-    limit: 1,
-    appid: process.env.REACT_APP_API_KEY,
-  })
-  const [currentLocation, isPending, error, fetchLocation] = useFetch(API_URL.locationRev, params);
-
-  useEffect(() => {
-    navigator.geolocation?.getCurrentPosition(pos => {
-      setCoords(pos.coords)
-    });
-  }, []);
-
-  useEffect(() => {
-    const onOrientationChange = () => {
-      if (window.screen.orientation.type === 'landscape-primary') {
-        viewport.setAttribute("content", viewport.content + ", height=" + document.body.clientHeight);
-      } else if (window.screen.orientation.type === 'portrait-primary') {
-        viewport.setAttribute("content", viewport.content + ", height=" + window.innerHeight);
-      }
-    }
-    window.screen.orientation.addEventListener('change', onOrientationChange);
-
-    return window.screen.orientation.removeEventListener('change', onOrientationChange);
-  })
-
-  const handleChangeLocation = async (location) => {
-    const params = new URLSearchParams({
-      q: [...location],
-      limit: 1,
-      appid: process.env.REACT_APP_API_KEY
-    })
-    fetchLocation(API_URL.locationDir + params.toString());
-    setCoords(null)
-  }
-
-  const handleModalOpen = (e) => {
-    if (e.currentTarget === menuBtn.current) {
-      setActiveModal('menu');
-    }
-    document.body.classList.add('modalOpen');
-  }
-
-  const handleModalClose = (e) => {
-    if (e.target !== modal.current && e.target !== closeModalBtn.current) {
-      return;
-    } else setActiveModal(null);
-    document.body.classList.remove('modalOpen');
-  }
 
   return (
-    // <RouterProvider router={router}>
-      <div className="App">
-        <Router >
-          <Header currentLocation={currentLocation} handleChangeLocation={handleChangeLocation} handleModalOpen={handleModalOpen} handleModalClose={handleModalClose} API_URL={API_URL} inputRef={input} menuBtnRef={menuBtn} activeModal={activeModal} />
-          {isPending && 'loading...'}
-          {currentLocation && <Main currentLocation={currentLocation} API_URL={API_URL} />}
-          <Modal modalRef={modal} modalWindowRef={modalWindow} closeModalBtnRef={closeModalBtn} activeModal={activeModal} handleModalClose={handleModalClose} />
-        </Router>
-      </div>
-    // </RouterProvider>
+    <RouterProvider router={router}>
+    </RouterProvider>
   )
 }
 

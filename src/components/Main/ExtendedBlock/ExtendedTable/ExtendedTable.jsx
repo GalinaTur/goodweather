@@ -3,8 +3,11 @@ import icons from '../../../../assets/sprite.svg';
 import TableRow from '../../TableBlock/TableRow/TableRow';
 import TemperatureBig from '../../TemperatureBig/TemperatureBig';
 import WeatherIcon from '../../WeatherIcon/WeatherIcon';
+import { useOutletContext } from 'react-router-dom';
 
-export default function ExtendedTable({ data }) {
+export default function ExtendedTable() {
+
+    const {data} = useOutletContext();
 
     return data && (
         <>
@@ -48,6 +51,7 @@ export default function ExtendedTable({ data }) {
                     </div>
                 </div>
             </div>
+            
         </>
     )
 }
