@@ -2,8 +2,8 @@
 @import '../../utils/variables.scss';
 
 .modalContainer {
-    position: absolute;
-    height: 100lvh;
+    position: fixed;
+    height: 100vh;
     width: 0;
     padding-top: 50px;
     top: 0;
@@ -11,13 +11,14 @@
     z-index: 21;
 
     .modal {
-        position: absolute;
+        position: fixed;
         margin: auto;
         width: 300px;
-        right: -300px;
+        right: -400px;
         padding: 30px 20px;
         background-color: rgba(22, 22, 43, 1);
-        height: 100%;
+        box-shadow: -2px -2px 20px rgb(0, 0, 0, 0.7);
+        height: 100svh;
         z-index: 22;
         @include transEaseInOut(all, 0.3s);
 
@@ -41,8 +42,7 @@
         width: 100vw;
 
         .modal {
-            transform: translate(-300px, 0);
-            box-shadow: -2px -2px 20px rgb(0, 0, 0, 0.7);
+            transform: translate(-400px, 0);
         }
     }
 }

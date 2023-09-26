@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFetch } from '../../useFetch';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Container from '../Container/Container';
 import styles from './Main.module.scss';
-import units from '../../utils/store.js';
+import {units, airComponentsRanges} from '../../utils/store.js';
 import icons from '../../assets/sprite.svg';
 import WeatherIcon from './WeatherIcon/WeatherIcon';
 
@@ -109,23 +109,6 @@ const setBgImage = (weather, partOfDay) => {
     document.body.style.backgroundImage = `url(${bgImage})`;
 }
 
-const defineAqiDescription = (aqi) => {
-    let aqiDescription;
-    switch (aqi) {
-        case 1: aqiDescription = 'Good';
-            break;
-        case 2: aqiDescription = 'Fair';
-            break;
-        case 3: aqiDescription = 'Moderate';
-            break;
-        case 4: aqiDescription = 'Poor';
-            break;
-        case 5: aqiDescription = 'Very Poor';
-            break;
-    }
-    return aqiDescription;
-}
-
 const convertPressureValue = (value) => {
     return Math.round(value * 0.75006157584566);
 }
@@ -186,7 +169,7 @@ const createDataArr = (data, aqi) => {
         {
             icon: 'aqi',
             key: 'Air quality index',
-            value: aqi && `${aqi.main.aqi} (${defineAqiDescription(aqi.main.aqi)})`,
+            value: aqi && `${aqi.main.aqi} (${airComponentsRanges.qualitativeNames[aqi.main.aqi - 1]})`,
         },
     ]
     return dataArr;
@@ -281,11 +264,17 @@ export default function Main({ currentLocation, API_URL }) {
     const [currentWeather, isPendingCurrent, errorCurrent, fetchWeather] = useFetch(API_URL.weather, params);
     const [forecast, isPendingForecast, errorForecast, fetchForecast] = useFetch(API_URL.forecast, params);
     const [airPollut, isPendingAirPollut, errorAirPollut, fetchAirPollut] = useFetch(API_URL.airPollution, params);
-    
+    const [cityId, setCityId] = useState(null);
+
     useEffect(() => {
         if (!currentWeather) return;
-        navigate(`main/${currentWeather.id}`);
-    }, [currentLocation]);
+        setCityId(currentWeather.id);
+    }, [currentWeather]);
+
+    useEffect(() => {
+        if (!cityId) return;
+        navigate(`/${cityId}/main`);
+    }, [cityId]);
 
     const currentData = currentWeather && {
         date: formatDateFullDate(new Date(Date.now()), currentWeather.timezone),
@@ -341,9 +330,10 @@ export default function Main({ currentLocation, API_URL }) {
         currentData: currentData,
         hourlyForecast: hourlyForecast,
         dailyForecast: dailyForecast,
+        airPollut: airPollut,
     }
 
-    return currentWeather && (
+    return dailyForecast && (
         <main className={styles.main}>
             <Container className={styles.container}>
                 <Outlet context={ctx} />

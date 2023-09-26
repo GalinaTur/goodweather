@@ -1,6 +1,6 @@
 import styles from './ExtendedTable.module.scss';
 import icons from '../../../../assets/sprite.svg';
-import TableRow from '../../TableBlock/TableRow/TableRow';
+import TableRow from '../../TableRow/TableRow';
 import TemperatureBig from '../../TemperatureBig/TemperatureBig';
 import WeatherIcon from '../../WeatherIcon/WeatherIcon';
 import { useOutletContext } from 'react-router-dom';

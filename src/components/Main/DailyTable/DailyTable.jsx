@@ -1,11 +1,11 @@
-import styles from './TableBlock.module.scss';
-import TableRow from './TableRow/TableRow';
+import styles from './DailyTable.module.scss';
+import TableRow from '../TableRow/TableRow';
 
 const setLinkPath = (elem) => {
-    return elem[0].isToday ? `/details/${elem[0].cityID}/today` : `/details/${elem[0].cityID}/${elem[0].date.slice(0,3)}`;
+    return elem[0].isToday ? `../details/today` : `../details/${elem[0].date.slice(0,3)}`;
 }
 
-export default function TableBlock({ data }) {
+export default function DailyTable({ data }) {
 
     return data && (
         <div className={styles.tableBlock}>

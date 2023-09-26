@@ -15,6 +15,7 @@ export default function InputForm({ handleChange, searchTerm, searchResult, hand
 
     const handleFocus = (e) => {
         if (!isActive) {
+            inputRef.current.focus();
             inputRef.current.classList.add(styles.input_active);
             inputRef.current.inputMode = 'search';
             logoRef.current.classList.add(styles.logo_active);

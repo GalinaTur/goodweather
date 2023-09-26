@@ -1,9 +1,9 @@
-import styles from './ExtendedBlock.module.scss';
+import styles from './DetailsPage.module.scss';
 import icons from '../../../assets/sprite.svg';
-import ChartBlock from '../ChartBlock/ChartBlock';
+import LineChart from '../../charts/LineChart/LineChart';
 import { NavLink, Link, useOutletContext, useParams, Outlet } from 'react-router-dom';
 
-export default function ExtendedBlock() {
+export default function DetailsPage() {
 
     const { currentData, hourlyForecast, dailyForecast } = useOutletContext();
 
@@ -22,7 +22,7 @@ if (time) return Object.values(dailyForecast[day || currentData.date.slice(0,3)]
     return currentData && (
         <>
             <nav className={styles.navigation}>
-                <Link to={`/main/${currentData.cityID}`} className={styles.back}>
+                <Link to={`../main`} className={styles.back}>
                     <svg width='30' height='30' viewBox="0 0 100 100" role="img" aria-label="back to main page">
                         <use href={`${icons}#back`} />
                     </svg>
@@ -34,7 +34,7 @@ if (time) return Object.values(dailyForecast[day || currentData.date.slice(0,3)]
                 })}
             </nav>
             <Outlet context={ctx} />
-            <ChartBlock data={day ? dailyForecast[day] : hourlyForecast} />
+            <LineChart data={day ? dailyForecast[day] : hourlyForecast} />
         </>
     )
 }

@@ -1,6 +1,6 @@
 import styles from './Datalabel.module.scss';
 import { NavLink } from 'react-router-dom';
-import WeatherIcon from '../../WeatherIcon/WeatherIcon';
+import WeatherIcon from '../../../Main/WeatherIcon/WeatherIcon';
 
 const containerWidth = 830;
 const datalabelWidth = 50;
@@ -13,7 +13,7 @@ const calculateStyleLeft = (id, length) => {
 export default function Datalabel({ elem, id, length }) {
 
     return !elem ? 'Loading..' : (
-        <NavLink to={`${elem.isToday ? `/details/${elem.cityID}/today` : `/details/${elem.cityID}/${elem.date.slice(0,3)}`}/${elem.time.replace(':', '-')}`} 
+        <NavLink to={`${elem.isToday ? `../details/today` : `../details/${elem.date.slice(0,3).toLowerCase()}`}/${elem.time.replace(':', '-')}`} 
         className={({isActive}) => isActive ? styles.active : styles.navlink}
         style={{ left: calculateStyleLeft(id, length) }} data-testid={`datalabel_${id}`}>
                     <p className={styles.time}>{elem.time}</p>

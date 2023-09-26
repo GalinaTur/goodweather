@@ -21,7 +21,7 @@ export default function CurrentWeather({ data }) {
     }, [data]);
 
     return (
-        <Link to={`/details/${data.cityID}/today`} className={styles.current}>
+        <Link to={`../details/today`} className={styles.current}>
             {!data ? 'Loading...' :
                 <>
                     <div className={styles.date}>

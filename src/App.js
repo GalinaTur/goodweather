@@ -1,18 +1,19 @@
 import './App.scss';
 import { createHashRouter, createRoutesFromElements, RouterProvider, Route, Navigate } from 'react-router-dom';
 import Root from './components/Root';
-import HomeBlock from './components/Main/HomeBlock/HomeBlock';
-import ExtendedBlock from './components/Main/ExtendedBlock/ExtendedBlock';
-import ExtendedTable from './components/Main/ExtendedBlock/ExtendedTable/ExtendedTable';
+import HomePage from './components/Main/HomePage/HomePage';
+import DetailsPage from './components/Main/DetailsPage/DetailsPage';
+import ExtendedTable from './components/Main/DetailsPage/ExtendedTable/ExtendedTable';
+import AqiPage from './components/Main/AqiPage/AqiPage';
 
 const router = createHashRouter(createRoutesFromElements(
-  <Route path="/" element={<Root />} >
-    <Route index elemement={<Navigate to='main/:cityId' replace />} />
-    <Route path='main/:cityId?' element={<HomeBlock />} />
-    <Route path='details/:cityId' element={<ExtendedBlock />} >
+  <Route path="/:cityId?" element={<Root />} >
+    <Route path='main/' element={<HomePage />} />
+    <Route path='details/' element={<DetailsPage />} >
       <Route path=':day/:time?' element={<ExtendedTable />} />
       <Route path='today/:time?' element={<ExtendedTable />} />
     </Route>
+    <Route path='aqi' element={<AqiPage />} />
   </Route>
 ));
 

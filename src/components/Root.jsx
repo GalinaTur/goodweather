@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
+import { useFetch } from '../useFetch';
+import { useLocation } from 'react-router-dom';
 import Header from './Header/Header';
 import Main from './Main/Main';
-import { useFetch } from '../useFetch';
 import Modal from './Modal/Modal';
 
 const API_URL = {
@@ -15,11 +16,13 @@ const API_URL = {
 export default function Root() {
   const [coords, setCoords] = useState(null);
   const [activeModal, setActiveModal] = useState(null);
+  const [activeModule, setActiveModule] = useState('main');
   const input = useRef(null);
   const modal = useRef(null);
   const modalWindow = useRef(null);
   const menuBtn = useRef(null);
   const closeModalBtn = useRef(null);
+  const urlLocation = useLocation();
 
   const params = coords && new URLSearchParams({
     lat: coords.latitude,
@@ -49,7 +52,7 @@ export default function Root() {
     window.screen.orientation.addEventListener('change', onOrientationChange);
 
     return window.screen.orientation.removeEventListener('change', onOrientationChange);
-  })
+  }, [window.screen.orientation.type])
 
   const handleChangeLocation = async (location) => {
     const params = new URLSearchParams({
@@ -69,11 +72,15 @@ export default function Root() {
   }
 
   const handleModalClose = (e) => {
-    if (e.target !== modal.current && e.target !== closeModalBtn.current) {
+    if (e && e.target !== modal.current && e.target !== closeModalBtn.current) {
       return;
     } else setActiveModal(null);
     document.body.classList.remove('modalOpen');
   }
+
+  useEffect(()=> {
+  handleModalClose();
+  }, [urlLocation])
 
   return (
     <>

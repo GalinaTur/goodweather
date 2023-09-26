@@ -13,15 +13,15 @@
 }
 
 body {
-  overflow: hidden;
+  overflow-x: hidden;
   width: 100vw;
   position: relative;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 110vw;
-  -webkit-background-size: 110vw;
-  -moz-background-size: 110vw;
-  -o-background-size: 110vw;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-attachment: fixed;
 
   color: rgb(255, 255, 255);
@@ -66,13 +66,5 @@ a {
 @include for-phone {
   body {
     font-size: 12px;
-    background-size: 110vh;
-    -webkit-background-size: 110vh;
-    -moz-background-size: 110vh;
-    -o-background-size: 110vh;
-    background-size: 110lvh;
-    -webkit-background-size: 110lvh;
-    -moz-background-size: 110lvh;
-    -o-background-size: 110lvh;
   }
 }

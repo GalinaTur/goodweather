@@ -1,17 +1,17 @@
 import { useOutletContext } from 'react-router-dom';
-import ChartBlock from '../ChartBlock/ChartBlock';
+import LineChart from '../../charts/LineChart/LineChart';
 import CurrentWeather from '../CurrentWeather/CurrentWeather';
-import TableBlock from '../TableBlock/TableBlock';
+import DailyTable from '../DailyTable/DailyTable';
 
-export default function HomeBlock() {
+export default function HomePage() {
 
     const {currentData, hourlyForecast, dailyForecast} = useOutletContext();
 
     return (
         <>
             <CurrentWeather data={currentData} />
-            <ChartBlock data={hourlyForecast} />
-            <TableBlock data={dailyForecast} />
+            <LineChart data={hourlyForecast} />
+            <DailyTable data={dailyForecast} />
         </>
     )
 }
