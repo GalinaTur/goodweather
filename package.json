@@ -2,7 +2,7 @@
   "name": "goodweather",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://galinatur.github.io/goodweather",
+  "homepage": "https://galinatur.github.io/goodweather/#/main",
   "dependencies": {
     "@fontsource/oxygen": "^5.0.3",
     "@reach/combobox": "^0.18.0",

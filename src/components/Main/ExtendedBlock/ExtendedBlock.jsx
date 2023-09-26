@@ -7,8 +7,6 @@ export default function ExtendedBlock() {
 
     const { currentData, hourlyForecast, dailyForecast } = useOutletContext();
 
-console.log(currentData)
-
     const { cityId, day, time } = useParams();
 
 const defineOutletContext = (day, time)=> {

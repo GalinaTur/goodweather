@@ -1,10 +1,6 @@
 @import './utils/mixins.scss';
 @import '@fontsource/oxygen';
 
-// html {
-//   overflow-y: hidden;
-// }
-
 * {
   box-sizing: border-box;
   scrollbar-width: none;
@@ -18,17 +14,14 @@
 
 body {
   overflow: hidden;
+  width: 100vw;
   position: relative;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 100vw;
-  -webkit-background-size: 100vw;
-  -moz-background-size: 100vw;
-  -o-background-size: 100vw;
-  background-size: cover;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  background-size: 110vw;
+  -webkit-background-size: 110vw;
+  -moz-background-size: 110vw;
+  -o-background-size: 110vw;
   background-attachment: fixed;
 
   color: rgb(255, 255, 255);

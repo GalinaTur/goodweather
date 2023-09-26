@@ -2,30 +2,24 @@
 @import '../../utils/variables.scss';
 
 .modalContainer {
-    display: flex;
-    padding-top: 50px;
     position: absolute;
-    width: 100vw;
     height: 100lvh;
+    width: 0;
+    padding-top: 50px;
     top: 0;
-    left: 100vw;
-    justify-content: flex-end;
-    align-items: flex-start;
+    right: 0;
     z-index: 21;
-    @include transEaseInOut(all, 0.3s);
-
-    &_active {
-        left: 0;
-    }
 
     .modal {
         position: absolute;
         margin: auto;
         width: 300px;
+        right: -300px;
         padding: 30px 20px;
         background-color: rgba(22, 22, 43, 1);
-        z-index: 22;
         height: 100%;
+        z-index: 22;
+        @include transEaseInOut(all, 0.3s);
 
         .close {
             position: absolute;
@@ -40,6 +34,15 @@
             font-size: 18px;
             text-transform: capitalize;
             height: 80px;
+        }
+    }
+
+    &_active {
+        width: 100vw;
+
+        .modal {
+            transform: translate(-300px, 0);
+            box-shadow: -2px -2px 20px rgb(0, 0, 0, 0.7);
         }
     }
 }
