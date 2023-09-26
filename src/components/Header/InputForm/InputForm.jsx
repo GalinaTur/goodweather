@@ -16,7 +16,6 @@ export default function InputForm({ handleChange, searchTerm, searchResult, hand
     const handleFocus = (e) => {
         if (!isActive) {
             inputRef.current.classList.add(styles.input_active);
-            inputRef.current.readOnly = false;
             inputRef.current.inputMode = 'search';
             logoRef.current.classList.add(styles.logo_active);
             setIsActive(true);
@@ -31,7 +30,6 @@ export default function InputForm({ handleChange, searchTerm, searchResult, hand
         } else {
             setIsActive(false);
             inputRef.current.classList.remove(styles.input_active);
-            inputRef.current.readOnly = true;
             inputRef.current.inputMode = 'none';
             logoRef.current.classList.remove(styles.logo_active);
             clearBtnRef.current.classList.remove(styles.clear_active);

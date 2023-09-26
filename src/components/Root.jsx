@@ -40,8 +40,10 @@ export default function Root() {
     const onOrientationChange = () => {
       if (window.screen.orientation.type === 'landscape-primary') {
         viewport.setAttribute("content", viewport.content + ", height=" + document.body.clientHeight);
+        viewport.setAttribute("content", viewport.content + ", width=" + window.innerWidth);
       } else if (window.screen.orientation.type === 'portrait-primary') {
         viewport.setAttribute("content", viewport.content + ", height=" + window.innerHeight);
+        viewport.setAttribute("content", viewport.content + ", width=" + window.innerWidth);
       }
     }
     window.screen.orientation.addEventListener('change', onOrientationChange);

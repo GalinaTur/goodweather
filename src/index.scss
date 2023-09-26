@@ -66,5 +66,13 @@ a {
 @include for-phone {
   body {
     font-size: 12px;
+    background-size: 110vh;
+    -webkit-background-size: 110vh;
+    -moz-background-size: 110vh;
+    -o-background-size: 110vh;
+    background-size: 110lvh;
+    -webkit-background-size: 110lvh;
+    -moz-background-size: 110lvh;
+    -o-background-size: 110lvh;
   }
 }
