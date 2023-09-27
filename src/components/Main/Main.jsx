@@ -240,8 +240,8 @@ const addDetailsForDay = (list) => {
         groupedList[key].detailsForTable = {
             weekday: value[0].weekday[0],
             date: value[0].weekday[1],
-            weatherIcon: <WeatherIcon data={createIconId(defineCommonWeatherPerDay(value), 'd')} />,
-            weather: defineCommonWeatherPerDay(value),
+            weatherIcon: <WeatherIcon data={createIconId(defineCommonWeatherPerDay(value), 'd')} 
+                description = {defineCommonWeatherPerDay(value)} className={styles.weather}/>,
             popr: getMaxPoP(value),
             wind: getMaxWindSpeed(value),
             tempExtr: getTempExtremums(value),
@@ -288,8 +288,10 @@ export default function Main({ currentLocation, API_URL }) {
         briefWeather: currentWeather.weather[0].main,
         partOfDay: currentWeather.weather[0].icon.slice(-1),
         windDirWords: defineWindDirection(currentWeather?.wind.deg),
-        sunrise: formatTime(new Date(currentWeather.sys.sunrise * 1000), currentWeather.timezone),
-        sunset: formatTime(new Date(currentWeather.sys.sunset * 1000), currentWeather.timezone),
+        sun: {
+            sunrise: formatTime(new Date(currentWeather.sys.sunrise * 1000), currentWeather.timezone),
+            sunset: formatTime(new Date(currentWeather.sys.sunset * 1000), currentWeather.timezone)
+        },
         details: createDataArr(currentWeather, airPollut?.list?.[0]),
     }
 

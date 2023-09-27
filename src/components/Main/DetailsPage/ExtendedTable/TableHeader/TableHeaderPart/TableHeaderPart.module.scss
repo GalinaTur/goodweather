@@ -1,0 +1,19 @@
+@import '../../../../../../utils/mixins.scss';
+@import '../../../../../../utils/variables.scss';
+
+.part {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:first-of-type {
+        min-width: 50%;
+    }
+}
+
+@include for-phone {
+    .part {
+        gap: 5px;
+    }
+
+}

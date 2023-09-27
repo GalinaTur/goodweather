@@ -1,6 +1,7 @@
 import styles from './LineChart.module.scss';
 import { Line } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import Datalabel from './Datalabel/Datalabel';
 
 Chart.register(...registerables);
@@ -100,7 +101,7 @@ const chartOptions = {
                         return <Datalabel elem={elem} id={id} key={id} length={arr.length} dayId={dayId || 'd0'}/>
                     })}
                     <Line width='850' datasetIdKey="tempByHoursChart" className={styles.line} 
-                    data={chartData} options={chartOptions}/>
+                    data={chartData} options={chartOptions} plugins={[ChartDataLabels]}/>
                 </div>
             </div>
             <p className={styles.title}>{(data.length-1) * 3} hours</p>

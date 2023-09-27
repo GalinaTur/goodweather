@@ -13,18 +13,46 @@
     .wind {
         margin-right: 5px;
     }
+
+    .weather {
+        flex-direction: row;
+        justify-content: flex-start;
+        width: 180px;
+        gap: 10px;
+        white-space: nowrap;
+
+        p {
+            &::first-letter {
+                text-transform: lowercase;
+            }
+        }
+
+        svg {
+            width: 40px;
+            height: 40px;
+        }
+    }
 }
 
 @include for-phone {
-    .main .container {
-    height: calc(100svh - 60px);
+    .main {
+        .container {
+            height: calc(100svh - 60px);
+        }
+
+        .weather {
+            width: 40px;
+
+            p {
+                display: none;
+            }
+        }
     }
 }
 
 @include for-phone-horiz {
     .main .container {
-    height: auto;
-    padding-bottom: 10px; 
+        height: auto;
+        padding-bottom: 10px;
     }
 }
-

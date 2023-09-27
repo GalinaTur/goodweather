@@ -1,9 +1,19 @@
 @import '../../../utils/mixins.scss';
 @import '../../../utils/variables.scss';
 
-.icon {
-    width: 40px;
-    height: 40px;
+.weather {
+    min-width: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    p {
+        &::first-letter {
+            text-transform: uppercase;
+        }
+    }
 
     svg {
         width: 100%;

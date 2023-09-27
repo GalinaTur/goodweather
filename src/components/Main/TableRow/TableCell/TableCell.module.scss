@@ -4,7 +4,6 @@
 .cell {
     white-space: wrap;
     text-align: left;
-    width: 15%;
 }
 
 .wind {
@@ -22,17 +21,12 @@
     text-transform: capitalize;
 }
 
-.weatherIcon {
-    width: 60px;
-    svg {
-        width: 40px;
-        height: 40px;
-    }
+.date {
+width: 50px;
 }
 
-.weather,
 .popr {
-    min-width: 70px;
+    width: 70px;
     word-wrap: normal;
     text-align: left;
 }
@@ -74,7 +68,8 @@
     }
 
     .popr {
-        min-width: 60px;
+        width: 70px;
+        text-align: center;
     }
 
     .tempExtr {

@@ -1,0 +1,29 @@
+@import '../../../../../utils/mixins.scss';
+@import '../../../../../utils/variables.scss';
+
+
+.datetime {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 5px 0;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 3px;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 15px;
+    height: 120px;
+
+}
+
+@include for-phone {
+    .header {
+        height: min(15svh, 80px);
+    }
+}

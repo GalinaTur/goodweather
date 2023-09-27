@@ -30,10 +30,7 @@ export default function CurrentWeather({ data }) {
                     </div>
 
                     <TemperatureBig data={data.temp} className={styles.temperature} />
-                    <div className={styles.weather}>
-                        <WeatherIcon data={data.weatherIcon} className={styles.icon} />
-                        <p className={styles.weather_text}>{data?.weather}</p>
-                    </div>
+                    <WeatherIcon data={data.weatherIcon} className={styles.weather} description={data.weather} />
                     <div className={styles.details}>
                         <div className={styles.feelsLike}>
                             <p>Feels like: {data?.details?.[0].value}</p>
