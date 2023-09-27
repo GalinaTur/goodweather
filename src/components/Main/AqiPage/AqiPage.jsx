@@ -2,6 +2,7 @@ import styles from './AqiPage.module.scss';
 import { airComponentsRanges } from '../../../utils/store';
 import { useOutletContext } from 'react-router-dom';
 import DoughnutChart from '../../charts/DoughnutChart/DoughnutChart';
+import ExtendedTable from '../ExtendedTable/ExtendedTable';
 
 const defineColor = (key, value) => {
     const list = airComponentsRanges.colors;
@@ -11,23 +12,31 @@ const defineColor = (key, value) => {
 
 const formatData = (data) => {
     const list = data.list[0];
+    const aqiLimit = airComponentsRanges.aqi[airComponentsRanges.aqi.length - 1]; 
     return {
         main: {
             key: 'aqi',
             value: list.main.aqi,
-            limit: airComponentsRanges.aqi[4],
+            limit: aqiLimit,
             message: airComponentsRanges.messages[list.main.aqi - 1],
-            color: airComponentsRanges.colors[list.main.aqi - 1],
             full: 'Air Quality Index',
+            chart: <DoughnutChart value={list.main.aqi} 
+            limit={aqiLimit}
+                color={airComponentsRanges.colors[list.main.aqi - 1]}
+            />
         },
         components: Object.entries(list.components).map(([key, value]) => {
+            const componentLimit = airComponentsRanges[key].ranges[airComponentsRanges[key].ranges.length - 1];
+            const componentPercents = Math.round(value / componentLimit * 200)/2
             return {
                 key: key,
                 value: value,
-                limit: airComponentsRanges[key].ranges[airComponentsRanges[key].ranges.length - 1],
-                percents: Math.round(value / airComponentsRanges[key].ranges[airComponentsRanges[key].ranges.length - 1] * 200)/2,
-                color: defineColor(key, value),
+                limit: componentLimit,
+                percents: componentPercents,
                 full: airComponentsRanges[key].full,
+                chart: <DoughnutChart value={componentPercents} 
+                limit='100' color={defineColor(key, value)}
+                />
             }
         })
     }
@@ -36,16 +45,12 @@ const formatData = (data) => {
 export default function AqiPage() {
 
     const { airPollut } = useOutletContext();
-    const formattedAqi = formatData(airPollut);
 
-console.log(formattedAqi)
+    console.log(formatData(airPollut))
 
     return airPollut && (
         <div className={styles.aqiPage}>AQIPAGE
-            <DoughnutChart data={formattedAqi.main} />
-            {formattedAqi.components.map((elem, id) => {
-                return <DoughnutChart data={elem} key={id}/>
-            })}
+            <ExtendedTable data={formatData(airPollut)}/>
         </div>
     )
 }

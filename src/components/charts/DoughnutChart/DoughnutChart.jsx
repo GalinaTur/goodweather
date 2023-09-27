@@ -1,20 +1,20 @@
 import styles from './DoughnutChart.module.scss';
 import { Doughnut } from 'react-chartjs-2';
 
-const setMinimalizedData = (data, limit) => {
+const setMinimalizedData = (value, limit) => {
     const minimalFragmentSize = 0.19;
-    if (data > limit) return [data];
-    if (data/limit > minimalFragmentSize) return [data, limit - data];
+    if (value > limit) return [value];
+    if(value/limit > minimalFragmentSize) return [value, limit - value];
     return [minimalFragmentSize, 1 - minimalFragmentSize];
 }
 
-const setDataToDoughnut = (data) => {
+const setDataToDoughnut = (value, limit, color) => {
     return {
         labels: [],
         datasets: [{
-            data: setMinimalizedData(data.value, data.limit),
+            data: setMinimalizedData(value, limit),
             backgroundColor: [
-                data.color, 'rgba(70, 70, 70, 0.4)'
+                color, 'rgba(70, 70, 70, 0.4)'
             ],
             rotation: 180,
         }],
@@ -35,14 +35,14 @@ const setOptionsToDoughnut = (data) => {
     }
 }
 
-export default function DoughnutChart({ data }) {
+export default function DoughnutChart({ value, limit, color }) {
 
-    return data && (
+    return value && (
         <div className={styles.doughnut}>
-            <Doughnut data={setDataToDoughnut(data)}
-                options={setOptionsToDoughnut(data)}
+            <Doughnut data={setDataToDoughnut(value, limit, color)}
+                options={setOptionsToDoughnut(value)}
             />
-            <p className={styles.percents}>{data.percents || data.value}</p>
+            <p className={styles.percents}>{value}</p>
         </div>
     )
 }

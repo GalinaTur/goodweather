@@ -3,7 +3,7 @@ import { createHashRouter, createRoutesFromElements, RouterProvider, Route, Navi
 import Root from './components/Root';
 import HomePage from './components/Main/HomePage/HomePage';
 import DetailsPage from './components/Main/DetailsPage/DetailsPage';
-import ExtendedTable from './components/Main/DetailsPage/ExtendedTable/ExtendedTable';
+import ExtendedTable from './components/Main/ExtendedTable/ExtendedTable';
 import AqiPage from './components/Main/AqiPage/AqiPage';
 
 const router = createHashRouter(createRoutesFromElements(

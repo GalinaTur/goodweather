@@ -18,7 +18,7 @@ export default function Datalabel({ elem, id, length }) {
         style={{ left: calculateStyleLeft(id, length) }} data-testid={`datalabel_${id}`}>
                     <p className={styles.time}>{elem.time}</p>
                     <WeatherIcon data={elem.weatherIcon} className={styles.icon}/>
-                    <p>{`${elem.precipitationIcon}\u00a0${elem.details?.[7].value}`}</p>
+                    <p>{`${elem.precipitationIcon}\u00a0${elem.details?.[6].value}`}</p>
             </NavLink>
     )
 }

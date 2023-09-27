@@ -126,11 +126,6 @@ const createDataArr = (data, aqi) => {
             value: convertPressureValue(data.main.pressure) + '\u00a0' + units.pressure.en,
         },
         {
-            icon: 'humidity',
-            key: 'Humidity',
-            value: data.main.humidity + '\u00a0' + units.humidity,
-        },
-        {
             icon: 'cloudiness',
             key: 'Cloudiness',
             value: data.clouds.all + '\u00a0' + units.cloudiness,
@@ -141,14 +136,9 @@ const createDataArr = (data, aqi) => {
             value: Math.round(data.visibility / 100) / 10 + '\u00a0' + units.visibility.en,
         },
         {
-            icon: 'wind',
-            key: 'Wind',
-            value: <p>
-                <svg width='20' height='20' viewBox="0 0 100 100" role="img" aria-roledescription="Wind direction" style={{ transform: `rotate(${data.wind.deg}deg)` }} className={styles.wind}>
-                    <use href={`${icons}#wind_dir`} />
-                </svg>
-                {' ' + Math.round(data.wind.speed) + '\u00a0' + units.speed.metric.en}
-            </p>,
+            icon: 'humidity',
+            key: 'Humidity',
+            value: data.main.humidity + '\u00a0' + units.humidity,
         },
         {
             icon: 'gust',
@@ -159,6 +149,16 @@ const createDataArr = (data, aqi) => {
             icon: 'chance',
             key: `Chance of ${data.rain ? 'rain' : data.snow ? 'snow' : 'precipitation'}`,
             value: (Math.round(data.pop * 100) || 0) + '\u00a0' + units.pop,
+        },
+        {
+            icon: 'wind',
+            key: 'Wind',
+            value: <p>
+                <svg width='20' height='20' viewBox="0 0 100 100" role="img" aria-roledescription="Wind direction" style={{ transform: `rotate(${data.wind.deg}deg)` }} className={styles.wind}>
+                    <use href={`${icons}#wind_dir`} />
+                </svg>
+                {' ' + Math.round(data.wind.speed) + '\u00a0' + units.speed.metric.en}
+            </p>,
         },
         {
             icon: 'volume',
@@ -177,7 +177,7 @@ const createDataArr = (data, aqi) => {
 
 const getMaxPoP = (list) => {
     let precipitation = list.reduce((maxPoP, elem) => {
-        const PoPValue = parseInt(elem.details[7].value);
+        const PoPValue = parseInt(elem.details[6].value);
         if (!maxPoP || maxPoP[0] < PoPValue) {
             maxPoP = [PoPValue, elem.precipitationIcon];
         }
@@ -312,8 +312,10 @@ export default function Main({ currentLocation, API_URL }) {
             windDirWords: defineWindDirection(elem?.wind.deg),
             weekday: formatDateFullWeekdayShortDate(elem.dt, forecast.city.timezone),
             precipitationIcon: definePrecipitationType(elem.main.temp, elem.rain ? "rain" : elem.snow ? 'snow' : ''),
-            sunrise: formatTime(new Date(forecast.city.sunrise * 1000), forecast.city.timezone),
-            sunset: formatTime(new Date(forecast.city.sunset * 1000), forecast.city.timezone),
+            sun: {
+                sunrise: formatTime(new Date(forecast.city.sunrise * 1000), forecast.city.timezone),
+                sunset: formatTime(new Date(forecast.city.sunset * 1000), forecast.city.timezone),
+            },
             details: createDataArr(elem, airPollut?.list?.[0]),
         }
     });

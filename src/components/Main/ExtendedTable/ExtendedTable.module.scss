@@ -1,0 +1,54 @@
+@import '../../../utils/mixins.scss';
+@import '../../../utils/variables.scss';
+
+.extended {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 20px;
+    line-height: 1;
+    flex: 1;
+    @include block-bg;
+
+    .body {
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+        gap: 30px;
+
+        .table {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 20px;
+            flex-grow: 1;
+
+            .row {
+                cursor: unset;
+                height: 100%;
+
+                &:nth-child(2n+1):nth-last-child(-n+3) {
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+
+}
+@include for-phone {
+    .extended {
+        font-size: 12px;
+
+        .body {
+            gap: 0;
+
+            .table {
+                column-gap: 10px;
+
+                .row {
+                    min-height: 40px;
+                }
+            }
+    }
+}
+}
