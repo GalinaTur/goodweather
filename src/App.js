@@ -13,7 +13,9 @@ const router = createHashRouter(createRoutesFromElements(
       <Route path=':day/:time?' element={<ExtendedTable />} />
       <Route path='today/:time?' element={<ExtendedTable />} />
     </Route>
-    <Route path='aqi' element={<AqiPage />} />
+    <Route path='aqi' element={<AqiPage />} >
+    <Route index element={<ExtendedTable />} />
+    </Route>
   </Route>
 ));
 

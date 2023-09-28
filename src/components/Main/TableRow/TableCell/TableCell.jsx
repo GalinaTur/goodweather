@@ -15,6 +15,7 @@ const defineCellData = (className, data) => {
 }
 
 export default function TableCell({ data, className }) {
+
     return data ? (
         <div className={classNames(styles.cell, styles[`${className}`])}>{defineCellData(className, data)}</div>
     ) : ''

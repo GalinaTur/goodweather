@@ -1,6 +1,5 @@
 import styles from './DetailsPage.module.scss';
-import icons from '../../../assets/sprite.svg';
-import { NavLink, Link, useOutletContext, useParams, Outlet } from 'react-router-dom';
+import { useOutletContext, useParams, Outlet } from 'react-router-dom';
 import LineChart from '../../charts/LineChart/LineChart';
 import TemperatureBig from '../TemperatureBig/TemperatureBig';
 import WeatherIcon from '../WeatherIcon/WeatherIcon';

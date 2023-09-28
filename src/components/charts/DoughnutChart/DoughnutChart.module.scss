@@ -3,11 +3,9 @@
 
 .doughnut {
     position: relative;
-    width: 80px;
 
     .percents {
         position: absolute;
-        font-size: 20px;
         top: calc(50% - 0.3em);
         width: 60px;
         left: calc(50% - 30px);

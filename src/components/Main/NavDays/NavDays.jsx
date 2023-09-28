@@ -1,8 +1,8 @@
 import styles from './NavDays.module.scss';
 import icons from '../../../assets/sprite.svg';
-import { NavLink, Link,  } from 'react-router-dom';
+import { NavLink, Link, } from 'react-router-dom';
 
-export default function NavDays({data}) {
+export default function NavDays({ data }) {
 
     return data && (
         <>

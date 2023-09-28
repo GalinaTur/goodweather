@@ -38,6 +38,7 @@ const units = {
         uk: 'км з\u00a010',
     },
     pop: '%',
+    airPollutants: 'µg/m3',
 }
 
 const airComponentsRanges = {
