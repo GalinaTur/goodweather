@@ -18,12 +18,5 @@
     gap: 3px;
     border-bottom: 1px solid currentColor;
     padding-bottom: 15px;
-    height: 120px;
-
-}
-
-@include for-phone {
-    .header {
-        height: min(15svh, 80px);
-    }
+    height: max-content;
 }

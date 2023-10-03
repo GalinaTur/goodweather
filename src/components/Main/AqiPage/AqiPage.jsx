@@ -2,7 +2,6 @@ import styles from './AqiPage.module.scss';
 import { airComponentsRanges, units } from '../../../utils/store';
 import { Outlet, useOutletContext } from 'react-router-dom';
 import DoughnutChart from '../../charts/DoughnutChart/DoughnutChart';
-import ExtendedTable from '../ExtendedTable/ExtendedTable';
 import AirComponent from './AirComponent/AirComponent';
 
 const defineIndex = (key, value) => {
@@ -22,6 +21,8 @@ const definePrimatyPollutant = (data) => {
     return primaryPollutant;
 }
 
+const maxAqi = 1000;
+
 const formatData = (data) => {
     const list = data.list[0];
     const aqiLimit = airComponentsRanges.aqi[airComponentsRanges.aqi.length - 1];
@@ -35,23 +36,28 @@ const formatData = (data) => {
             chart: <DoughnutChart value={list.main.aqi}
                 limit={aqiLimit}
                 color={airComponentsRanges.colors[list.main.aqi - 1]}
-                className = {styles.chartMain}
+                className={styles.chartMain}
             />
         },
         components: Object.entries(list.components).map(([key, value]) => {
+            const index = defineIndex(key, value);
             const componentLimit = airComponentsRanges[key].ranges[airComponentsRanges[key].ranges.length - 1];
-            const componentPercents = Math.round(value / componentLimit * 200) / 2;
+            const IHigh = airComponentsRanges.aqi[index] || maxAqi;
+            const ILow = airComponentsRanges.aqi[index - 1];
+            const CHigh = airComponentsRanges[key].ranges[index];
+            const CLow = airComponentsRanges[key].ranges[index - 1];
+            const componentAqi = Math.round(((IHigh - ILow)/(CHigh - CLow)) * (value - CLow) + ILow);
             return {
                 key: key,
                 value: value,
                 limit: componentLimit,
-                percents: componentPercents,
-                message: defineRange(defineIndex(key, value), airComponentsRanges.qualitativeNames),
+                message: defineRange(index, airComponentsRanges.qualitativeNames),
                 full: airComponentsRanges[key].full,
+                aqi: componentAqi,
                 units: units.airPollutants,
-                chart: <DoughnutChart value={componentPercents}
-                    limit='100' color={defineRange(defineIndex(key, value), airComponentsRanges.colors)}
-                    className = {styles.chartTable}
+                chart: <DoughnutChart value={componentAqi}
+                    limit='500' color={defineRange(index, airComponentsRanges.colors)}
+                    className={styles.chartTable}
                 />
             }
         })
@@ -59,6 +65,7 @@ const formatData = (data) => {
 }
 
 const formatTableData = (data) => {
+
     const primaryPollutant = definePrimatyPollutant(data);
 
     const headerPartLeft = <>
@@ -71,28 +78,29 @@ const formatTableData = (data) => {
 
     const formatedData = {
         headerData: {
-            datetime: ['date', 'time'],
+            // datetime: ['date', 'time'],
             parts: [headerPartLeft, headerPartRigt],
         },
         details: data.components.map((item) => {
             return {
                 component: <AirComponent data={item} />
             }
-    })
+        })
     }
     return formatedData;
 }
 
 export default function AqiPage() {
 
+    
     const { airPollut } = useOutletContext();
-
+    
     const ctx = {
         data: formatTableData(formatData(airPollut)),
     }
 
     return airPollut && (
-        <div className={styles.aqiPage}>AQIPAGE
+        <div className={styles.aqiPage}>
             <Outlet context={ctx} />
         </div>
     )

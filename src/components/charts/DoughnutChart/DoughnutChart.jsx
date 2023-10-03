@@ -3,14 +3,13 @@ import { Doughnut } from 'react-chartjs-2';
 import classNames from 'classnames';
 
 const setMinimalizedData = (value, limit) => {
-    const minimalFragmentSize = 19;
+    const minimalFragmentSize = 50;
     if (value > limit) return [value];
-    if (value < minimalFragmentSize) return [minimalFragmentSize, 100 - minimalFragmentSize];
+    if (value < minimalFragmentSize && limit !== 5) return [minimalFragmentSize, 500 - minimalFragmentSize];
     return [value, limit - value];
 }
 
 const setDataToDoughnut = (value, limit, color) => {
-    console.log(value, limit, setMinimalizedData(value, limit))
     return {
         labels: [],
         datasets: [{
