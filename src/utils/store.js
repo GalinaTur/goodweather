@@ -43,7 +43,7 @@ const units = {
 
 const airComponentsRanges = {
     qualitativeNames: ['Good', 'Moderate', 'Unhealthy for sensitive groups', 'Unhealthy', 'Very unhealthy', 'Hazardous'],
-    colors: ['#B9FF72', '#F3F300', '#FF8E1C', '#FF8888', '#C994FF', '#B00058'],
+    colors: ['#008000', '#FFFF00', '#FFA500', '#FF0000', '#800080', '#800000'],
     messages: ['Air quality is satisfactory, and air pollution poses little or no risk. Enjoy your usual outdoor activities.',
         'Air quality is acceptable. However, there may be a risk for some people, particularly those who are unusually sensitive to air pollution.',
         'Members of sensitive groups may experience health effects. The general public is less likely to be affected.',

@@ -5,11 +5,11 @@ import TableHeader from './TableHeader/TableHeader';
 
 export default function ExtendedTable() {
 
-    const { data } = useOutletContext();
+    const { data, className } = useOutletContext();
 
     return data && (
         <div className={styles.extended}>
-            <TableHeader data={data.headerData} />
+            <TableHeader data={data.headerData} className={className}/>
             <div className={styles.body}>
                 <div className={styles.table}>
                     {data?.details?.map((item, id) => {

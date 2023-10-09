@@ -14,53 +14,55 @@ const defineRange = (index, list) => {
 }
 
 const definePrimatyPollutant = (data) => {
-    const primaryPollutant = Object.entries(data.components).reduce((primary, elem) => {
-        if (elem.percents > primary) primary = elem;
+    const primaryPollutant = data.reduce((primary, elem) => {
+        if (elem.aqi > primary.aqi) primary = elem;
         return primary;
     })
     return primaryPollutant;
 }
 
 const maxAqi = 1000;
+        const aqiLimit = 500;
 
 const formatData = (data) => {
     const list = data.list[0];
-    const aqiLimit = airComponentsRanges.aqi[airComponentsRanges.aqi.length - 1];
-    return {
-        main: {
-            key: 'aqi',
-            value: list.main.aqi,
-            limit: aqiLimit,
-            message: airComponentsRanges.messages[list.main.aqi - 1],
-            full: 'Air Quality Index',
-            chart: <DoughnutChart value={list.main.aqi}
-                limit={aqiLimit}
-                color={airComponentsRanges.colors[list.main.aqi - 1]}
-                className={styles.chartMain}
+    const components = Object.entries(list.components).map(([key, value]) => {
+        const index = defineIndex(key, value);
+        const componentLimit = airComponentsRanges[key].ranges[airComponentsRanges[key].ranges.length - 1];
+        const IHigh = airComponentsRanges.aqi[index] || maxAqi;
+        const ILow = airComponentsRanges.aqi[index - 1];
+        const CHigh = airComponentsRanges[key].ranges[index];
+        const CLow = airComponentsRanges[key].ranges[index - 1];
+        const componentAqi = Math.round(((IHigh - ILow)/(CHigh - CLow)) * (value - CLow) + ILow);
+        return {
+            key: key,
+            value: value,
+            limit: componentLimit,
+            index: index,
+            message: defineRange(index, airComponentsRanges.qualitativeNames),
+            full: airComponentsRanges[key].full,
+            aqi: componentAqi,
+            units: units.airPollutants,
+            chart: <DoughnutChart value={componentAqi}
+                limit={aqiLimit} color={defineRange(index, airComponentsRanges.colors)}
+                className={styles.chartTable}
             />
-        },
-        components: Object.entries(list.components).map(([key, value]) => {
-            const index = defineIndex(key, value);
-            const componentLimit = airComponentsRanges[key].ranges[airComponentsRanges[key].ranges.length - 1];
-            const IHigh = airComponentsRanges.aqi[index] || maxAqi;
-            const ILow = airComponentsRanges.aqi[index - 1];
-            const CHigh = airComponentsRanges[key].ranges[index];
-            const CLow = airComponentsRanges[key].ranges[index - 1];
-            const componentAqi = Math.round(((IHigh - ILow)/(CHigh - CLow)) * (value - CLow) + ILow);
-            return {
-                key: key,
-                value: value,
-                limit: componentLimit,
-                message: defineRange(index, airComponentsRanges.qualitativeNames),
-                full: airComponentsRanges[key].full,
-                aqi: componentAqi,
-                units: units.airPollutants,
-                chart: <DoughnutChart value={componentAqi}
-                    limit='500' color={defineRange(index, airComponentsRanges.colors)}
-                    className={styles.chartTable}
-                />
-            }
-        })
+        }
+    });
+    return components;
+}
+
+const formatMainAqiData = (data) => {
+    return {
+        key: 'AQI',
+        value: data.value,
+        message: defineRange(data.index, airComponentsRanges.messages),
+        full: 'Air Quality Index',
+        aqi: data.aqi,
+        chart: <DoughnutChart value={data.aqi}
+        limit={aqiLimit} color={defineRange(data.index, airComponentsRanges.colors)}
+        className={styles.chartMain}
+    />
     }
 }
 
@@ -69,19 +71,19 @@ const formatTableData = (data) => {
     const primaryPollutant = definePrimatyPollutant(data);
 
     const headerPartLeft = <>
-        <AirComponent data={data.main} />
+        <AirComponent data={formatMainAqiData(primaryPollutant)} />
     </>;
 
-    const headerPartRigt = <>
-        <p className={styles.primaryPollutant}>Primary Pollutant:</p>
-        <p>{primaryPollutant.key} ({primaryPollutant.full})</p></>
+    const headerPartRigt = <div className={styles.primaryPollutant}>
+        <p className={styles.title}>Primary pollutant:</p>
+        <p>{primaryPollutant.full} ({primaryPollutant.key.replace('_', '.').toUpperCase()})</p></div>
 
     const formatedData = {
         headerData: {
             // datetime: ['date', 'time'],
             parts: [headerPartLeft, headerPartRigt],
         },
-        details: data.components.map((item) => {
+        details: data.map((item) => {
             return {
                 component: <AirComponent data={item} />
             }
@@ -92,11 +94,11 @@ const formatTableData = (data) => {
 
 export default function AqiPage() {
 
-    
     const { airPollut } = useOutletContext();
     
     const ctx = {
         data: formatTableData(formatData(airPollut)),
+        className: styles.flexDirectionColumn,
     }
 
     return airPollut && (
