@@ -15,16 +15,11 @@ const navs = [{
     key: 'details',
     link: 'details/today',
 },
-{
-    icon: 'favorite',
-    key: 'favorite cities',
-    link: 'favorite-cities',
-},
-{
-    icon: 'radar',
-    key: 'radar',
-    link: 'radar',
-},
+// {
+//     icon: 'settings',
+//     key: 'settings',
+//     link: '#',
+// },
 {
     icon: 'aqi',
     key: 'air quality',
@@ -34,7 +29,8 @@ const navs = [{
     icon: 'about',
     key: 'about',
     link: 'about',
-}];
+}
+];
 
 export default function Modal({ modalRef, modalWindowRef, closeModalBtnRef, activeModal, handleModalClose }) {
 

@@ -54,7 +54,7 @@ export default function InputForm({ handleChange, searchTerm, searchResult, hand
                         </ComboboxPopover>
                     }
                 </Combobox>
-                <svg ref={clearBtnRef} role='button' viewBox="0 0 30 30" className={classNames(styles.clear, inputRef.current?.value && isActive && styles.clear_active)} onClick={handleClear} tabIndex='-1'>
+                <svg ref={clearBtnRef} role='button' viewBox="0 0 30 30" className={classNames(styles.clear, inputRef?.current?.value && isActive && styles.clear_active)} onClick={handleClear} tabIndex='-1'>
                     <use href={`${icons}#clearForm`} />
                 </svg>
                 <svg role='button' viewBox="0 0 30 30" className={styles.search} onClick={handleFocus} tabIndex='-1'>

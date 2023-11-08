@@ -1,0 +1,15 @@
+@import '../../utils/mixins.scss';
+@import '../../utils/variables.scss';
+
+    .logo {
+        color: white;
+        text-shadow: -1px -1px 0 rgb(100, 100, 100), 1px -1px 0 rgb(100, 100, 100), -1px 1px 0 rgb(100, 100, 100), 1px 1px 0 rgb(100, 100, 100);
+        font-size: 12px;
+        background-image: url(../../assets/icons/logo.svg);
+        background-position: left bottom;
+        background-size: contain;
+        background-repeat: no-repeat;
+        padding: 18px 0 18px 18px;
+        width: 125px;
+        @include transEaseInOut(width, 1s);
+    }

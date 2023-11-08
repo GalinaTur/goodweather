@@ -5,7 +5,7 @@ export const useFetch = (url, params) => {
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
 
-    const path = params && url+params.toString();
+    const path = params && url + params.toString();
 
     const fetchData = async (path) => {
         await fetch(path).then(response => {
@@ -20,11 +20,12 @@ export const useFetch = (url, params) => {
         }).catch(err => {
             setIsPending(false);
             setError(err.message);
-        })}
+        })
+    }
 
     useEffect(() => {
         if (!params) return;
-        fetchData(path)
-    }, [path])
-    return [data, isPending, error, fetchData]
+        fetchData(path);
+    }, [path]);
+    return [data, isPending, setIsPending, error, setError, fetchData];
 }

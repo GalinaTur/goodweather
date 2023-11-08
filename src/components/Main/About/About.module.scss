@@ -1,0 +1,24 @@
+@import '../../../utils/mixins.scss';
+@import '../../../utils/variables.scss';
+
+.about {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    margin:20% auto;
+    align-items: center;
+    padding: 10px 10px;
+    border-radius: 18px;
+    text-align: center;
+    @include block-bg;
+
+    .logo {
+        display: inline;
+        font-size: 0.8em;
+    }
+
+    h3 {
+        color: $activeColor;
+    }
+}

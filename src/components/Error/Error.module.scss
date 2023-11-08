@@ -1,0 +1,19 @@
+@import '../../utils/mixins.scss';
+@import '../../utils/variables.scss';
+
+.error {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 320px;
+    margin:20% auto;
+    align-items: center;
+    padding: 10px 10px;
+    border-radius: 18px;
+    text-align: center;
+    @include block-bg;
+    
+    h3 {
+        color: $activeColor;
+    }
+}

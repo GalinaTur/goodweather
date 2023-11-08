@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import Header from './Header/Header';
 import Main from './Main/Main';
 import Modal from './Modal/Modal';
+import Error from './Error/Error';
 
 const API_URL = {
   weather: "https://api.openweathermap.org/data/2.5/weather?",
@@ -13,13 +14,25 @@ const API_URL = {
   airPollution: "http://api.openweathermap.org/data/2.5/air_pollution?"
 };
 
-// const setLocationError = () => {
+const setLocationText = (location, isPending) => {
+  const city = location?.[0]['name'];
+  const state = location?.[0]['state'] || '';
+  const country = location?.[0]['country'];
+  const locationText = location && `${city}${state ? ', ' + state : ''}${country ? ', ' + country : ''}`;
 
-// }
+  if (locationText) {
+    return locationText;
+  } else if (isPending) {
+    return 'Loading...';
+  } else if (!isPending) {
+    return 'No location';
+  }
+}
 
 export default function Root() {
   const [coords, setCoords] = useState(null);
   const [activeModal, setActiveModal] = useState(null);
+
   const input = useRef(null);
   const modal = useRef(null);
   const modalWindow = useRef(null);
@@ -33,12 +46,16 @@ export default function Root() {
     limit: 1,
     appid: process.env.REACT_APP_API_KEY,
   })
-  const [currentLocation, isPending, error, fetchLocation] = useFetch(API_URL.locationRev, params);
+
+  const [currentLocation, isPending, setIsPending, error, setError, fetchLocation] = useFetch(API_URL.locationRev, params);
 
   useEffect(() => {
-    navigator.geolocation?.getCurrentPosition(pos => {
-      setCoords(pos.coords)
-    });
+    navigator.geolocation?.getCurrentPosition((pos => {
+      setCoords(pos.coords);
+    }), (err => {
+      setError(err);
+      setIsPending(false);
+    }));
   }, []);
 
   useEffect(() => {
@@ -81,17 +98,24 @@ export default function Root() {
     document.body.classList.remove('modalOpen');
   }
 
-  useEffect(()=> {
-  handleModalClose();
-  }, [urlLocation])
+  useEffect(() => {
+    handleModalClose();
+  }, [urlLocation]);
+
+  useEffect(() => {
+    if (!error) {
+      setActiveModal('');
+    } else {
+    setActiveModal('disabled');
+    }
+  }, [error])
 
   return (
     <>
-      <Header currentLocation={currentLocation} handleChangeLocation={handleChangeLocation} handleModalOpen={handleModalOpen} handleModalClose={handleModalClose} API_URL={API_URL} inputRef={input} menuBtnRef={menuBtn} activeModal={activeModal} />
-      {currentLocation && <Main currentLocation={currentLocation} API_URL={API_URL} />}
+      <Header locationText={setLocationText(currentLocation, isPending)} handleChangeLocation={handleChangeLocation} handleModalOpen={handleModalOpen} handleModalClose={handleModalClose} API_URL={API_URL} inputRef={input} menuBtnRef={menuBtn} activeModal={activeModal} />
+      {error && <Error error={error} />}
+      <Main currentLocation={currentLocation} API_URL={API_URL} />
       <Modal modalRef={modal} modalWindowRef={modalWindow} closeModalBtnRef={closeModalBtn} activeModal={activeModal} handleModalClose={handleModalClose} />
     </>
   )
 }
-
-
