@@ -22,7 +22,7 @@
 }
 
 .date {
-width: 50px;
+    width: 50px;
 }
 
 .popr {
@@ -43,12 +43,19 @@ width: 50px;
 
 .value {
     text-align: right;
-    width: max-content;
+    width: 100%;
     white-space: nowrap;
 }
 
 .key {
     width: 100%;
+}
+
+@include for-tablets {
+
+    .value {
+        white-space: unset;
+    }
 }
 
 @include for-phone {
@@ -59,8 +66,8 @@ width: 50px;
     }
 
     .weatherIcon svg {
-            width: 40px;
-            height: 40px;
+        width: 40px;
+        height: 40px;
     }
 
     .weekday {
@@ -74,9 +81,5 @@ width: 50px;
 
     .tempExtr {
         width: 65px;
-    }
-
-    .value {
-        white-space: unset;
     }
 }

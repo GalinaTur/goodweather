@@ -13,10 +13,13 @@ const API_URL = {
   airPollution: "http://api.openweathermap.org/data/2.5/air_pollution?"
 };
 
+// const setLocationError = () => {
+
+// }
+
 export default function Root() {
   const [coords, setCoords] = useState(null);
   const [activeModal, setActiveModal] = useState(null);
-  const [activeModule, setActiveModule] = useState('main');
   const input = useRef(null);
   const modal = useRef(null);
   const modalWindow = useRef(null);

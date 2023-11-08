@@ -168,7 +168,7 @@ const createDataArr = (data, aqi) => {
         },
         {
             icon: 'aqi',
-            key: 'Air quality index',
+            key: 'AQI',
             value: aqi && `${aqi.main.aqi} (${airComponentsRanges.qualitativeNames[aqi.main.aqi - 1]})`,
         },
     ]
