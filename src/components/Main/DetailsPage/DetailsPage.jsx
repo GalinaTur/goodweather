@@ -14,7 +14,7 @@ export default function DetailsPage() {
 
     const defineOutletContext = (day, time) => {
         if (!day && !time) return currentData;
-        if (day && !time) return dailyForecast[day][4];
+        if (day && !time) return dailyForecast[day][3];
         if (time) return Object.values(dailyForecast[day || currentData.date.slice(0, 3)]).find((e) => e.time.slice(0, 2) === time.slice(0, 2));
     }
 

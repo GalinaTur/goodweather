@@ -250,7 +250,7 @@ const addDetailsForDay = (list) => {
     return groupedList;
 }
 
-export default function Main({ currentLocation, API_URL }) {
+export default function Main({ currentLocation, API_URL, handleError, handlePending }) {
 
     const navigate = useNavigate();
 
@@ -261,9 +261,9 @@ export default function Main({ currentLocation, API_URL }) {
         units: 'metric',
     })
 
-    const [currentWeather, isPendingCurrent, errorCurrent, fetchWeather] = useFetch(API_URL.weather, params);
-    const [forecast, isPendingForecast, errorForecast, fetchForecast] = useFetch(API_URL.forecast, params);
-    const [airPollut, isPendingAirPollut, errorAirPollut, fetchAirPollut] = useFetch(API_URL.airPollution, params);
+    const [currentWeather, fetchWeather] = useFetch(API_URL.weather, params, handleError, handlePending);
+    const [forecast, fetchForecast] = useFetch(API_URL.forecast, params, handleError, handlePending);
+    const [airPollut, fetchAirPollut] = useFetch(API_URL.airPollution, params, handleError, handlePending);
     const [cityId, setCityId] = useState(null);
 
     useEffect(() => {

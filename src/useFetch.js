@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 
-export const useFetch = (url, params) => {
+export const useFetch = (url, params, handleError, handlePending) => {
     const [data, setData] = useState(null);
-    const [isPending, setIsPending] = useState(true);
-    const [error, setError] = useState(null);
 
     const path = params && url + params.toString();
 
@@ -15,11 +13,11 @@ export const useFetch = (url, params) => {
             return response.json();
         }).then(data => {
             setData(data);
-            setIsPending(false);
-            setError(null);
+            handlePending(false);
+            handleError(null);
         }).catch(err => {
-            setIsPending(false);
-            setError(err.message);
+            handlePending(false);
+            handleError(err);
         })
     }
 
@@ -27,5 +25,5 @@ export const useFetch = (url, params) => {
         if (!params) return;
         fetchData(path);
     }, [path]);
-    return [data, isPending, setIsPending, error, setError, fetchData];
+    return [data, fetchData];
 }

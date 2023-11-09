@@ -1,5 +1,5 @@
 import './App.scss';
-import { createHashRouter, createRoutesFromElements, RouterProvider, Route, Navigate } from 'react-router-dom';
+import { createHashRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom';
 import Root from './components/Root';
 import HomePage from './components/Main/HomePage/HomePage';
 import DetailsPage from './components/Main/DetailsPage/DetailsPage';
@@ -14,9 +14,10 @@ const router = createHashRouter(createRoutesFromElements(
         <Route path=':day/:time?' element={<ExtendedTable />} />
         <Route path='today/:time?' element={<ExtendedTable />} />
       </Route>
-      <Route path='aqi' element={<AqiPage />} />
       <Route path='about' element={<About />} />
+      <Route path='aqi' element={<AqiPage />} >
       <Route index element={<ExtendedTable />} />
+      </Route>
     </Route>
 ));
 

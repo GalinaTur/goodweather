@@ -32,6 +32,8 @@ const setLocationText = (location, isPending) => {
 export default function Root() {
   const [coords, setCoords] = useState(null);
   const [activeModal, setActiveModal] = useState(null);
+  const [error, setError] = useState(null);
+  const [isPending, setIsPending] = useState(true);
 
   const input = useRef(null);
   const modal = useRef(null);
@@ -47,7 +49,15 @@ export default function Root() {
     appid: process.env.REACT_APP_API_KEY,
   })
 
-  const [currentLocation, isPending, setIsPending, error, setError, fetchLocation] = useFetch(API_URL.locationRev, params);
+const handleError = (err) => {
+  setError(err);
+}
+
+const handlePending = (ispending) => {
+  setIsPending(ispending);
+}
+
+  const [currentLocation, fetchLocation] = useFetch(API_URL.locationRev, params, handleError, handlePending);
 
 const getLocation = () => {
   navigator.geolocation?.getCurrentPosition((pos => {
@@ -119,7 +129,7 @@ const getLocation = () => {
     <>
       <Header locationText={setLocationText(currentLocation, isPending)} handleChangeLocation={handleChangeLocation} handleModalOpen={handleModalOpen} handleModalClose={handleModalClose} API_URL={API_URL} inputRef={input} menuBtnRef={menuBtn} activeModal={activeModal}/>
       {error && <Error error={error} />}
-      <Main currentLocation={currentLocation} API_URL={API_URL} />
+      {currentLocation && <Main currentLocation={currentLocation} API_URL={API_URL} handleError={handleError} handlePending={handlePending}/>}
       <Modal modalRef={modal} modalWindowRef={modalWindow} closeModalBtnRef={closeModalBtn} activeModal={activeModal} handleModalClose={handleModalClose} />
     </>
   )
