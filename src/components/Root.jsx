@@ -57,7 +57,7 @@ const handlePending = (ispending) => {
   setIsPending(ispending);
 }
 
-  const [currentLocation, fetchLocation] = useFetch(API_URL.locationRev, params, handleError, handlePending);
+  const [currentLocation, fetchLocation] = useFetch(handleError, handlePending, API_URL.locationRev, params);
 
 const getLocation = () => {
   navigator.geolocation?.getCurrentPosition((pos => {
@@ -127,7 +127,7 @@ const getLocation = () => {
 
   return (
     <>
-      <Header locationText={setLocationText(currentLocation, isPending)} handleChangeLocation={handleChangeLocation} handleModalOpen={handleModalOpen} handleModalClose={handleModalClose} API_URL={API_URL} inputRef={input} menuBtnRef={menuBtn} activeModal={activeModal}/>
+      <Header locationText={setLocationText(currentLocation, isPending)} handleChangeLocation={handleChangeLocation} handleModalOpen={handleModalOpen} handleModalClose={handleModalClose} API_URL={API_URL} inputRef={input} menuBtnRef={menuBtn} activeModal={activeModal} handleError={handleError} handlePending={handlePending}/>
       {error && <Error error={error} />}
       {currentLocation && <Main currentLocation={currentLocation} API_URL={API_URL} handleError={handleError} handlePending={handlePending}/>}
       <Modal modalRef={modal} modalWindowRef={modalWindow} closeModalBtnRef={closeModalBtn} activeModal={activeModal} handleModalClose={handleModalClose} />

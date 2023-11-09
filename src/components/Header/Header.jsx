@@ -10,8 +10,8 @@ const API_LIMIT = '&limit=5';
 
 let activeBtn;
 
-export default function Header({ locationText, handleChangeLocation, handleModalOpen, API_URL, inputRef, menuBtnRef, activeModal }) {
-    const [searchResult, isPending, setIsPending, error, setError, fetchSearch] = useFetch();
+export default function Header({ locationText, handleChangeLocation, handleModalOpen, API_URL, inputRef, menuBtnRef, activeModal, handleError, handlePending }) {
+    const [searchResult, fetchSearch] = useFetch(handleError, handlePending);
     const [searchTerm, setSearchTerm] = useState(null);
     const clearBtn = useRef(null);
     const logo = useRef(null);

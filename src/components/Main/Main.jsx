@@ -261,9 +261,9 @@ export default function Main({ currentLocation, API_URL, handleError, handlePend
         units: 'metric',
     })
 
-    const [currentWeather, fetchWeather] = useFetch(API_URL.weather, params, handleError, handlePending);
-    const [forecast, fetchForecast] = useFetch(API_URL.forecast, params, handleError, handlePending);
-    const [airPollut, fetchAirPollut] = useFetch(API_URL.airPollution, params, handleError, handlePending);
+    const [currentWeather, fetchWeather] = useFetch(handleError, handlePending, API_URL.weather, params);
+    const [forecast, fetchForecast] = useFetch(handleError, handlePending, API_URL.forecast, params);
+    const [airPollut, fetchAirPollut] = useFetch(handleError, handlePending, API_URL.airPollution, params);
     const [cityId, setCityId] = useState(null);
 
     useEffect(() => {

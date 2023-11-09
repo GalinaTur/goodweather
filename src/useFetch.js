@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const useFetch = (url, params, handleError, handlePending) => {
+export const useFetch = (handleError, handlePending, url, params) => {
     const [data, setData] = useState(null);
 
     const path = params && url + params.toString();
