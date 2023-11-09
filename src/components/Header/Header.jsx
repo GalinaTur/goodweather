@@ -60,7 +60,7 @@ export default function Header({ locationText, handleChangeLocation, handleModal
     return (
         <header className={styles.header}>
             <Container className={styles.container}>
-                <Logo className={styles.logo} logoRef={logo} />
+                <Logo className={styles.logo} logoRef={logo}/>
                 <p className={styles.location}>
                     <svg width='16' height='20' viewBox="0 0 100 100" role="img" aria-roledescription={`Location: ${locationText}`}>
                         <use href={`${icons}#location`} />

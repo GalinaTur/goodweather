@@ -49,13 +49,18 @@ export default function Root() {
 
   const [currentLocation, isPending, setIsPending, error, setError, fetchLocation] = useFetch(API_URL.locationRev, params);
 
+const getLocation = () => {
+  navigator.geolocation?.getCurrentPosition((pos => {
+    setCoords(pos.coords);
+  }), 
+  (err => {
+    setError(err);
+    setIsPending(false);
+  }));
+}
+
   useEffect(() => {
-    navigator.geolocation?.getCurrentPosition((pos => {
-      setCoords(pos.coords);
-    }), (err => {
-      setError(err);
-      setIsPending(false);
-    }));
+    getLocation();
   }, []);
 
   useEffect(() => {
@@ -112,7 +117,7 @@ export default function Root() {
 
   return (
     <>
-      <Header locationText={setLocationText(currentLocation, isPending)} handleChangeLocation={handleChangeLocation} handleModalOpen={handleModalOpen} handleModalClose={handleModalClose} API_URL={API_URL} inputRef={input} menuBtnRef={menuBtn} activeModal={activeModal} />
+      <Header locationText={setLocationText(currentLocation, isPending)} handleChangeLocation={handleChangeLocation} handleModalOpen={handleModalOpen} handleModalClose={handleModalClose} API_URL={API_URL} inputRef={input} menuBtnRef={menuBtn} activeModal={activeModal}/>
       {error && <Error error={error} />}
       <Main currentLocation={currentLocation} API_URL={API_URL} />
       <Modal modalRef={modal} modalWindowRef={modalWindow} closeModalBtnRef={closeModalBtn} activeModal={activeModal} handleModalClose={handleModalClose} />
